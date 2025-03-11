@@ -1,0 +1,10 @@
+funcion principal() 
+%%Este es un comentario
+# Yo soy
+un comentario
+multilinea #
+
+inicio
+    lmp;
+    imprimeln("Hola Bienvendios a CPAS Jueves 20/Feb/2025");
+fin

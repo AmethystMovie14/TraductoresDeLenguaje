@@ -1,0 +1,98 @@
+importar "fmt"
+
+const MAX entero=10
+const SALUDO alfabetico="Hola"
+var vec[MAX]entero = {33, 1, 0, 4, 19, 34, 15, 2, 100, 10}
+var i entero, j entero, k entero, facto entero, num entero, tmp entero
+var fibo entero, fiba entero
+var bPrimo logico = verdadero, nom alfabetico = "Juan"
+
+
+func OrdVec() {
+   //Ordena Vec
+   desde i=0; i<(MAX-1);i=i+1 {
+      desde j=i+1; j < MAX; j=j+1 {
+         si vec[i] > vec[j] {
+            tmp = vec[i]
+            vec[i] = vec[j]
+            vec[j] = tmp 
+         }
+      }
+   }
+   //Imprime arreglo ordenado
+   fmt.Imprime("[")
+   desde i=0;i<MAX;i=i+1 {
+     fmt.Imprime(vec[i], " ")
+   }
+   fmt.Imprimenl("]")
+   //Fin de Ordena
+}
+
+func esPrimo(n entero) logico {
+   i = 2
+   desde {
+      si n % i == 0 {
+         regresa falso
+      }
+      i = i + 1
+      si i >= n {
+         regresa verdadero
+      }
+   }
+}
+
+func fibonacci(num entero) entero {
+   si num == 0 || num == 1 {
+     regresa num
+   }
+   fiba = 0
+   fibo = 1
+   i = 2
+   si num > 1 {
+      desde {
+          tmp = fibo
+          fibo = fiba + fibo
+          fiba = tmp
+          i = i + 1
+          si i > num {
+              interrumpe
+          }
+      }
+   }
+   regresa fibo
+}
+
+func facrec(n entero) entero {
+   si n == 0 || n == 1 {
+      regresa 1
+   }
+   sino {
+      regresa n * facrec(n-1)
+   }
+}
+
+func principal() {
+   fmt.Lmp()
+   fmt.Imprimenl("Este en un compilador completo")
+   fmt.Imprimenl("Hoy es Jueves 16/Ene/2025 9:30")
+   fmt.Imprime("Dame num: ")
+   fmt.Leer(k)
+   fmt.Imprimenl("Factorial(", k, ")=", facrec(k))
+   OrdVec()
+   fmt.Imprimenl("Fibonacci(", k, ")=", fibonacci(k))
+   //Checa primo
+   fmt.Imprime("Dame num: ")
+   fmt.Leer(num)
+   fmt.Imprime(num)
+   si esPrimo(num) {
+      fmt.Imprimenl(" es numero PRIMO")
+   }
+   sino {
+      fmt.Imprimenl(" NO es numero PRIMO")
+   }
+   j = k * num
+   fmt.Imprimenl(num, "*", k, "=", j )
+   fmt.Imprime("Como te llamas ? ")
+   fmt.Leer(nom)
+   fmt.Imprimenl("Felicidades ", nom, " ya PASASTE Compiladores")
+}

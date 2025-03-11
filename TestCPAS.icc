@@ -1,0 +1,121 @@
+constante entera MAX = 10; 
+constante decimal PI = 3.141592;
+constante alfabetica SALUDO="Hola";
+variable entera vec[MAX] = { 33, 1, 0, 4, 19, 34, 15, 
+                        2, 100, 10 };
+variable entera i, j, k, facto, num, tmp;
+variable entera fibo, fiba;
+variable logica bPrimo = verdadero;
+variable alfabetica nom = "Juan";
+variable decimal raiz1, raiz2, r1, r2;
+
+funcion decimal raices(decimal a, b, c)
+inicio
+    r1 = (-b + (b^2 - 4*a*c)^(1/2))/(2*a);
+    r2 = (-b - (b^2 - 4*a*c)^(1/2))/(2*a);
+    regresa r1, r2;
+fin
+
+funcion OrdVec() {
+   %% Ordena Vec
+   desde i=0 hasta MAX-1 incr 1 
+   inicio
+      desde j=i+1 hasta MAX
+      inicio 
+         si vec[i] > vec[j] hacer
+         inicio
+            tmp = vec[i];
+            vec[i] = vec[j];
+            vec[j] = tmp;
+         fin;
+      fin;
+   fin;
+   %% Imprime arreglo ordenado
+   imprime("[");
+   desde i=0 hasta MAX 
+   inicio
+     imprime(vec[i], " ");
+   fin;
+   imprimeln("]");
+   %%Fin de Ordena
+fin
+
+funcion logico esPrimo(entero n) 
+inicio
+   i = 2;
+   mientras( verdadero ) 
+   inicio
+      si n % i == 0 hacer
+      inicio
+         regresa falso;
+      fin;
+      i = i + 1;
+      si i >= n hacer
+      inicio
+         regresa verdadero;
+      fin;
+   fin;
+fin
+
+funcion entera fibonacci(entera num)
+inicio
+   si num == 0 o num == 1 hacer
+   inicio
+     regresa num;
+   fin;
+   fiba = 0;
+   fibo = 1;
+   i = 2;
+   si num > 1 hacer
+   inicio
+      repite
+        tmp = fibo;
+        fibo = fiba + fibo;
+        fiba = tmp;
+        i = i + 1;
+      hasta que ( i > num );
+   fin;
+   regresa fibo;
+fin
+
+funcion entera facrec(entera n) 
+inicio
+   si n == 0 o n == 1 hacer
+   inicio
+      regresa 1;
+   fin
+   sino 
+   inicio
+      regresa n * facrec(n-1);
+   fin;
+fin
+
+funcion principal() 
+inicio
+   lmp();
+   imprime("Dame num: ");
+   lee(k);
+   imprimeln("Factorial(", k, ")=", facrec(k))
+   OrdVec();
+   imprimeln("Fibonacci(", k, ")=", fibonacci(k));
+   # Checa primo 
+     de un numero entero #
+   imprime("Dame num: ");
+   lee(num);
+   imprime(num);
+   si esPrimo(num) hacer
+   inicio
+      imprimeln(" es numero PRIMO");
+   fin
+   sino 
+   inicio
+         imprimeln(" NO es numero PRIMO");
+   fin;
+   j = k * num;
+   imprimeln(num, "*", k, "=", j );
+   imprime("Como te llamas ? ");
+   lee(nom);
+   imprimeln("Felicidades ", nom, " ya PASASTE 
+   Compiladores con
+   Exito")
+fin
