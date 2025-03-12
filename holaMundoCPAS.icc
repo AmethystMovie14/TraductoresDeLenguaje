@@ -1,10 +1,20 @@
-funcion principal() 
-%%Este es un comentario
-# Yo soy
-un comentario
-multilinea #
+#eg
+vgrrh#
+%% Programa Hola Bienvenidos
+variable alfabetica nom;
+variable entera num;
 
+funcion principal() 
 inicio
     lmp;
-    imprimeln("Hola Bienvendios a CPAS Jueves 20/Feb/2025");
+    imprime("Como te llamas: ");
+    lee(nom);
+    imprime("Ingresa valor");
+    lee(num);
+    imprimeln(num);
+    imprimeln("Hola ", nom, " Bienvenida(o) CPAS ", 
+              verdadero, " ", 123.45, " ", 
+              128, " ", falso, " fin de imprimir");
+    imprimeln("Fin de hola bienvenidos!!!");
+
 fin
