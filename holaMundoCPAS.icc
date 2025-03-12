@@ -2,8 +2,9 @@
 vgrrh#
 %% Programa Hola Bienvenidos
 variable alfabetica nom;
-variable entera num;
-
+variable entera num[10], jalapls[45], reservado;
+variable entera i[85];
+constante entera DEC = 15;
 funcion principal() 
 inicio
     lmp;

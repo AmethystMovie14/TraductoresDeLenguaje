@@ -1,5 +1,9 @@
 nom,V,A,0,0,#,
-num,V,E,0,0,#,
+num,V,E,10,0,#,
+jalapls,V,E,45,0,#,
+reservado,V,E,0,0,#,
+i,V,E,85,0,#,
+DEC,C,E,0,0,#,
 _P,E,I,1,0,#,
 @
 1 OPR 0, 18

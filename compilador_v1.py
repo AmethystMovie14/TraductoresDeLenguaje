@@ -175,12 +175,13 @@ def dimen():
             erra(renC, colC, "Error de sintaxis,", "se esperaba ']' y llegó " + lexe)
         
         toke, lexe = lexico()
+            
 
     return 'x'.join(dimensiones)
         
 
 def ctes(): 
-    global toke, lexe, renC, colC
+    global toke, lexe, renC, colC, tData
 
     # 📌 Validación de constantes según su tipo
     if tData == 'A':  # Alfabética debe estar entre comillas
