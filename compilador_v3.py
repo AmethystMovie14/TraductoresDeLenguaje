@@ -45,6 +45,43 @@ palRes=['interrumpe', 'si',  'sino',   'funcion',
         'regresa', 'variable', 'que', 'mientras', 
         'lmp', 'imprime', 'lee', 'imprimeln', 'principal']
 
+mapTipos={
+    'E=E': '', 'A=A': '', 'D=D':'', 'D=E':'', 'L=L': '',
+    'A+A': 'A', 'E+E': 'E', 'E+D': 'D', 'D+E':'D', 'D+D': 'D', 
+    'E-E': 'E', 'E-D': 'D', 'D-E':'D', 'D-D': 'D',
+    'E*E': 'E', 'E*D': 'D', 'D*E':'D', 'D*D': 'D',     
+    'E/E': 'D', 'E/D': 'D', 'D/E':'D', 'D/D': 'D',
+    'E%E': 'E',     
+    'E^E': 'D', 'E^D': 'D', 'D^E':'D', 'D^D': 'D',
+     '-E': 'E', '-D': 'D',     
+    'E<E': 'L', 'E<D': 'L', 'D<E':'L', 'D<D': 'L', 'A<A': 'L',
+    'E<=E': 'L', 'E<=D':'L', 'D<=E': 'L', 'D<=D': 'L', 'A<=A':'L',
+    'E>E' : 'L', 'E>D' :'L', 'D>E' : 'L', 'D>D' : 'L', 'A>A' :'L',
+    'E>=E': 'L', 'E>=D':'L', 'D>=E': 'L', 'D>=D': 'L', 'A>=A':'L',
+    'E<>E': 'L', 'E<>D':'L', 'D<>E': 'L', 'D<>D': 'L', 'A<>A':'L',
+    'E==E': 'L', 'E==D':'L', 'D==E': 'L', 'D==D': 'L', 'A==A':'L',
+    'noL' : 'L', 'LyL' :'L', 'LoL' : 'L'
+    }
+
+pilaTipos=[]
+
+def tipoResul(key):
+    global renC, colC
+    try:
+        tip = mapTipos[key]
+        pilaTipos.append(tip)
+    except KeyError:
+        erra(renC, colC, 'Error Semantico', 'Conflicto en tipos NO opera '+key)
+        pilaTipos.append('I')
+
+def buscaInsTipo(ide):
+    global tabSim, renC, colC
+    try:
+       o = tabSim[ide]
+       pilaTipos.append(o[1])
+    except KeyError:
+        erra(renC,colC,'Error de Semantica', 'Identificador '+ide+' No declarado')
+
 def insTabSim(key, data):
     global tabSim
     tabSim[key] = data
@@ -331,27 +368,45 @@ def termino():
            erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) ' + lexe)
     elif toke == 'Ide': 
         nIde = lexe
+        buscaInsTipo(nIde)
         #validar udimen o llamada a llamada funcion
         insCodigo(['LOD', nIde, '0'])
 
     elif toke in ['Ent', 'Dec', 'CtA', 'CtL']:
         cte = lexe
+        if toke in ['Ent', 'Dec']:
+            pilaTipos.append(toke[0])
+        elif toke in ['CtA', 'CtL']:
+            pilaTipos.append(toke[2])
         if   lexe == 'verdadero': cte = 'V'
         elif lexe == 'falso'    : cte = 'F'
         insCodigo(['LIT', cte, '0'])
-        
+      
     toke, lexe = lexico()
 
 
 def signo():
     global toke, lexe, renC, colC, bImp 
     if lexe == '-':
+        pilaTipos.append('-')
         toke, lexe = lexico()
     termino()
 
 def expo():
-    global toke, lexe, renC, colC, bImp
+    global toke, lexe, renC, colC, bImp 
+    op = ''
+    if lexe == '-':
+        op = '-'
+        pilaTipos.append('-')
+        toke, lexe = lexico()
     signo()
+    if op == '-':
+        tipKey = ''
+        tp = pilaTipos.pop()
+        op = pilaTipos.pop()
+        tipKey = op + tp
+        tipoResul(tipKey)
+        insCodigo(['OPR', '0', '8'])
 
 def multi():
     global toke, lexe, renC, colC, bImp
@@ -377,15 +432,27 @@ def opy():
     global toke, lexe, renC, colC, bImp
     op = 'y'
     while op == 'y':
+        op = ''
+        if lexe == 'y':
+           op = lexe   
         opno()
-        op = lexe    
 
 
 def opno():
     global toke, lexe, renC, colC, bImp 
+    op = ''
     if lexe == 'no':
+        op = 'no'
+        pilaTipos.append('no')
         toke, lexe = lexico()
     oprel()
+    if op == 'no':
+        tipKey = ''
+        tp = pilaTipos.pop()
+        op = pilaTipos.pop()
+        tipKey = op + tp
+        tipoResul(tipKey)
+        insCodigo(['OPR', '0', '17'])
 
 def expr():
     global toke, lexe, renC, colC, bImp
@@ -393,6 +460,7 @@ def expr():
     while op == 'o':
         opy()
         op = lexe    
+
 
 def imprimir():
     global toke, lexe, renC, colC, bImp
@@ -403,11 +471,13 @@ def imprimir():
         toke, lexe = lexico()
         expr()
         if lexe == ',':
+            x = pilaTipos.pop()
             insCodigo(['OPR', '0', '20'])
         deli = lexe       
     if lexe != ')':
         erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) ' + lexe)
     else:
+        x = pilaTipos.pop()
         if bImp: insCodigo(['OPR', '0', '21'])
         else: insCodigo(['OPR', '0', '20'])
     toke, lexe = lexico()
