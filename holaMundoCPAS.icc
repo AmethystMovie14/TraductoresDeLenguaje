@@ -4,7 +4,9 @@ vgrrh#
 variable alfabetica nom;
 variable entera num[10], jalapls[45], reservado;
 variable entera i[85];
-constante entera DEC = 15;
+%% variable entera edades[3] = {4, 5, 7};
+variable entera numero = 45;
+
 funcion principal() 
 inicio
     lmp;
