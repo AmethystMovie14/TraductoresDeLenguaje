@@ -228,21 +228,16 @@ void exec() {
                     else rs = "F";
                     pila.push( rs );
                     //cout << pila << endl;
-                } else if ( op > 14 && op <= 17) {
+                } else if ( op > 14 && op < 17) {
                     bool a = pila.top() == "V";
                     pila.pop();
-                    bool b=false;
-                    if (op > 14 and op < 17) {
-                       b = pila.top() == "V";
-                       pila.pop();
-                    }
+                    bool b = pila.top() == "V";
+                    pila.pop();
                     bool res;
                     switch( op ) {
                        case 15: res = a && b;
                                break;
                        case 16: res = a || b;
-                               break;
-                       case 17: res = !a;
                                break;
                     }
                     pila.push( res ? "V" : "F" );
