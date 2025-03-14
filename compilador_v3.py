@@ -353,15 +353,36 @@ def varconst():
 
 def eSi():
     global toke, lexe, renC, colC, bImp, conCod
-    if lexe =='':
+    if lexe == '(':
+        toke, lexe = lexico()
+        expr()
+    if lexe != '()':
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( y llego'  + lexe)
+    toke, lexe = lexico()
+    
 
-def asigna(): pass
+def asigna():
+    global toke, lexe, renC, colC, bImp, conCod
+    if lexe == '(':
+        udim()
+    
+    if lexe != '=':
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba = y llego'  + lexe)
+    toke, lexe = lexico()
+    expr()
+    
+    
 
 def cfunc(): pass
 
 def udim():
     global toke, lexe, renC, colC, bImp, conCod
-    if lexe ==''
+    toke, lexe = lexico()
+    expr()
+    if lexe != ']' :
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ] y llego'  + lexe)
+    toke, lexe = lexico()
+    
 
 def termino():
     global toke, lexe, renC, colC, bImp, conCod
@@ -369,10 +390,15 @@ def termino():
         toke, lexe = lexico()
         expr()
         if lexe != ')':
-           erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) ' + lexe)
+           erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llego' + lexe)
     elif toke == 'Ide': 
         nIde = lexe
         buscaInsTipo(nIde)
+        toke, lexe = lexico()
+        if lexe == '(' :
+            cfunc()
+        elif lexe == '[': 
+            udim()
         #validar udimen o llamada a llamada funcion
         insCodigo(['LOD', nIde, '0'])
 
@@ -385,8 +411,7 @@ def termino():
         if   lexe == 'verdadero': cte = 'V'
         elif lexe == 'falso'    : cte = 'F'
         insCodigo(['LIT', cte, '0'])
-      
-    toke, lexe = lexico()
+        toke, lexe = lexico()
 
 
 def signo():
@@ -461,7 +486,7 @@ def expr():
 def imprimir():
     global toke, lexe, renC, colC, bImp
     if lexe != '(':
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( ' + lexe)
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( y llego' + lexe)
     deli = ','
     while deli == ',':
         toke, lexe = lexico()

@@ -4,17 +4,21 @@ vgrrh#
 variable alfabetica nom;
 variable entera num[10], jalapls[45], reservado;
 variable entera i[85];
-%% variable entera edades[3] = {4, 5, 7};
+variable entera edades[3];%%= {4, 5, 7};
 variable entera numero = 45;
+variable decimal metros = 32.09;
+constante alfabetica VERDADES = "A Axel le gusta la macana";
 
 funcion principal() 
 inicio
     lmp;
+    nom = "poder";
     imprime("Como te llamas: ");
     lee(nom);
     imprime("Ingresa valor");
     lee(num);
     imprimeln(num);
+    imprimeln(edades[i]);
     imprimeln("Hola ", nom, " Bienvenida(o) CPAS ", 
               verdadero, " ", 123.45, " ", 
               128, " ", falso, " fin de imprimir");

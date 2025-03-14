@@ -3,40 +3,47 @@ num,V,E,10,0,#,
 jalapls,V,E,45,0,#,
 reservado,V,E,0,0,#,
 i,V,E,85,0,#,
+edades,V,E,3,0,#,
 numero,V,E,0,0,#,
+metros,V,D,0,0,#,
+verdades,C,A,0,0,#,
 _P,E,I,1,0,#,
 @
 1 OPR 0, 18
-2 LIT "Como te llamas: ", 0
-3 OPR 0, 20
-4 OPR nom, 19
-5 LIT "Ingresa valor", 0
-6 OPR 0, 20
-7 OPR num, 19
-8 LOD num, 0
-9 OPR 0, 21
-10 LIT "Hola ", 0
-11 OPR 0, 20
-12 LOD nom, 0
-13 OPR 0, 20
-14 LIT " Bienvenida(o) CPAS ", 0
+2 LIT "poder", 0
+3 LIT "Como te llamas: ", 0
+4 OPR 0, 20
+5 OPR nom, 19
+6 LIT "Ingresa valor", 0
+7 OPR 0, 20
+8 OPR num, 19
+9 LOD num, 0
+10 OPR 0, 21
+11 LOD i, 0
+12 LOD edades, 0
+13 OPR 0, 21
+14 LIT "Hola ", 0
 15 OPR 0, 20
-16 LIT V, 0
+16 LOD nom, 0
 17 OPR 0, 20
-18 LIT " ", 0
+18 LIT " Bienvenida(o) CPAS ", 0
 19 OPR 0, 20
-20 LIT 123.45, 0
+20 LIT V, 0
 21 OPR 0, 20
 22 LIT " ", 0
 23 OPR 0, 20
-24 LIT 128, 0
+24 LIT 123.45, 0
 25 OPR 0, 20
 26 LIT " ", 0
 27 OPR 0, 20
-28 LIT F, 0
+28 LIT 128, 0
 29 OPR 0, 20
-30 LIT " fin de imprimir", 0
-31 OPR 0, 21
-32 LIT "Fin de hola bienvenidos", 0
-33 OPR 0, 21
-34 OPR 0, 0
+30 LIT " ", 0
+31 OPR 0, 20
+32 LIT F, 0
+33 OPR 0, 20
+34 LIT " fin de imprimir", 0
+35 OPR 0, 21
+36 LIT "Fin de hola bienvenidos", 0
+37 OPR 0, 21
+38 OPR 0, 0
