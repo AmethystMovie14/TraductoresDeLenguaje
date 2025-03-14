@@ -373,7 +373,16 @@ def asigna():
     
     
 
-def cfunc(): pass
+def cfunc():
+    global toke, lexe, renC, colC, bImp, conCod
+    deli = ','
+    toke, lexe = lexico()
+    expr()
+    
+
+    #elif lexe != ')':
+     #   erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llego' + lexe)
+
 
 def udim():
     global toke, lexe, renC, colC, bImp, conCod

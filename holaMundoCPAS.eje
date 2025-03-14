@@ -6,7 +6,7 @@ i,V,E,85,0,#,
 edades,V,E,3,0,#,
 numero,V,E,0,0,#,
 metros,V,D,0,0,#,
-verdades,C,A,0,0,#,
+VERDADES,C,A,0,0,#,
 _P,E,I,1,0,#,
 @
 1 OPR 0, 18
