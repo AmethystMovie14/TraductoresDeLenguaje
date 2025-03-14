@@ -201,7 +201,7 @@ def dimen():
     global toke, lexe, renC, colC, tabSim
     dime='0'
     toke, lexe = lexico()
-    print(lexe)
+    #print(lexe)
     if not toke == 'Ent':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una constante entera y llegó ' + lexe)
     
@@ -319,8 +319,8 @@ def vars():
         toke, lexe = lexico()
         if lexe == '[': 
             dim1=dimen()
-            print('Vars' +lexe)
-            print(dim1)
+            #print('Vars' +lexe)
+            #print(dim1)
         if lexe == '=': 
             toke, lexe = lexico()
             if lexe == '{':
@@ -351,13 +351,17 @@ def varconst():
     elif lexe == 'variable': vars()
 
 
-def eSi(): pass
+def eSi():
+    global toke, lexe, renC, colC, bImp, conCod
+    if lexe =='':
 
 def asigna(): pass
 
 def cfunc(): pass
 
-def udim(): pass
+def udim():
+    global toke, lexe, renC, colC, bImp, conCod
+    if lexe ==''
 
 def termino():
     global toke, lexe, renC, colC, bImp, conCod
@@ -412,10 +416,6 @@ def multi():
     global toke, lexe, renC, colC, bImp
     signo()
 
-def multi():
-    global toke, lexe, renC, colC, bImp
-    expo()
-
 def oprel():
     global toke, lexe, renC, colC, bImp
     suma()
@@ -423,10 +423,6 @@ def oprel():
 def suma():
     global toke, lexe, renC, colC, bImp
     multi()
-
-def oprel():
-    global toke, lexe, renC, colC, bImp
-    suma()
 
 def opy():
     global toke, lexe, renC, colC, bImp
