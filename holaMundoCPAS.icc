@@ -15,13 +15,13 @@ inicio
     nom = "poder";
     imprime("Como te llamas: ");
     lee(nom);
-    imprime("Ingresa valor");
-    lee(num);
-    imprimeln(num);
-    imprimeln(edades[i]);
+    imprime("Ingresa valor: ");
+    lee(numero);
+    imprimeln(numero);
+    %%imprimeln(edades[i]);
     imprimeln("Hola ", nom, " Bienvenida(o) CPAS ", 
               verdadero, " ", 123.45, " ", 
-              128, " ", falso, " fin de imprimir");
+              128, " ", falso, 45 - 8," fin de imprimir");
     imprimeln("Fin de hola bienvenidos!!!");
 
 fin

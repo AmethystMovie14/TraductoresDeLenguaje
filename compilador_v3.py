@@ -376,12 +376,15 @@ def asigna():
 def cfunc():
     global toke, lexe, renC, colC, bImp, conCod
     deli = ','
-    toke, lexe = lexico()
-    expr()
-    
+    while deli == ',':
+        toke, lexe = lexico()
+        expr()
+        if lexe == ',':
+            deli = lexe       
+    if lexe != ')':
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) ' + lexe)
+    toke, lexe = lexico 
 
-    #elif lexe != ')':
-     #   erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llego' + lexe)
 
 
 def udim():
@@ -433,12 +436,12 @@ def signo():
 def expo():
     global toke, lexe, renC, colC, bImp 
     op = ''
-    if lexe == '-':
-        op = '-'
-        pilaTipos.append('-')
+    if lexe == '^':
+        op = '^'
+        pilaTipos.append('^')
         toke, lexe = lexico()
     signo()
-    if op == '-':
+    if op == '^':
         tipKey = ''
         tp = pilaTipos.pop()
         op = pilaTipos.pop()
@@ -448,15 +451,87 @@ def expo():
 
 def multi():
     global toke, lexe, renC, colC, bImp
-    signo()
+    paso = False
+    while operador in ['*', '/', '%']:
+        expo()
+        if paso: 
+            dim2 = '4'
+            vd = pilaTipos.pop()
+            op = pilaTipos.pop()
+            vi = pilaTipos.pop()
+            tipKey = vi + op + vd
+            tipoResul(tipKey)
+            print(tipKey)
+            if op == '/':
+                dim2 = '5'
+            elif op == '%':
+                dim2 = '6'
+            insCodigo(['OPR', '0', dim2]) 
+            paso = False
+            print(paso)
+        operador = lexe
+        if operador in ['*', '/', '%']:
+            pilaTipos.append(operador)
+            paso = True
+            toke, lexe = lexico()
 
 def oprel():
     global toke, lexe, renC, colC, bImp
-    suma()
+    paso = False
+    while operador in ['<', '>', '<=', '>=', '<>', '==']:
+        suma()
+        if paso: 
+            dim2 = '10'
+            vd = pilaTipos.pop()
+            op = pilaTipos.pop()
+            vi = pilaTipos.pop()
+            tipKey = vi + op + vd
+            tipoResul(tipKey)
+            print(tipKey)
+            if op == '>':
+                dim2 = '11'
+            elif op == '<=':
+                dim2 = '12'
+            elif op == '>=':
+                dim2 = '13'
+            elif op == '<>':
+                dim2 = '14'
+            elif op == '==':
+                dim2 = '11'   
+            insCodigo(['OPR', '0', dim2]) 
+            paso = False
+            print(paso)
+        operador = lexe
+        if operador in ['<', '>', '<=', '>=', '<>', '==']:
+            pilaTipos.append(operador)
+            paso = True
+            toke, lexe = lexico()
 
 def suma():
     global toke, lexe, renC, colC, bImp
-    multi()
+    operador = '+'
+    paso = False
+    while operador in ['+', '-']:
+        multi()
+        if paso: 
+            dim2 = '2'
+            vd = pilaTipos.pop()
+            op = pilaTipos.pop()
+            vi = pilaTipos.pop()
+            tipKey = vi + op + vd
+            tipoResul(tipKey)
+            print(tipKey)
+            if op == '-':
+                dim2 = '3'
+            insCodigo(['OPR', '0', dim2]) 
+            paso = False
+            print(paso)
+        operador = lexe
+        if operador in ['+', '-']:
+            pilaTipos.append(operador)
+            paso = True
+            toke, lexe = lexico()
+            
 
 def opy():
     global toke, lexe, renC, colC, bImp

@@ -14,36 +14,37 @@ _P,E,I,1,0,#,
 3 LIT "Como te llamas: ", 0
 4 OPR 0, 20
 5 OPR nom, 19
-6 LIT "Ingresa valor", 0
+6 LIT "Ingresa valor: ", 0
 7 OPR 0, 20
-8 OPR num, 19
-9 LOD num, 0
+8 OPR numero, 19
+9 LOD numero, 0
 10 OPR 0, 21
-11 LOD i, 0
-12 LOD edades, 0
-13 OPR 0, 21
-14 LIT "Hola ", 0
-15 OPR 0, 20
-16 LOD nom, 0
-17 OPR 0, 20
-18 LIT " Bienvenida(o) CPAS ", 0
-19 OPR 0, 20
-20 LIT V, 0
-21 OPR 0, 20
-22 LIT " ", 0
-23 OPR 0, 20
-24 LIT 123.45, 0
-25 OPR 0, 20
-26 LIT " ", 0
-27 OPR 0, 20
-28 LIT 128, 0
-29 OPR 0, 20
-30 LIT " ", 0
-31 OPR 0, 20
-32 LIT F, 0
-33 OPR 0, 20
-34 LIT " fin de imprimir", 0
-35 OPR 0, 21
-36 LIT "Fin de hola bienvenidos", 0
-37 OPR 0, 21
-38 OPR 0, 0
+11 LIT "Hola ", 0
+12 OPR 0, 20
+13 LOD nom, 0
+14 OPR 0, 20
+15 LIT " Bienvenida(o) CPAS ", 0
+16 OPR 0, 20
+17 LIT V, 0
+18 OPR 0, 20
+19 LIT " ", 0
+20 OPR 0, 20
+21 LIT 123.45, 0
+22 OPR 0, 20
+23 LIT " ", 0
+24 OPR 0, 20
+25 LIT 128, 0
+26 OPR 0, 20
+27 LIT " ", 0
+28 OPR 0, 20
+29 LIT F, 0
+30 OPR 0, 20
+31 LIT 45, 0
+32 LIT 8, 0
+33 OPR 0, 3
+34 OPR 0, 20
+35 LIT " fin de imprimir", 0
+36 OPR 0, 21
+37 LIT "Fin de hola bienvenidos", 0
+38 OPR 0, 21
+39 OPR 0, 0
