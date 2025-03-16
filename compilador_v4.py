@@ -10,7 +10,6 @@ bImp = False
 conCod = 1
 tabSim  = {}
 codProg = {}
-
 matran=[
     #           tab  +,-
     #           sp   *                        ==        
@@ -81,6 +80,7 @@ def buscaInsTipo(ide):
        pilaTipos.append(o[1])
     except KeyError:
         erra(renC,colC,'Error de Semantica', 'Identificador '+ide+' No declarado')
+    
 
 def insTabSim(key, data):
     global tabSim
@@ -261,7 +261,7 @@ def ctes():
             deli = ''
 
     return valores """
-    
+
 def const():
     global toke, lexe, renC, colC, tabSim, tData
     
@@ -384,7 +384,7 @@ def udim():
     if lexe != ']' :
         erra(renC, colC, 'Error de Sintaxis', 'se esperaba ] y llego'  + lexe)
     toke, lexe = lexico()
-    
+
 def termino():
     global toke, lexe, renC, colC, bImp, conCod
     if lexe == '(':
@@ -425,12 +425,12 @@ def signo():
 def expo():
     global toke, lexe, renC, colC, bImp 
     op = ''
-    if lexe == '^':
-        op = '^'
-        pilaTipos.append('^')
+    if lexe == '-':
+        op = '-'
+        pilaTipos.append('-')
         toke, lexe = lexico()
     signo()
-    if op == '^':
+    if op == '-':
         tipKey = ''
         tp = pilaTipos.pop()
         op = pilaTipos.pop()
@@ -441,6 +441,7 @@ def expo():
 def multi():
     global toke, lexe, renC, colC, bImp
     paso = False
+    operador = '*'
     while operador in ['*', '/', '%']:
         signo()
         if paso: 
@@ -466,6 +467,7 @@ def multi():
 
 def oprel():
     global toke, lexe, renC, colC, bImp
+    operador = '<'
     paso = False
     while operador in ['<', '>', '<=', '>=', '<>', '==']:
         suma()
@@ -520,7 +522,7 @@ def suma():
             pilaTipos.append(operador)
             paso = True
             toke, lexe = lexico()
-            
+
 def opy():
     global toke, lexe, renC, colC, bImp
     op = 'y'
@@ -547,6 +549,7 @@ def opno():
         tipoResul(tipKey)
         insCodigo(['OPR', '0', '17'])
 
+
 def expr():
     global toke, lexe, renC, colC, bImp
     op = 'o'
@@ -554,11 +557,10 @@ def expr():
         opy()
         op = lexe    
 
-
 def imprimir():
     global toke, lexe, renC, colC, bImp
     if lexe != '(':
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( y llego' + lexe)
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( ' + lexe)
     deli = ','
     while deli == ',':
         toke, lexe = lexico()
@@ -610,6 +612,7 @@ def comando():
             cfunc()
         else: 
             asigna()
+
 
 def estatutos(): 
     global toke, lexe, renC, colC
@@ -732,6 +735,3 @@ if __name__ == '__main__':
                 aSal.close()
         except FileNotFoundError:
             print(archE, 'No existe, vuelve a intentar')
-
-
-

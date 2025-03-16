@@ -18,10 +18,13 @@ inicio
     imprime("Ingresa valor: ");
     lee(numero);
     imprimeln(numero);
-    %%imprimeln(edades[i]);
+    imprimeln(edades[i]);
     imprimeln("Hola ", nom, " Bienvenida(o) CPAS ", 
               verdadero, " ", 123.45, " ", 
-              128, " ", falso, 45 - 8," fin de imprimir");
+              128, " ", falso ," ", 45 - 8," ",
+              10 * 2 ," ", 20 / 2  ," ",18 % 254 ," ", 19.5 + 0.5," ", 45 < 8," ", 45 > 8," ",
+              45 <= 8," ", 45 >= 8," ", 
+              45 <> 8," ", 45 == 8," fin de imprimir");
     imprimeln("Fin de hola bienvenidos!!!");
 
 fin
