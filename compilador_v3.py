@@ -453,7 +453,7 @@ def multi():
     global toke, lexe, renC, colC, bImp
     paso = False
     while operador in ['*', '/', '%']:
-        suma()
+        signo()
         if paso: 
             dim2 = '4'
             vd = pilaTipos.pop()
