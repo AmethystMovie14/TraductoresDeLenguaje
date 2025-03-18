@@ -68,10 +68,13 @@ def tipoResul(key):
     global renC, colC
     try:
         tip = mapTipos[key]
-        pilaTipos.append(tip)
+        if tip != '':
+            pilaTipos.append(tip)
     except KeyError:
         erra(renC, colC, 'Error Semantico', 'Conflicto en tipos NO opera '+key)
-        pilaTipos.append('I')
+        #if not (key in ['A=A', 'L=L', 'E=E', 'D=D', 'D=E']):
+        if key[1] != '=':
+            pilaTipos.append('I')
 
 def buscaInsTipo(ide):
     global tabSim, renC, colC
@@ -374,7 +377,7 @@ def cfunc():
         if lexe == ',':
             deli = lexe       
     if lexe != ')':
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) ' + lexe)
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llego' + lexe)
     toke, lexe = lexico 
 
 def udim():
@@ -525,13 +528,26 @@ def suma():
 
 def opy():
     global toke, lexe, renC, colC, bImp
-    op = 'y'
-    while op == 'y':
-        op = ''
-        if lexe == 'y':
-           op = lexe   
+    banY = True
+    op = ''
+    while banY:
+        print('La pila inicia con', pilaTipos)
+        banY = False
         opno()
-
+        if op == 'y':
+            tipD   = pilaTipos.pop()
+            op     = pilaTipos.pop()
+            tipI   = pilaTipos.pop()
+            tipKey = tipI + op + tipD
+            print('La pila trae', pilaTipos)
+            tipoResul(tipKey)
+            op = ''
+            insCodigo(['OPR', '0', '15'])
+        if lexe == 'y':
+            op = lexe
+            banY = True
+            pilaTipos.append('y')  
+            toke, lexe == lexico()
 
 def opno():
     global toke, lexe, renC, colC, bImp 
@@ -547,6 +563,7 @@ def opno():
         op = pilaTipos.pop()
         tipKey = op + tp
         tipoResul(tipKey)
+        op = ''
         insCodigo(['OPR', '0', '17'])
 
 
@@ -560,7 +577,7 @@ def expr():
 def imprimir():
     global toke, lexe, renC, colC, bImp
     if lexe != '(':
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( ' + lexe)
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( y llego' + lexe)
     deli = ','
     while deli == ',':
         toke, lexe = lexico()
@@ -570,7 +587,7 @@ def imprimir():
             insCodigo(['OPR', '0', '20'])
         deli = lexe       
     if lexe != ')':
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) ' + lexe)
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llego ' + lexe)
     else:
         x = pilaTipos.pop()
         if bImp: insCodigo(['OPR', '0', '21'])

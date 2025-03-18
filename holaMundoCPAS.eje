@@ -108,7 +108,7 @@ _P,E,I,1,0,#,
 97 LIT 8, 0
 98 OPR 0, 11
 99 OPR 0, 20
-100 LIT " fin de imprimir", 0
+100 LIT "fin de imprimir", 0
 101 OPR 0, 21
 102 LIT "Fin de hola bienvenidos", 0
 103 OPR 0, 21
