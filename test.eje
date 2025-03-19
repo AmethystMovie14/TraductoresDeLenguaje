@@ -1,0 +1,31 @@
+_P,E,I,1,0,#,
+@
+1 OPR 0, 18
+2 LIT "Hola ", 0
+3 OPR 0, 20
+4 LIT " Bienvenida(o) CPAS ", 0
+5 OPR 0, 20
+6 LIT V, 0
+7 OPR 0, 20
+8 LIT " ", 0
+9 OPR 0, 20
+10 LIT 10, 0
+11 LIT 10, 0
+12 OPR 0, 2
+13 OPR 0, 20
+14 LIT "No falso y verdadero es:", 0
+15 OPR 0, 20
+16 LIT " ", 0
+17 OPR 0, 20
+18 LIT F, 0
+19 OPR 0, 17
+20 LIT V, 0
+21 OPR 0, 15
+22 OPR 0, 20
+23 LIT " ", 0
+24 OPR 0, 20
+25 LIT "fin de imprimir", 0
+26 OPR 0, 21
+27 LIT "Fin de hola bienvenidos", 0
+28 OPR 0, 21
+29 OPR 0, 0

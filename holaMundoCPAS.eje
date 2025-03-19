@@ -108,8 +108,28 @@ _P,E,I,1,0,#,
 97 LIT 8, 0
 98 OPR 0, 11
 99 OPR 0, 20
-100 LIT "fin de imprimir", 0
-101 OPR 0, 21
-102 LIT "Fin de hola bienvenidos", 0
-103 OPR 0, 21
-104 OPR 0, 0
+100 LIT " ", 0
+101 OPR 0, 20
+102 LIT "No falso y verdadero es:", 0
+103 OPR 0, 20
+104 LIT " ", 0
+105 OPR 0, 20
+106 LIT F, 0
+107 OPR 0, 17
+108 LIT V, 0
+109 OPR 0, 15
+110 OPR 0, 20
+111 LIT " ", 0
+112 OPR 0, 20
+113 LIT "No verdadero y falso es:", 0
+114 OPR 0, 20
+115 LIT V, 0
+116 OPR 0, 17
+117 LIT F, 0
+118 OPR 0, 15
+119 OPR 0, 20
+120 LIT "fin de imprimir", 0
+121 OPR 0, 21
+122 LIT "Fin de hola bienvenidos", 0
+123 OPR 0, 21
+124 OPR 0, 0

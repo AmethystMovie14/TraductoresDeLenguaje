@@ -24,7 +24,7 @@ inicio
               128, " ", falso ," ", 45 - 8," ",
               10 * 2 ," ", 20 / 2  ," ",18 % 254 ," ", 19.5 + 0.5," ", 45 < 8," ", 45 > 8," ",
               45 <= 8," ", 45 >= 8," ", 
-              45 <> 8," ", 45 == 8, "fin de imprimir");
+              45 <> 8," ", 45 == 8 ," ","No falso y verdadero es:"," ", no falso y verdadero, " ","No verdadero y falso es:", no verdadero y falso, "fin de imprimir");
     imprimeln("Fin de hola bienvenidos!!!");
 
 fin

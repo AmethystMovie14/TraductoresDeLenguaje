@@ -11,28 +11,22 @@ conCod = 1
 tabSim  = {}
 codProg = {}
 matran=[
-    #           tab  +,-
-    #           sp   *                        ==        
-    #_,let  dig nl   /     %   .    "   del  ops   >    <,   #    Sym
-    [1,     2,   0,   5,   6, ERR,   9,  11,  16,  14,  15,  12,  18],  # #0
-    [1,     1, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP],  # #1
-    [ACP,   2, ACP, ACP, ACP,   3, ACP, ACP, ACP, ACP, ACP, ACP, ACP],  # #2
-    [ERR,   4, ERR, ERR, ERR, ERR, ERR, ERR, ERR, ACP, ACP, ACP, ACP],  # #3
-    [ACP,   4, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP],  # #4
-    [ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP],  # #5
-    [ACP, ACP, ACP, ACP,   7, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP],  # #6
-    [7,     7,   7,   7,   7,   7,   7,   7,   7,   7,   7, ACP,   7],  # #7
-    [ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP],  # #8
-    [9,     9,   9,   9,   9,   9,  10,   9,   9,   9,   9, ACP,   9],  # #9
-    [ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP],  # #10
-    [ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP],  # #11
-    [ 12,  12,  12,  12,  12,  12,  12,  12,  12,  12,  12,  13,  12],  # #12
-    [ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP],  # #13
-    [1,     2, ACP,   5, ACP, ERR, ACP, ERR,  17, ACP, ACP, ACP, ACP],  # #14
-    [1,     2, ACP,   5, ACP, ERR, ACP, ERR,  17, 17,  ACP, ACP, ACP],  # #15
-    [ACP, ACP, ACP, ACP, ACP, ACP, ACP, ACP,  17, ACP, ACP, ACP, ACP],  # #16
-    [ACP, ACP, ACP, ERR, ACP, ERR, ACP, ERR, ACP, ACP, ACP, ACP, ACP],  # #17
-    [ACP, ACP, ACP, ACP, ACP, ERR, ACP, ERR, ACP, ACP, ACP, ACP, ACP]   # #18
+    #           tab +,-
+    #           sp  *
+    #_,let  dig nl  /   %   .   "   del =
+    [1,     2,  0,  5,  6,  ERR,9,  11, 12 ], #0
+    [1,     1,  ACP,ACP,ACP,ACP,ACP,ACP,ACP], #1
+    [ACP,   2,  ACP,ACP,ACP,3  ,ACP,ACP,ACP], #2
+    [ERR,   4,  ERR,ERR,ERR,ERR,ERR,ERR,ERR], #3
+    [ACP,   4,  ACP,ACP,ACP,ACP,ACP,ACP,ACP], #4
+    [ACP,   ACP,ACP,ACP,ACP,ACP,ACP,ACP,ACP], #5
+    [ACP,   ACP,ACP,ACP,  7,ACP,ACP,ACP,ACP], #6
+    [7,     7,  7,  7,  7,  7  ,7,  7,  7  ], #7
+    [ACP,   ACP,ACP,ACP,ACP,ACP,ACP,ACP,ACP], #8
+    [9,     9,  9,  9,  9,  9  ,10, 9,  9  ], #9
+    [ACP,   ACP,ACP,ACP,ACP,ACP,ACP,ACP,ACP], #10
+    [ACP,   ACP,ACP,ACP,ACP,ACP,ACP,ACP,ACP], #11
+    [ACP,   ACP,ACP,ACP,ACP,ACP,ACP,ACP,ACP]  #12
 ]
 
 opLog=['y', 'no', 'o']
@@ -61,7 +55,6 @@ mapTipos={
     'E==E': 'L', 'E==D':'L', 'D==E': 'L', 'D==D': 'L', 'A==A':'L',
     'noL' : 'L', 'LyL' :'L', 'LoL' : 'L'
     }
-#A es alfabefica, E es entera, D es decimal, L es logica, 
 
 pilaTipos=[]
 
@@ -73,8 +66,7 @@ def tipoResul(key):
             pilaTipos.append(tip)
     except KeyError:
         erra(renC, colC, 'Error Semantico', 'Conflicto en tipos NO opera '+key)
-        #if not (key in ['A=A', 'L=L', 'E=E', 'D=D', 'D=E']):
-        if key[1] != '=':
+        if key[1] != '=': 
             pilaTipos.append('I')
 
 def buscaInsTipo(ide):
@@ -108,11 +100,6 @@ def colCar( c ):
              '}', ',', ';', ':', 
              '(', ')']        : return 7
     if c == '='               : return 8
-    if c == '>'               : return 9
-    if c == '<'               : return 10
-    if c == '#'               : return 11 
-    if c == ['$', '¿', '¡',
-     '?', '!']                : return 12 
     return ERR
 
 def erra(ren, col, tipE, desE):
@@ -127,9 +114,10 @@ def lexical():
     col = 0
     lex = ''
     tok = ''
-    while idx < len(entrada) and estado != ERR and estado != ACP:
+    while idx < len(entrada) and estado != ERR \
+        and estado != ACP:
         x = entrada[idx]
-        if x == '\n' and estado in [0, 7, 9, 12]:
+        if x == '\n'and estado in [0, 7, 9]:
             renC += 1
             colC = 0
         elif x == '\t' and estado == 0: 
@@ -137,18 +125,20 @@ def lexical():
         else:
             colC += 1 
         idx += 1
-        col = colCar(x)
-        if col >= 0 and col <= 12:
+        col = colCar( x )
+        if col >=0 and col<=8:
             if estado == 7:
                 lex = ''
                 if x == '\n':
                     estado = 8
             else:
-                estado = matran[estado][col]
+                estado=matran[estado][col]
             if estado not in [ERR, ACP]:
                 estAnt = estado
-                if estado == 9 or (estado not in [7, 9, 12] and x not in [' ', '\t', '\n']):
-                    lex += x
+                if estado == 9 or \
+                    (estado not in [7, 9] and \
+                    x not in [' ', '\t', '\n']):
+                   lex += x
 
     #Clasificacion de Tokens, Lexemas
     if estado in [ACP, ERR]:
@@ -156,13 +146,10 @@ def lexical():
     else: estAnt = estado
     if estAnt == 3:
         tok = 'Dec'
-        erra(renC, colC, "Error Lexico", "constante DECIMAL sin cerrar " + lex)
+        erra(renC, colC, "Error Lexico", "constante DECIMAL sin cerrar "+lex);
     elif estAnt == 9:
         tok = 'CtA'
-        erra(renC, colC, "Error Lexico", "constante Alfabetica sin cerrar ")
-    if estAnt == 12:
-        tok = 'Cml' 
-        erra (renC, colC, "Error Lexico", "Comentario de multiple linea sin cerrar")
+        erra(renC, colC, "Error Lexico", "constante Alfabetica sin cerrar ");
     if estAnt == 1:
         tok='Ide'
         if   lex in cteLog: tok = 'CtL'
@@ -175,153 +162,45 @@ def lexical():
     elif estAnt in [5, 6]:
         tok = 'OpA'
     elif estAnt == 7:
-        tok = 'CdL'
+        tok = 'Del'
     elif estAnt == 8:
         tok = 'Com'
     elif estAnt == 10:
         tok = 'CtA'
     elif estAnt == 11:
         tok = 'Del'
-    elif estAnt == 13:
-        tok = 'Cml'
-    elif estAnt in [14, 15, 17]:
-        tok = 'OpR'
-    elif estAnt == 16:
+    elif estAnt == 12:
         tok = 'OpS'
-    elif estAnt == 18:
-        tok = 'Sys'
 
     return tok, lex
 
 def lexico():
     tok, lex = lexical()
-    while tok in ['Com', 'Cml']:
+    while tok == 'Com':
         tok, lex = lexical()
     
     return tok, lex
 
-# Dimensiones de arreglos o variables o constantes xd alv 
-def dimen(): 
-    global toke, lexe, renC, colC, tabSim
-    dime='0'
-    toke, lexe = lexico()
-    #print(lexe)
-    if not toke == 'Ent':
-        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una constante entera y llegó ' + lexe)
-    
-    dime=lexe
-    toke, lexe= lexico()
-    if not lexe == ']':
-         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una ] y llegó ' + lexe)
-    toke, lexe = lexico()
-    return dime
+def dimen(): pass
 
-def ctes(): 
-    global toke, lexe, renC, colC, tData
-
-    # 📌 Validación de constantes según su tipo
-    if tData == 'A':  # Alfabética debe estar entre comillas
-        if toke != 'CtA':
-            erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una constante alfabetica entre comillas y llegó ' + lexe)
-            return ''
-    elif tData == 'L':  # Lógica debe ser "verdadero" o "falso"
-        if toke != 'CtL':
-            erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una constante lógica (verdadero/falso) y llegó ' + lexe)
-            return 'falso'  # Por defecto falso si hay error
-    elif tData == 'E':  # Entero debe ser un número
-        if toke != 'Ent':
-            erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una constante entera y llegó ' + lexe)
-            return '0'
-    elif tData == 'D':  # Decimal debe ser un número con punto flotante
-        if toke != 'Dec':
-            erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una constante decimal y llegó ' + lexe)
-            return '0.0'
-
-    valor = lexe  # Guarda el valor de la constante
-    toke, lexe = lexico()  # Avanza al siguiente token
-    return valor  # Devuelve el valor de la constante
-
-""" global toke, lexe, renC, colC, bImp, conCod, tData
-    
-    valores = []
-    deli = ','
-    while deli == ',':
-        toke, lexe = lexico()
-        print(f'Toke: {toke}  Lexe: {lexe}')
-
-        # Verificar que sea un tipo valido (Entera, Decimal, Alfabetica o Logica)
-        if toke not in ['Ent', 'Dec', 'CtA', 'CtL']:
-            erra(renC, colC, 'Error de sintaxis,', 'se esperaba una constante válida y llegó ' + lexe)
-            return  # Termina la función en caso de error
-        
-        valores.append(lexe)
-        toke, lexe = lexico()
-
-        if lexe == ',':
-            #deli = lexe
-            #toke, lexe = lexico()
-            deli = lexe
-        else:
-            deli = ''
-
-    return valores """
+def ctes(): pass
 
 def const():
-    global toke, lexe, renC, colC, tabSim, tData
-    
-    toke, lexe = lexico()  # Avanza al siguiente token
-    tipo()  # Obtiene el tipo de la constante (entera, decimal, lógica, alfabetica)
-    
-    deli = ','  # Para manejar múltiples constantes en una línea
-    while deli == ',':
-        deli = ';'
-        nIde = lexe  # Nombre de la constante
-        
-        # 🛑 Validación: ¿Es un identificador válido?
-        if toke != 'Ide':
-            erra(renC, colC, 'Error de Sintaxis', 'Se esperaba un Identificador y llegó ' + lexe)
-        
-        toke, lexe = lexico()  # Avanza al siguiente token
-        
-        # 📌 Verificar si hay asignación `=`
-        if lexe != '=':
-            erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "=" en la declaración de la constante ' + nIde)
-        
-        toke, lexe = lexico()  # Avanza al siguiente token
-        
-        # 📌 Leer el valor de la constante llamando a `ctes()`
-        valor = ctes()
-        
-        # 📌 Guardar en la tabla de símbolos
-        tabSim[nIde] = ['C', tData, '0', '0']  # 'C' = Constante
-        
-        # 📌 ¿Hay otra constante en la misma línea?
-        if lexe == ',':
-            deli = lexe
-            toke, lexe = lexico()
-    
-    # 🛑 Validación final: Se espera `;` al final de la declaración
-    if lexe != ';':
-        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba ";" y llegó ' + lexe)
-    
-    toke, lexe = lexico()  # Avanza al siguiente token
+    global toke, lexe, renC, colC, bImp, conCod
 
 def vars(): 
     global toke, lexe, renC, colC, bImp, conCod, tData
     toke, lexe = lexico()
     tipo()
     deli = ','
+    dim1 = '0'
     while deli == ',':
-        dim1 = '0'
         deli = ';'
         nIde = lexe
         if toke != 'Ide':
             erra(renC, colC, 'Error de Sintaxis', 'se esperaba Identificador y llego ' + lexe)
         toke, lexe = lexico()
-        if lexe == '[': 
-            dim1=dimen()
-            #print('Vars' +lexe)
-            #print(dim1)
+        if lexe == '[': dimen()
         if lexe == '=': 
             toke, lexe = lexico()
             if lexe == '{':
@@ -349,45 +228,14 @@ def varconst():
     if lexe == 'constante': const()
     elif lexe == 'variable': vars()
 
-def eSi():
-    global toke, lexe, renC, colC, bImp, conCod
-    if lexe == '(':
-        toke, lexe = lexico()
-        expr()
-    if lexe != '()':
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( y llego'  + lexe)
-    toke, lexe = lexico()
-    
 
-def asigna():
-    global toke, lexe, renC, colC, bImp, conCod
-    if lexe == '(':
-        udim()
-    
-    if lexe != '=':
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba = y llego'  + lexe)
-    toke, lexe = lexico()
-    expr()
-    
-def cfunc():
-    global toke, lexe, renC, colC, bImp, conCod
-    deli = ','
-    while deli == ',':
-        toke, lexe = lexico()
-        expr()
-        if lexe == ',':
-            deli = lexe       
-    if lexe != ')':
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llego' + lexe)
-    toke, lexe = lexico 
+def eSi(): pass
 
-def udim():
-    global toke, lexe, renC, colC, bImp, conCod
-    toke, lexe = lexico()
-    expr()
-    if lexe != ']' :
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ] y llego'  + lexe)
-    toke, lexe = lexico()
+def asigna(): pass
+
+def cfunc(): pass
+
+def udim(): pass
 
 def termino():
     global toke, lexe, renC, colC, bImp, conCod
@@ -395,15 +243,10 @@ def termino():
         toke, lexe = lexico()
         expr()
         if lexe != ')':
-           erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llego' + lexe)
+           erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) ' + lexe)
     elif toke == 'Ide': 
         nIde = lexe
         buscaInsTipo(nIde)
-        toke, lexe = lexico()
-        if lexe == '(' :
-            cfunc()
-        elif lexe == '[': 
-            udim()
         #validar udimen o llamada a llamada funcion
         insCodigo(['LOD', nIde, '0'])
 
@@ -416,7 +259,8 @@ def termino():
         if   lexe == 'verdadero': cte = 'V'
         elif lexe == 'falso'    : cte = 'F'
         insCodigo(['LIT', cte, '0'])
-        toke, lexe = lexico()
+      
+    toke, lexe = lexico()
 
 
 def signo():
@@ -442,93 +286,43 @@ def expo():
         tipoResul(tipKey)
         insCodigo(['OPR', '0', '8'])
 
+
 def multi():
     global toke, lexe, renC, colC, bImp
-    paso = False
-    operador = '*'
-    while operador in ['*', '/', '%']:
-        signo()
-        if paso: 
-            dim2 = '4'
-            vd = pilaTipos.pop()
-            op = pilaTipos.pop()
-            vi = pilaTipos.pop()
-            tipKey = vi + op + vd
+    expo()
+
+def oprel():
+    global toke, lexe, renC, colC, bImp
+    suma()
+
+def suma():
+    global toke, lexe, renC, colC, bImp
+    banS = True
+    op = ''
+    while banS:
+        banS = False
+        multi()
+        if op in ['+', '-']:
+            tipD   = pilaTipos.pop()
+            op     = pilaTipos.pop()
+            tipI   = pilaTipos.pop()
+            tipKey = tipI + op + tipD 
             tipoResul(tipKey)
-            print(tipKey)
-            if op == '/':
-                dim2 = '5'
-            elif op == '%':
-                dim2 = '6'
-            insCodigo(['OPR', '0', dim2]) 
-            paso = False
-            print(paso)
-        operador = lexe
-        if operador in ['*', '/', '%']:
-            pilaTipos.append(operador)
-            paso = True
+            if op == '+':
+                insCodigo(['OPR','0', '2'])
+            elif op == '-':
+                insCodigo(['OPR','0', '3'])
+            op = ''
+        if lexe in ['+', '-']: 
+            op = lexe
+            banS = True
+            pilaTipos.append(op)  
             toke, lexe = lexico()
 
 def oprel():
     global toke, lexe, renC, colC, bImp
-    operador = '<'
-    paso = False
-    while operador in ['<', '>', '<=', '>=', '<>', '==']:
-        suma()
-        if paso: 
-            dim2 = '10'
-            vd = pilaTipos.pop()
-            op = pilaTipos.pop()
-            vi = pilaTipos.pop()
-            tipKey = vi + op + vd
-            tipoResul(tipKey)
-            print(tipKey)
-            if op == '>':
-                dim2 = '11'
-            elif op == '<=':
-                dim2 = '12'
-            elif op == '>=':
-                dim2 = '13'
-            elif op == '<>':
-                dim2 = '14'
-            elif op == '==':
-                dim2 = '11'   
-            insCodigo(['OPR', '0', dim2]) 
-            paso = False
-            print(paso)
-        operador = lexe
-        if operador in ['<', '>', '<=', '>=', '<>', '==']:
-            pilaTipos.append(operador)
-            paso = True
-            toke, lexe = lexico()
+    suma()
 
-def suma():
-    global toke, lexe, renC, colC, bImp
-    operador = '+'
-    paso = False
-    while operador in ['+', '-']:
-        multi()
-        if paso: 
-            dim2 = '2'
-            vd = pilaTipos.pop()
-            op = pilaTipos.pop()
-            vi = pilaTipos.pop()
-            tipKey = vi + op + vd
-            tipoResul(tipKey)
-            print(tipKey)
-            print('SUMA TR', tipoResul)
-            if op == '-':
-                dim2 = '3'
-            insCodigo(['OPR', '0', dim2]) 
-            paso = False
-            print(paso)
-        operador = lexe
-        if operador in ['+', '-']:
-            pilaTipos.append(operador)
-            paso = True
-            toke, lexe = lexico()
-
-#CHINGA TU MADRE MAQUINA PL0
 def opy():
     global toke, lexe, renC, colC, bImp
     banY = True
@@ -542,8 +336,6 @@ def opy():
             tipI   = pilaTipos.pop()
             tipKey = tipI + op + tipD 
             tipoResul(tipKey)
-            print('La pila es', pilaTipos)
-            print('Las llaves xd', tipKey, tipoResul)
             op = ''
             insCodigo(['OPR','0', '15'])
         if lexe == 'y': 
@@ -551,6 +343,7 @@ def opy():
             banY = True
             pilaTipos.append('y')  
             toke, lexe = lexico()
+            
 
 def opno():
     global toke, lexe, renC, colC, bImp 
@@ -580,7 +373,7 @@ def expr():
 def imprimir():
     global toke, lexe, renC, colC, bImp
     if lexe != '(':
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( y llego' + lexe)
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( ' + lexe)
     deli = ','
     while deli == ',':
         toke, lexe = lexico()
