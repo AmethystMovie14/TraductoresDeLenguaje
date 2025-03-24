@@ -1,0 +1,10 @@
+funcion principal() 
+inicio
+    lmp;
+    
+    imprimeln("=== Prueba de estructura SI ===");
+    
+    si 10 hacer inicio fin sino inicio fin; 
+    
+    imprimeln("=== Fin de prueba SI ===");
+fin

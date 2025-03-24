@@ -200,6 +200,20 @@ def lexico():
     
     return tok, lex
 
+def bloque():
+    global toke, lexe, renC, colC
+    
+    if lexe != 'inicio':
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba inicio llego ' + lexe)
+    
+    if lexe != 'fin':
+        estatutos()
+        
+    if lexe != 'fin':
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba fin llego ' + lexe)
+        
+    toke, lexe = lexico()  
+
 # Dimensiones de arreglos o variables o constantes xd alv 
 def dimen(): 
     global toke, lexe, renC, colC, tabSim
@@ -275,36 +289,30 @@ def const():
     deli = ','  # Para manejar múltiples constantes en una línea
     while deli == ',':
         deli = ';'
-        nIde = lexe  # Nombre de la constante
+        nIde = lexe  
         
-        # 🛑 Validación: ¿Es un identificador válido?
         if toke != 'Ide':
             erra(renC, colC, 'Error de Sintaxis', 'Se esperaba un Identificador y llegó ' + lexe)
         
-        toke, lexe = lexico()  # Avanza al siguiente token
+        toke, lexe = lexico()  
         
-        # 📌 Verificar si hay asignación `=`
         if lexe != '=':
             erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "=" en la declaración de la constante ' + nIde)
         
-        toke, lexe = lexico()  # Avanza al siguiente token
+        toke, lexe = lexico()  
         
-        # 📌 Leer el valor de la constante llamando a `ctes()`
         valor = ctes()
         
-        # 📌 Guardar en la tabla de símbolos
-        tabSim[nIde] = ['C', tData, '0', '0']  # 'C' = Constante
+        tabSim[nIde] = ['C', tData, '0', '0']  
         
-        # 📌 ¿Hay otra constante en la misma línea?
         if lexe == ',':
             deli = lexe
             toke, lexe = lexico()
     
-    # 🛑 Validación final: Se espera `;` al final de la declaración
     if lexe != ';':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba ";" y llegó ' + lexe)
     
-    toke, lexe = lexico()  # Avanza al siguiente token
+    toke, lexe = lexico() 
 
 def vars(): 
     global toke, lexe, renC, colC, bImp, conCod, tData
@@ -349,14 +357,44 @@ def varconst():
     if lexe == 'constante': const()
     elif lexe == 'variable': vars()
 
+
 def eSi():
     global toke, lexe, renC, colC, bImp, conCod
-    if lexe == '(':
-        toke, lexe = lexico()
-        expr()
-    if lexe != '()':
-        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( y llego'  + lexe)
+    
     toke, lexe = lexico()
+    expr()  
+    
+    # Exigir "hacer"
+    if lexe != 'hacer':
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba hacer y llego ' + lexe)
+    
+    if lexe == 'inicio':
+        bloque()
+
+    toke, lexe = lexico()
+
+    # Guardar posición para salto condicional
+    pos_jmc = conCod
+    insCodigo(['JMC', 'F', '0'])  # Salta si falso
+    
+    # Guardar posición para salto incondicional (saltar el "sino")
+    pos_jmp = conCod
+    insCodigo(['JMP', '0', '0'])
+    
+    # Actualizar el destino del salto condicional
+    codProg[pos_jmc][2] = str(conCod)
+    
+    # Verificar si hay "sino"
+    if lexe == 'sino':
+        toke, lexe = lexico()
+        
+        if lexe == 'inicio':
+            bloque()
+
+    toke, lexe = lexico()
+    
+    # Actualizar el destino del salto incondicional
+    codProg[pos_jmp][2] = str(conCod)
     
 
 def asigna():

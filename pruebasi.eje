@@ -1,0 +1,9 @@
+_P,E,I,1,0,#,
+@
+1 OPR 0, 18
+2 LIT "=== Prueba de estructura SI ===", 0
+3 OPR 0, 21
+4 LIT 10, 0
+5 JMC F, 7
+6 JMP 0, 7
+7 OPR 0, 0
