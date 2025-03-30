@@ -502,6 +502,65 @@ def eRepite():
     toke, lexe = lexico()  # Avanzar después de "hasta"
     print(f"[DEBUG] Finalizando eRepite: toke={toke}, lexe={lexe}")
 
+def eDesde():
+    global toke, lexe, renC, colC, conCod, codProg
+    
+    # Leer variable inicial del ciclo
+    toke, lexe = lexico()
+    varControl = lexe  # Identificador de la variable de control
+    if toke != 'Ide':
+        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba un Identificador y llegó: ' + lexe)
+
+    toke, lexe = lexico()
+    if lexe != '=':
+        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "=" en la inicialización del ciclo "desde"')
+    
+    # Inicializar el valor de la variable de control
+    toke, lexe = lexico()
+    expr()  # Evaluar la expresión inicial
+    insCodigo(['STO', varControl, '0'])  # Guardar el valor inicial
+
+    # Validar el límite superior del ciclo
+    if lexe != 'hasta':
+        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "hasta" y llegó: ' + lexe)
+
+    toke, lexe = lexico()
+    expr()  # Evaluar la expresión límite
+    tipo = pilaTipos.pop()
+    if tipo != 'E':
+        erra(renC, colC, 'Error de Tipos', 'Se esperaba un valor entero para el límite superior')
+    
+    # Marcar el inicio del ciclo
+    posInicio = conCod
+    insCodigo(['NOP', '0', '0'])
+
+    # Evaluar condición para continuar
+    insCodigo(['LOD', varControl, '0'])  # Cargar valor de la variable de control
+    insCodigo(['SUB', '0', lexe])  # Comparar con el límite superior
+    posJMC = conCod
+    insCodigo(['JMC', 'F', '_ETIQ1'])  # Salto si la condición es falsa
+
+    # Procesar el bloque de comandos dentro del ciclo
+    if lexe != 'hacer':
+        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "hacer" y llegó: ' + lexe)
+
+    toke, lexe = lexico()
+    if lexe == 'inicio':
+        bloque()
+    
+    # Incrementar el valor de la variable de control
+    insCodigo(['LOD', varControl, '0'])
+    insCodigo(['ADD', '1', '0'])  # Incrementar en 1
+    insCodigo(['STO', varControl, '0'])
+
+    # Salto al inicio
+    insCodigo(['JMP', '0', str(posInicio)])
+
+    # Etiqueta de salida
+    codProg[posJMC][2] = str(conCod)
+    insCodigo(['NOP', '_ETIQ1', '0'])
+    toke, lexe = lexico()
+
 def asigna():
     global toke, lexe, renC, colC, bImp, conCod
     if lexe == '(':
@@ -770,6 +829,7 @@ def comando():
     elif lexe == 'si': eSi()
     elif lexe == 'mientras': eMientras()
     elif lexe == 'repite': eRepite()
+    elif lexe == 'desde':eDesde()
     elif lexe == 'lmp':
         insCodigo(['OPR', '0', '18'])
         toke, lexe = lexico()
