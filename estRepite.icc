@@ -1,0 +1,13 @@
+variable entera a, i;
+
+funcion principal()
+inicio 
+   i = 0;
+   a = 10;
+   repite
+   inicio
+      imprimeln("i=", i);
+      i = i + 1;
+   fin;   
+   hasta que i > a;
+fin

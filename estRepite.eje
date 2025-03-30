@@ -1,0 +1,23 @@
+a,V,E,0,0,#,
+i,V,E,0,0,#,
+_P,E,I,1,0,#,
+@
+1 LIT 0, 0
+2 STO 0, ;
+3 LIT 10, 0
+4 STO 0, ;
+5 NOP 0, 0
+6 LIT "i=", 0
+7 OPR 0, 20
+8 LOD i, 0
+9 OPR 0, 21
+10 LOD i, 0
+11 LIT 1, 0
+12 OPR 0, 2
+13 STO 0, ;
+14 LOD i, 0
+15 LOD a, 0
+16 OPR 0, 10
+17 JMC F, 5
+18 NOP 0, 0
+19 OPR 0, 0
