@@ -1,24 +1,23 @@
 a,V,E,0,0,#,
 i,V,E,0,0,#,
 _P,E,I,1,0,#,
+_E1,E,I,18,0,#,
 @
 1 LIT 0, 0
-2 STO 0, ;
+2 STO 0, i
 3 LIT 10, 0
-4 STO 0, ;
+4 STO 0, a
 5 LOD i, 0
 6 LOD a, 0
 7 OPR 0, 9
-8 NOP 0, 0
-9 JMC F, _E1
-10 LIT "i=", 0
-11 OPR 0, 20
-12 LOD i, 0
-13 OPR 0, 21
-14 LOD i, 0
-15 LIT 1, 0
-16 OPR 0, 2
-17 STO 0, ;
-18 JMP 0, 8
-19 NOP _E1, 0
-20 OPR 0, 0
+8 JMC F, _E1
+9 LIT "i=", 0
+10 OPR 0, 20
+11 LOD i, 0
+12 OPR 0, 21
+13 LOD i, 0
+14 LIT 1, 0
+15 OPR 0, 2
+16 STO 0, i
+17 JMP 0, 5
+18 OPR 0, 0

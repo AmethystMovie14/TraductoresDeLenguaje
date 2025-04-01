@@ -10,6 +10,7 @@ bImp = False
 conCod = 1
 tabSim  = {}
 codProg = {}
+IdEti = 0
 matran=[
     #           tab  +,-
     #           sp   *                        ==        
@@ -94,6 +95,11 @@ def insCodigo(code):
     global codProg, conCod
     codProg[conCod] = code  
     conCod += 1 
+
+def nomEti():
+    global IdEti
+    IdEti +=1
+    return '_E' + str(IdEti) 
 
 def colCar( c ):
     if c == '_' or c.isalpha(): return 0
@@ -282,36 +288,25 @@ def ctes():
 
 def const():
     global toke, lexe, renC, colC, tabSim, tData
-    
     toke, lexe = lexico()  # Avanza al siguiente token
     tipo()  # Obtiene el tipo de la constante (entera, decimal, lógica, alfabetica)
-    
     deli = ','  # Para manejar múltiples constantes en una línea
     while deli == ',':
         deli = ';'
         nIde = lexe  
-        
         if toke != 'Ide':
             erra(renC, colC, 'Error de Sintaxis', 'Se esperaba un Identificador y llegó ' + lexe)
-        
         toke, lexe = lexico()  
-        
         if lexe != '=':
             erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "=" en la declaración de la constante ' + nIde)
-        
         toke, lexe = lexico()  
-        
-        valor = ctes()
-        
+        valor = ctes()      
         tabSim[nIde] = ['C', tData, '0', '0']  
-        
         if lexe == ',':
             deli = lexe
-            toke, lexe = lexico()
-    
+            toke, lexe = lexico() 
     if lexe != ';':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba ";" y llegó ' + lexe)
-    
     toke, lexe = lexico() 
 
 def vars(): 
@@ -397,16 +392,18 @@ def eSi():
     codProg[pos_jmp][2] = str(conCod)
     
 def eMientras():
-    global toke, lexe, renC, colC, conCod, codProg
+    global toke, lexe, renC, colC, conCod, codProg, IdEti
+    ItiFin = nomEti()
     # Leer la condición del ciclo
     toke, lexe = lexico()
+    posInicio = conCod
     expr()  # Evaluar la expresión lógica
     tipo = pilaTipos.pop()  # Validar el tipo lógico
     if tipo != 'L':
         erra(renC, colC, 'Error de Tipos', 'Se esperaba una expresión lógica, pero se obtuvo: ' + tipo)
     # Marcar inicio del ciclo
-    posInicio = conCod
-    insCodigo(['NOP', '0', '0'])  # Etiqueta inicial del ciclo
+    #posInicio = conCod
+    #insCodigo(['NOP', '0', '0'])  # Etiqueta inicial del ciclo
     # Generar salto condicional al final del ciclo
     posJMC = conCod
     insCodigo(['JMC', 'F', '_E1'])  # Salto si la condición es falsa
@@ -419,26 +416,24 @@ def eMientras():
         toke, lexe = lexico()
     # Generar salto al inicio del ciclo
     insCodigo(['JMP', '0', str(posInicio)])   
+    posJMC = conCod #Posicion Final 
     # Etiqueta final del ciclo
-    insCodigo(['NOP', '_E1', '0'])
+    # insCodigo(['NOP', '_E1', '0'])
     # Avanzar después de "fin"
     toke, lexe = lexico()
+    insTabSim(ItiFin,['E', 'I', str(posJMC), '0'])
 
 def eRepite():
     global toke, lexe, renC, colC, conCod, codProg, pilaTipos
-
     print(f"[DEBUG] Iniciando eRepite: toke={toke}, lexe={lexe}, renC={renC}, colC={colC}")
-
     # Marcar el inicio del ciclo
     posInicio = conCod
-    insCodigo(['NOP', '0', '0'])  # Inicia el ciclo
+    #insCodigo(['NOP', '0', '0'])  # Inicia el ciclo
     print(f"[DEBUG] Código inicial del ciclo generado en posición {posInicio}")
-
     # Validar la palabra clave "repite"
     if lexe != 'repite':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "repite" y llegó: ' + lexe)
         return  # Terminar en caso de error
-
     # Procesar el bloque de comandos
     toke, lexe = lexico()
     print(f"[DEBUG] Después de avanzar token: toke={toke}, lexe={lexe}")
@@ -461,26 +456,21 @@ def eRepite():
     else:
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "inicio" y llegó: ' + lexe)
         return
-
     # Validar la palabra clave "hasta"
+    FinBuc = conCod
     if lexe != 'hasta':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "hasta" y llegó: ' + lexe)
         return  # Terminar en caso de error
-
     print(f"[DEBUG] Validación de 'hasta' exitosa: toke={toke}, lexe={lexe}")
-
     # Leer y evaluar la condición lógica
     toke, lexe = lexico()
     if lexe != 'que':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "que" y llegó: ' + lexe)
         return  # Terminar en caso de error
-
     print(f"[DEBUG] Validación de 'que' exitosa: toke={toke}, lexe={lexe}")
-
     toke, lexe = lexico()
     expr()  # Evaluar la expresión lógica
     print(f"[DEBUG] Después de evaluar la expresión lógica: pilaTipos={pilaTipos}")
-
     # Verificar el tipo lógico de la condición
     if len(pilaTipos) == 0:
         erra(renC, colC, 'Error de Tipos', 'Falta tipo lógico en pila.')
@@ -489,15 +479,12 @@ def eRepite():
     if tipoCond != 'L':
         erra(renC, colC, 'Error de Tipos', 'Se esperaba una expresión lógica, pero se obtuvo: ' + tipoCond)
         return
-
     print(f"[DEBUG] Tipo lógico verificado: tipoCond={tipoCond}")
-
     # Generar el salto condicional al inicio si la condición es falsa
     insCodigo(['JMC', 'F', str(posInicio)])
     print(f"[DEBUG] Salto condicional generado al inicio del ciclo")
-
     # Final del ciclo
-    insCodigo(['NOP', '0', '0'])
+    #insCodigo(['NOP', '0', '0'])
     print(f"[DEBUG] Código final del ciclo generado")
     toke, lexe = lexico()  # Avanzar después de "hasta"
     print(f"[DEBUG] Finalizando eRepite: toke={toke}, lexe={lexe}")
@@ -561,16 +548,15 @@ def eDesde():
     insCodigo(['NOP', '_ETIQ1', '0'])
     toke, lexe = lexico()
 
-def asigna():
+def asigna(NomIde):
     global toke, lexe, renC, colC, bImp, conCod
     if lexe == '(':
         udim()
-    
     if lexe != '=':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "=" en la asignación, pero llegó: ' + lexe)
     toke, lexe = lexico()
     expr()  # Evaluar la expresión
-    insCodigo(['STO', '0', lexe])  # Guardar el resultado
+    insCodigo(['STO', '0', NomIde])  # Guardar el resultado
   
 def cfunc():
     global toke, lexe, renC, colC, bImp, conCod
@@ -835,11 +821,12 @@ def comando():
         toke, lexe = lexico()
     elif lexe == 'lee': lee()
     elif toke == 'Ide':
+        SaIde=lexe
         toke, lexe = lexico()
         if lexe == '(': 
             cfunc()
         else: 
-            asigna()
+            asigna(SaIde)
 
 
 def estatutos(): 
