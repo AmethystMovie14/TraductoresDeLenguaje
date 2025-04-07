@@ -352,6 +352,17 @@ def varconst():
     if lexe == 'constante': const()
     elif lexe == 'variable': vars()
 
+def eInterrumpe():
+    global toke, leke, renC, colC, bImp, conCod
+    
+    toke, leke = lexico()
+    
+
+def eContinua():
+    global toke, leke, renC, colC, bImp, conCod
+
+    toke, leke = lexico()
+
 
 def eSi():
     global toke, lexe, renC, colC, bImp, conCod
@@ -491,7 +502,7 @@ def eRepite():
 
 def eDesde():
     global toke, lexe, renC, colC, conCod, codProg
-    
+
     # Leer variable inicial del ciclo
     toke, lexe = lexico()
     varControl = lexe  # Identificador de la variable de control
@@ -816,6 +827,8 @@ def comando():
     elif lexe == 'mientras': eMientras()
     elif lexe == 'repite': eRepite()
     elif lexe == 'desde':eDesde()
+    elif lexe == 'interrumpe': eInterrumpe()
+    elif lexe == 'continua': eContinua()
     elif lexe == 'lmp':
         insCodigo(['OPR', '0', '18'])
         toke, lexe = lexico()

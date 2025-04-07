@@ -1,0 +1,18 @@
+variable entera num, facto, i;
+
+funcion entera FacIte(entera n) 
+inicio
+     facto = 1;
+     desde i=n hasta i < 2 incr -1  
+     inicio                         
+        facto=facto*i;              
+     fin;                         
+     regresa facto;                  
+fin                                  
+
+funcion principal()
+inicio
+   imprime("Dame num: ");
+   lee(num);
+   imprimeln("Factorial(", num, ")=", FacIte(num));
+fin

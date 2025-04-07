@@ -1,24 +1,39 @@
-constante entera MAX = 10; 
-constante decimal PI = 3.141592;
+#
+   Tu afhsahgoiaoow7827502059170##&%&%^%&(&(:P"{}-+)&%^TETETHDHDTRTYRJRGR)
+#
+
+%% Esto es un ejemplo de un comentario
+
+constante entera MAX = 10;
 constante alfabetica SALUDO="Hola";
-variable entera vec[MAX] = { 33, 1, 0, 4, 19, 34, 15, 
-                        2, 100, 10 };
+#variable entera vec[MAX] = { 33, 1, 0, 4, 19, 34, 15, 
+                        2, 100, 10 };#
 variable entera i, j, k, facto, num, tmp;
 variable entera fibo, fiba;
 variable logica bPrimo = verdadero;
 variable alfabetica nom = "Juan";
-variable decimal raiz1, raiz2, r1, r2;
+%%variable decimal raiz1, raiz2, r1, r2;
 
-funcion decimal raices(decimal a, b, c)
+funcion decimal raices(a, b, c)
 inicio
     r1 = (-b + (b^2 - 4*a*c)^(1/2))/(2*a);
     r2 = (-b - (b^2 - 4*a*c)^(1/2))/(2*a);
-    regresa r1, r2;
+
+    mientras (12 > 90)
+    inicio
+    fin;
+
+    regresa r1 + r2;
 fin
 
-funcion OrdVec() {
+funcion saludar()
+inicio
+fin
+
+funcion OrdVec() 
+inicio
    %% Ordena Vec
-   desde i=0 hasta MAX-1 incr 1 
+   desde i=0 hasta MAX-1 incr 1
    inicio
       desde j=i+1 hasta MAX
       inicio 
@@ -37,10 +52,10 @@ funcion OrdVec() {
      imprime(vec[i], " ");
    fin;
    imprimeln("]");
-   %%Fin de Ordena
+   %% Fin de Ordena
 fin
 
-funcion logico esPrimo(entero n) 
+funcion logica esPrimo(entera n) 
 inicio
    i = 2;
    mientras( verdadero ) 
@@ -57,9 +72,9 @@ inicio
    fin;
 fin
 
-funcion entera fibonacci(entera num)
+funcion entera fibonacci(entera num, i, l; decimal p)
 inicio
-   si num == 0 o num == 1 hacer
+   si (num == 0 o num == 1 y no paso) hacer
    inicio
      regresa num;
    fin;
@@ -69,10 +84,12 @@ inicio
    si num > 1 hacer
    inicio
       repite
+      inicio
         tmp = fibo;
         fibo = fiba + fibo;
         fiba = tmp;
         i = i + 1;
+      fin
       hasta que ( i > num );
    fin;
    regresa fibo;
@@ -92,20 +109,21 @@ fin
 
 funcion principal() 
 inicio
-   lmp();
+   lmp;
    imprime("Dame num: ");
    lee(k);
-   imprimeln("Factorial(", k, ")=", facrec(k))
+   imprimeln("Factorial(", k, ")=", facrec(k));
    OrdVec();
    imprimeln("Fibonacci(", k, ")=", fibonacci(k));
-   # Checa primo 
+   # Ch
+      eca primo 
      de un numero entero #
    imprime("Dame num: ");
    lee(num);
    imprime(num);
    si esPrimo(num) hacer
    inicio
-      imprimeln(" es numero PRIMO");
+      imprimenl(" es numero PRIMO");
    fin
    sino 
    inicio
@@ -115,7 +133,9 @@ inicio
    imprimeln(num, "*", k, "=", j );
    imprime("Como te llamas ? ");
    lee(nom);
-   imprimeln("Felicidades ", nom, " ya PASASTE 
-   Compiladores con
-   Exito")
+   imprimeln("Felicidades ", nom, " ya PASASTE Compiladores")
 fin
+
+
+%%Ejemplo de comentario. 
+%%&&&&&&&&^$%!!@$$$$@@@@@"podpqokfsdlkhjs&^$#@##%~```"
