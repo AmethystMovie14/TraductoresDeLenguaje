@@ -1,0 +1,22 @@
+variable entera a, b;
+
+funcion entera max(entera r, s) 
+inicio
+    si a > s hacer
+    inicio
+       regresa r;
+    fin
+    sino
+    inicio
+       regresa s;
+    fin
+fin
+
+funcion principal()
+inicio
+   imprime("Dame num: ");
+   lee(a);
+   imprime("Dame num: ");
+   lee(b);
+   imprimeln("El mayor es=", max(a, b));
+fin

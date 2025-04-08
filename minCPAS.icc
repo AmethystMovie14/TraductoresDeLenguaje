@@ -1,3 +1,5 @@
 funcion principal() 
 inicio 
+    interrumpe 
+    continua
 fin

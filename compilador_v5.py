@@ -299,6 +299,16 @@ def ctes():
             deli = ''
 
     return valores """
+def ctess():
+    global toke, lexe, renC, colC, tabSim, tData
+
+    deli = ','
+    while deli == ',':
+        ctes()
+        deli = lexe
+        if deli == ',':
+            toke, lexe = lexico()
+    #toke, lexe = lexico()
 
 def const():
     global toke, lexe, renC, colC, tabSim, tData
@@ -344,8 +354,7 @@ def vars():
             toke, lexe = lexico()
             if lexe == '{':
                 toke, lexe = lexico()
-                ctes()
-                toke, lexe = lexico()
+                ctess() 
                 if lexe != '}':
                     erra(renC, colC, 'Error de Sintaxis', 'se esperaba } y llego ' + lexe)
                 toke, lexe = lexico()
@@ -371,7 +380,6 @@ def eInterrumpe():
     global toke, leke, renC, colC, bImp, conCod
     
     toke, leke = lexico()
-    
 
 def eContinua():
     global toke, leke, renC, colC, bImp, conCod
@@ -437,6 +445,7 @@ def eMientras():
     if lexe != 'inicio':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "inicio", pero se encontró: ' + lexe)
     toke, lexe = lexico()
+    
     while lexe != 'fin':
         comando()
         toke, lexe = lexico()
@@ -887,7 +896,16 @@ def block():
         erra(renC, colC, 'Error de Sintaxis', 'se esperaba fin llego ' + lexe)
     toke, lexe = lexico()
 
-def params(): pass
+def params():
+    global toke, lexe, renC, colC, tabSim, tData
+    toke, lexe = lexico()
+    tipo()
+    deli = ','
+    while deli == ',':
+        deli = ';'
+        if toke != 'Ide':
+            erra(renC, colC, 'Error de Sintaxis', 'se esperaba Identificador y llego ' + lexe)
+        toke, lexe = lexico()
 
 def funciones():
     global toke, lexe, conCod

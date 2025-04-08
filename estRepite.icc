@@ -1,5 +1,7 @@
 variable entera a, i;
-
+constante entera MAX = 10;
+variable entera vec[MAX] = { 0, 0, 0, 4, 19, 34, 15, 
+                        2, 100, 10 };
 funcion principal()
 inicio 
    i = 0;
@@ -8,6 +10,8 @@ inicio
    inicio
       imprimeln("i=", i);
       i = i + 1;
+      interrumpe;
+      continua;
    fin;   
    hasta que i > a;
 fin

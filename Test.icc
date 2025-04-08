@@ -1,3 +1,5 @@
+constante entera MAX = 10; 
+variable entera vector[MAX];
 
 funcion principal() 
 inicio

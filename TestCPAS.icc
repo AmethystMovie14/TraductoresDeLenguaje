@@ -3,7 +3,7 @@ variable entera vector[MAX];
 
 funcion principal()
 inicio
-    lmp();
-    imprimeln("Pruebaaaaaaaaaaa);
+    lmp;
+    imprimeln("Pruebaaaaaaaaaaa");
 fin
 

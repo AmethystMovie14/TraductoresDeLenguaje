@@ -1,0 +1,40 @@
+a,V,E,0,0,#,
+b,V,E,0,0,#,
+max$E$E,F,E,1,0,#,         
+s$max$E$E,P,E,0,0,#,
+r$max$E$E,P,E,0,0,#,
+_E1,E,I,11,0,#,
+_E2,E,I,14,0,#,
+principal,F,I,15,0,#,
+_P,E,I,15,0,#,
+_E3,E,I,27,0,#,
+@
+1 STO 0, s$max$E$E
+2 STO 0, r$max$E$El
+3 LOD r$max$E$E, 0    
+4 LOD s$max$E$E, 0
+5 OPR 0, 12
+6 JMC F, _E1
+7 LOD r$max$E$E, 0
+8 STO 0, max$E$E
+9 OPR 0, 1
+10 JMP 0, _E2
+11 LOD s$max$E$E, 0
+12 STO 0, max$E$E
+13 OPR 0, 1
+14 OPR 0, 1
+15 LIT "Dame num: ", 0
+16 OPR 0, 20
+17 OPR a, 19
+18 LIT "Dame num: ", 0
+19 OPR 0, 20
+20 OPR b, 19
+21 LIT "El mayor es=", 0
+22 OPR 0, 20
+23 LOD _E3, 0
+24 LOD a, 0
+25 LOD b, 0
+26 CAL max$E$E, 1
+27 LOD max$E$E, 0
+28 OPR 0, 21
+29 0PR 0, 0
