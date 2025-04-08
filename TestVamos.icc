@@ -12,7 +12,7 @@ variable entera i, j, k, facto, tmp, num;
 variable entera fibo, fiba;
 variable logica bPrimo = verdadero, paso;
 variable alfabetica nom = "Juan";
-variable decimal raiz1, raiz2, r1, r2 = 1;
+variable decimal raiz1, raiz2, r1, r2 = 1, a, b ,c ;
 
 funcion decimal raices(decimal a, b, c)
 inicio

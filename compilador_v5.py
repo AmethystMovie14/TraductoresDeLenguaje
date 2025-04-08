@@ -377,14 +377,21 @@ def varconst():
     elif lexe == 'variable': vars()
 
 def eInterrumpe():
-    global toke, leke, renC, colC, bImp, conCod
+    global toke, lexe, renC, colC, bImp, conCod
     
-    toke, leke = lexico()
+    toke, lexe = lexico()
+
+def eRegresa():
+    global toke, lexe, renC, colC, bImp, conCod
+    
+    toke, lexe = lexico()
+    expr()  # Evaluar la expresión de retorno
+    
 
 def eContinua():
-    global toke, leke, renC, colC, bImp, conCod
+    global toke, lexe, renC, colC, bImp, conCod
 
-    toke, leke = lexico()
+    toke, lexe = lexico()
 
 
 def eSi():
@@ -392,7 +399,7 @@ def eSi():
     
     toke, lexe = lexico()
     expr()  
-    
+
     # Exigir "hacer"
     if lexe != 'hacer':
         erra(renC, colC, 'Error de Sintaxis', 'se esperaba hacer y llego ' + lexe)
@@ -526,49 +533,43 @@ def eRepite():
 
 def eDesde():
     global toke, lexe, renC, colC, conCod, codProg
-
     # Leer variable inicial del ciclo
     toke, lexe = lexico()
     varControl = lexe  # Identificador de la variable de control
     if toke != 'Ide':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba un Identificador y llegó: ' + lexe)
-
     toke, lexe = lexico()
     if lexe != '=':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "=" en la inicialización del ciclo "desde"')
-    
     # Inicializar el valor de la variable de control
     toke, lexe = lexico()
     expr()  # Evaluar la expresión inicial
     insCodigo(['STO', varControl, '0'])  # Guardar el valor inicial
-
     # Validar el límite superior del ciclo
     if lexe != 'hasta':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "hasta" y llegó: ' + lexe)
-
     toke, lexe = lexico()
     expr()  # Evaluar la expresión límite
     tipo = pilaTipos.pop()
-    if tipo != 'E':
-        erra(renC, colC, 'Error de Tipos', 'Se esperaba un valor entero para el límite superior')
-    
+    # if tipo != 'E':
+    #     erra(renC, colC, 'Error de Tipos', 'Se esperaba un valor entero para el límite superior, pero se obtuvo: ' + tipo)
     # Marcar el inicio del ciclo
     posInicio = conCod
     insCodigo(['NOP', '0', '0'])
-
     # Evaluar condición para continuar
     insCodigo(['LOD', varControl, '0'])  # Cargar valor de la variable de control
     insCodigo(['SUB', '0', lexe])  # Comparar con el límite superior
     posJMC = conCod
     insCodigo(['JMC', 'F', '_ETIQ1'])  # Salto si la condición es falsa
-
-    # Procesar el bloque de comandos dentro del ciclo
-    if lexe != 'hacer':
-        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "hacer" y llegó: ' + lexe)
-
-    toke, lexe = lexico()
+    
+    if lexe == 'incr':
+        toke, lexe = lexico()
+        expr()
+    else:
+        toke, lexe = lexico()
+    #toke, lexe = lexico()
     if lexe == 'inicio':
-        bloque()
+        block()
     
     # Incrementar el valor de la variable de control
     insCodigo(['LOD', varControl, '0'])
@@ -585,7 +586,7 @@ def eDesde():
 
 def asigna(NomIde):
     global toke, lexe, renC, colC, bImp, conCod
-    if lexe == '(':
+    if lexe == '[':
         udim()
     if lexe != '=':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "=" en la asignación, pero llegó: ' + lexe)
@@ -620,7 +621,10 @@ def termino():
         expr()
         if lexe != ')':
            erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llego' + lexe)
+        toke, lexe = lexico()
     elif toke == 'Ide': 
+        if lexe == 'vec':
+            print('Es un vector'+lexe)
         nIde = lexe
         buscaInsTipo(nIde)
         toke, lexe = lexico()
@@ -651,27 +655,34 @@ def signo():
     termino()
 
 def expo():
-    global toke, lexe, renC, colC, bImp 
+    global toke, lexe, renC, colC, bImp
+    banY = True
     op = ''
-    if lexe == '-':
-        op = '-'
-        pilaTipos.append('-')
-        toke, lexe = lexico()
-    signo()
-    if op == '-':
-        tipKey = ''
-        tp = pilaTipos.pop()
-        op = pilaTipos.pop()
-        tipKey = op + tp
-        tipoResul(tipKey)
-        insCodigo(['OPR', '0', '8'])
+    while banY:
+        banY = False
+        signo()
+        if op == '^':
+            tipD   = pilaTipos.pop()
+            op     = pilaTipos.pop()
+            tipI   = pilaTipos.pop()
+            tipKey = tipI + op + tipD 
+            tipoResul(tipKey)
+            print('La pila es', pilaTipos)
+            print('Las llaves xd', tipKey, tipoResul)
+            op = ''
+            insCodigo(['OPR','0', '7'])
+        if lexe == '^': 
+            op = lexe
+            banY = True
+            pilaTipos.append('^')  
+            toke, lexe = lexico()
 
 def multi():
     global toke, lexe, renC, colC, bImp
     paso = False
     operador = '*'
     while operador in ['*', '/', '%']:
-        signo()
+        expo()
         if paso: 
             dim2 = '4'
             vd = pilaTipos.pop()
@@ -853,6 +864,7 @@ def comando():
     elif lexe == 'desde':eDesde()
     elif lexe == 'interrumpe': eInterrumpe()
     elif lexe == 'continua': eContinua()
+    elif lexe == 'regresa': eRegresa()
     elif lexe == 'lmp':
         insCodigo(['OPR', '0', '18'])
         toke, lexe = lexico()
@@ -896,16 +908,38 @@ def block():
         erra(renC, colC, 'Error de Sintaxis', 'se esperaba fin llego ' + lexe)
     toke, lexe = lexico()
 
+#Consejo, leer el diagrama de derecha a izquierda, es mas facil
+
 def params():
     global toke, lexe, renC, colC, tabSim, tData
-    toke, lexe = lexico()
-    tipo()
+    #listaParams = []
+    deli2 = ';'
+    print('Params:', lexe)
+    while deli2 == ';':
+        tipo()
+        deli = ','
+        while deli == ',': 
+            #paramName = lexe
+            if toke != 'Ide':
+                erra(renC, colC, 'Error de Sintaxis', 'Se esperaba un identificador y llegó ' + lexe)
+            #listaParams.append((paramName, tData)) 
+            toke, lexe = lexico()
+            deli = lexe
+            if lexe == ',':
+                toke, lexe = lexico()
+        if lexe == ';':
+            toke, lexe = lexico()
+        deli2 = lexe
+
+def uparams():
+    global toke, lexe, renC, colC, tabSim, tData
     deli = ','
     while deli == ',':
-        deli = ';'
-        if toke != 'Ide':
-            erra(renC, colC, 'Error de Sintaxis', 'se esperaba Identificador y llego ' + lexe)
         toke, lexe = lexico()
+        expr()
+        if lexe == ',':
+            deli = lexe       
+    toke, lexe = lexico()
 
 def funciones():
     global toke, lexe, conCod
