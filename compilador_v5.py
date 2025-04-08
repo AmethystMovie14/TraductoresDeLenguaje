@@ -223,16 +223,30 @@ def bloque():
 # Dimensiones de arreglos o variables o constantes xd alv 
 def dimen(): 
     global toke, lexe, renC, colC, tabSim
-    dime='0'
+    dime = '0'
     toke, lexe = lexico()
-    #print(lexe)
-    if not toke == 'Ent':
-        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una constante entera y llegó ' + lexe)
     
-    dime=lexe
-    toke, lexe= lexico()
-    if not lexe == ']':
-         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una ] y llegó ' + lexe)
+    if toke == 'Ent':
+        # Si es un entero literal, usarlo directamente
+        dime = lexe
+    elif toke == 'Ide':
+        # Si es un identificador, verificar si es una constante y obtener su valor
+        nIde = lexe
+        if nIde in tabSim:
+            info = tabSim[nIde]
+            if info[0] == 'C':  # Es una constante
+                dime = info[2]  # Obtener el valor
+            else:
+                erra(renC, colC, 'Error Semántico', 'Se esperaba una constante para la dimensión: ' + nIde)
+        else:
+            erra(renC, colC, 'Error Semántico', 'Identificador no declarado: ' + nIde)
+    else:
+        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una constante entera o identificador y llegó ' + lexe)
+    
+    toke, lexe = lexico()
+    if lexe != ']':
+        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba una ] y llegó ' + lexe)
+    
     toke, lexe = lexico()
     return dime
 
@@ -300,8 +314,9 @@ def const():
         if lexe != '=':
             erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "=" en la declaración de la constante ' + nIde)
         toke, lexe = lexico()  
-        valor = ctes()      
-        tabSim[nIde] = ['C', tData, '0', '0']  
+        valor = ctes()
+
+        tabSim[nIde] = ['C', tData, valor, '0']  
         if lexe == ',':
             deli = lexe
             toke, lexe = lexico() 
@@ -940,7 +955,7 @@ def prgm():
     
 if __name__ == '__main__':
     prgm()
-    
+    programa
     if not(errB):
         print(archE, "COMPILO con Exito!!")
         archS = archE[0:len(archE)-3] + 'eje'
