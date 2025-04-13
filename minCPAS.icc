@@ -1,5 +1,9 @@
+variable logica res;
+variable entera a, b ,c;
+variable alfabetica h = "Hola";
+variable decimal x = 1.;
 funcion principal() 
 inicio 
-    interrumpe 
-    continua
+    desde c=1 hasta c > 10;
+    %%res = no (a>=b y a==5 o falso o b +5 <> 10);
 fin

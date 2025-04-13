@@ -1,0 +1,64 @@
+MAX,C,E,10,0,#,
+SALUDO,C,A,"Hola",0,#,
+vec,V,E,10,0,#,
+i,V,E,0,0,#,
+j,V,E,0,0,#,
+k,V,E,0,0,#,
+facto,V,E,0,0,#,
+tmp,V,E,0,0,#,
+num,V,E,0,0,#,
+fibo,V,E,0,0,#,
+fiba,V,E,0,0,#,
+bPrimo,V,L,0,0,#,
+paso,V,L,0,0,#,
+nom,V,A,0,0,#,
+raiz1,V,D,0,0,#,
+raiz2,V,D,0,0,#,
+r1,V,D,0,0,#,
+r2,V,D,0,0,#,
+a,V,D,0,0,#,
+b,V,D,0,0,#,
+c,V,D,0,0,#,
+@
+1 LOD b, 0
+2 LOD b, 0
+3 LIT 2, 0
+4 OPR 0, 7
+5 LIT 4, 0
+6 LOD a, 0
+7 OPR 0, 4
+8 LOD c, 0
+9 OPR 0, 4
+10 OPR 0, 3
+11 LIT 1, 0
+12 LIT 2, 0
+13 OPR 0, 5
+14 OPR 0, 7
+15 OPR 0, 2
+16 LIT 2, 0
+17 LOD a, 0
+18 OPR 0, 4
+19 OPR 0, 5
+20 STO 0, r1
+21 LOD b, 0
+22 LOD b, 0
+23 LIT 2, 0
+24 OPR 0, 7
+25 LIT 4, 0
+26 LOD a, 0
+27 OPR 0, 4
+28 LOD c, 0
+29 OPR 0, 4
+30 OPR 0, 3
+31 LIT 1, 0
+32 LIT 2, 0
+33 OPR 0, 5
+34 OPR 0, 7
+35 OPR 0, 3
+36 LIT 2, 0
+37 LOD a, 0
+38 OPR 0, 4
+39 OPR 0, 5
+40 STO 0, r2
+41 LOD r1, 0
+42 OPR 0, 1
