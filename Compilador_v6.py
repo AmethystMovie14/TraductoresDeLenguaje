@@ -470,49 +470,43 @@ def eRepite():
     print(f"[DEBUG] Iniciando eRepite: toke={toke}, lexe={lexe}, renC={renC}, colC={colC}")
     # Marcar el inicio del ciclo
     posInicio = conCod
-    #insCodigo(['NOP', '0', '0'])  # Inicia el ciclo
     print(f"[DEBUG] Código inicial del ciclo generado en posición {posInicio}")
+    
     # Validar la palabra clave "repite"
     if lexe != 'repite':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "repite" y llegó: ' + lexe)
         return  # Terminar en caso de error
-    # Procesar el bloque de comandos
+    
+    # Procesar el bloque de comandos o comandos individuales
     toke, lexe = lexico()
     print(f"[DEBUG] Después de avanzar token: toke={toke}, lexe={lexe}")
     if lexe == 'inicio':
-        toke, lexe = lexico()  # Avanzar después de "inicio"
-        print(f"[DEBUG] Dentro del bloque 'inicio': toke={toke}, lexe={lexe}")
-        while lexe != 'fin':  # Procesar comandos hasta encontrar "fin"
-            comando()
-            toke, lexe = lexico()  # Avanzar después de cada comando
-            print(f"[DEBUG] Dentro del bloque, después de comando: toke={toke}, lexe={lexe}")
-        if lexe == 'fin':
-            toke, lexe = lexico()  # Avanzar después de "fin"
-            print(f"[DEBUG] Después de 'fin': toke={toke}, lexe={lexe}")
-            if lexe == ';':  # Consumir el token `;` si está presente
-                toke, lexe = lexico()
-                print(f"[DEBUG] Después de consumir ';': toke={toke}, lexe={lexe}")
-        else:
-            erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "fin" y llegó: ' + lexe)
-            return
+        block()  # Reutilizar la función block para manejar el bloque de comandos
+        toke, lexe = lexico()  # Avanzar después de "fin"
     else:
-        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "inicio" y llegó: ' + lexe)
-        return
+        # Procesar comandos individuales hasta encontrar "hasta"
+        while lexe not in ['hasta', 'fin']:
+            comando()
+            if lexe == ';':
+                toke, lexe = lexico()
+    
     # Validar la palabra clave "hasta"
-    FinBuc = conCod
     if lexe != 'hasta':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "hasta" y llegó: ' + lexe)
         return  # Terminar en caso de error
+    
     print(f"[DEBUG] Validación de 'hasta' exitosa: toke={toke}, lexe={lexe}")
     # Leer y evaluar la condición lógica
     toke, lexe = lexico()
     if lexe != 'que':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "que" y llegó: ' + lexe)
         return  # Terminar en caso de error
+    
     print(f"[DEBUG] Validación de 'que' exitosa: toke={toke}, lexe={lexe}")
     toke, lexe = lexico()
     expr()  # Evaluar la expresión lógica
     print(f"[DEBUG] Después de evaluar la expresión lógica: pilaTipos={pilaTipos}")
+    
     # Verificar el tipo lógico de la condición
     if len(pilaTipos) == 0:
         erra(renC, colC, 'Error de Tipos', 'Falta tipo lógico en pila.')
@@ -521,13 +515,11 @@ def eRepite():
     if tipoCond != 'L':
         erra(renC, colC, 'Error de Tipos', 'Se esperaba una expresión lógica, pero se obtuvo: ' + tipoCond)
         return
+    
     print(f"[DEBUG] Tipo lógico verificado: tipoCond={tipoCond}")
     # Generar el salto condicional al inicio si la condición es falsa
     insCodigo(['JMC', 'F', str(posInicio)])
     print(f"[DEBUG] Salto condicional generado al inicio del ciclo")
-    # Final del ciclo
-    #insCodigo(['NOP', '0', '0'])
-    print(f"[DEBUG] Código final del ciclo generado")
     toke, lexe = lexico()  # Avanzar después de "hasta"
     print(f"[DEBUG] Finalizando eRepite: toke={toke}, lexe={lexe}")
 
@@ -902,11 +894,14 @@ def block():
     if lexe != 'inicio':
         erra(renC, colC, 'Error de Sintaxis', 'se esperaba inicio llego ' + lexe)
     toke, lexe = lexico()
+    print(f"[DEBUG] Dentro del bloque 'inicio': toke={toke}, lexe={lexe}")
     if lexe != 'fin':
         estatutos()
+        print(f"[DEBUG] Dentro del bloque, después de comando: toke={toke}, lexe={lexe}")
     if lexe != 'fin':
         erra(renC, colC, 'Error de Sintaxis', 'se esperaba fin llego ' + lexe)
     toke, lexe = lexico()
+    print(f"[DEBUG] Después de 'fin': toke={toke}, lexe={lexe}")
 
 #Consejo, leer el diagrama de derecha a izquierda, es mas facil
 
