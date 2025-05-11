@@ -588,21 +588,21 @@ def asigna(NomIde):
   
 def cfunc():
     global toke, lexe, renC, colC, bImp, conCod
-    # Espera que lexe sea el primer argumento o ')'
+    toke, lexe = lexico()  # Consumir el (
     if lexe == ')':
         toke, lexe = lexico()
         return
+    
     while True:
         expr()
         if lexe == ',':
             toke, lexe = lexico()
-            continue
         elif lexe == ')':
             toke, lexe = lexico()
-            break
+            return
         else:
             erra(renC, colC, 'Error de Sintaxis', 'se esperaba , o ) y llego ' + lexe)
-            break
+            return
 
 def udim():
     global toke, lexe, renC, colC, bImp, conCod
@@ -613,7 +613,7 @@ def udim():
     toke, lexe = lexico()
 
 def termino():
-    global toke, lexe, renC, colC, bImp, conCod
+    global toke, lexe, renC, colC, bImp, conCod, tabSim
     if lexe == '(':
         toke, lexe = lexico()
         expr()
@@ -621,16 +621,16 @@ def termino():
            erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llego' + lexe)
         toke, lexe = lexico()
     elif toke == 'Ide': 
-        if lexe == 'vec':
-            print('Es un vector'+lexe)
         nIde = lexe
-        buscaInsTipo(nIde)
+        if nIde in tabSim:
+            tipo_original = tabSim[nIde][1]  # Guardar tipo original
+            buscaInsTipo(nIde)
         toke, lexe = lexico()
         if lexe == '(' :
             cfunc()
-            # Agregar tipo de retorno de la función a la pila de tipos
             if nIde in tabSim and tabSim[nIde][0] == 'F':
-                pilaTipos.append(tabSim[nIde][1])
+                # Restaurar el tipo de retorno de la función
+                pilaTipos.append(tipo_original)
         elif lexe == '[': 
             udim()
         #validar udimen o llamada a llamada funcion
@@ -822,13 +822,17 @@ def imprimir():
         toke, lexe = lexico()
         expr()
         if lexe == ',':
-            x = pilaTipos.pop()
+            if len(pilaTipos) > 0:
+                x = pilaTipos.pop()
             insCodigo(['OPR', '0', '20'])
-        deli = lexe 
+            deli = ','
+        else:
+            deli = ''
     if lexe != ')':
         erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llego ' + lexe)
     else:
-        x = pilaTipos.pop()
+        if len(pilaTipos) > 0:
+            x = pilaTipos.pop()
         if bImp:
             insCodigo(['OPR', '0', '21'])
         else:

@@ -1,35 +1,32 @@
 num,V,E,0,0,#,
 facto,V,E,0,0,#,
 i,V,E,0,0,#,
-FacIte$E,F,E,1,0,#,
-n$FacIte$E,P,E,0,0,#,
-_E1,E,I,20,0,#,
+FacIte,F,E,1,0,#,
+n,P,E,None,0,#,
 _P,E,I,24,0,#,
-principal,F,I,24,0,#,
-_E2,E,I,36,0,#,
 @
-1 STO 0, n$FacIte$E
-2 LIT 1, 0
-3 STO 0, facto
-4 LOD n$FacIte$E, 0
-5 STO 0, i
-6 LOD i, 0 
-7 LIT 2, 0
-8 OPR 0, 9
-9 JMC V, _E1
-10 LOD facto, 0
-11 LOD i, 0
-12 OPR 0, 4
-13 STO 0, facto
-14 LIT 1, 0
-15 OPR 0, 8
-16 LOD i, 0
-17 OPR 0, 2
-18 STO 0, i
-19 JMP 0, 6
-20 LOD facto, 0
-21 STO 0, FacIte$E
-22 OPR 0, 1
+1 LIT 1, 0
+2 STO 0, facto
+3 LOD n, 0
+4 STO i, 0
+5 LOD i, 0
+6 LIT 2, 0
+7 OPR 0, 9
+8 NOP 0, 0
+9 LOD i, 0
+10 SUB 0, incr
+11 JMC F, 21
+12 LIT 1, 0
+13 LOD facto, 0
+14 LOD i, 0
+15 OPR 0, 4
+16 STO 0, facto
+17 LOD i, 0
+18 ADD 1, 0
+19 STO i, 0
+20 JMP 0, 8
+21 NOP _ETIQ1, 0
+22 LOD facto, 0
 23 OPR 0, 1
 24 LIT "Dame num: ", 0
 25 OPR 0, 20
@@ -40,9 +37,7 @@ _E2,E,I,36,0,#,
 30 OPR 0, 20
 31 LIT ")=", 0
 32 OPR 0, 20
-33 LOD _E2, 0
-34 LOD num, 0
-35 CAL FacIte$E, 1
-36 LOD FacIte$E, 0
-37 OPR 0, 21
-38 OPR 0, 0
+33 LOD num, 0
+34 LOD FacIte, 0
+35 OPR 0, 21
+36 OPR 0, 0
