@@ -16,9 +16,10 @@ raiz1,V,D,0,0,#,
 raiz2,V,D,0,0,#,
 r1,V,D,0,0,#,
 r2,V,D,0,0,#,
-a,V,D,0,0,#,
-b,V,D,0,0,#,
-c,V,D,0,0,#,
+a,P,D,None,0,#,
+b,P,D,None,0,#,
+c,P,D,None,0,#,
+raices,F,D,1,0,#,
 @
 1 LOD b, 0
 2 LOD b, 0
