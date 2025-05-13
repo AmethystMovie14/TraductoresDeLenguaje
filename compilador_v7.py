@@ -957,6 +957,8 @@ def uparams():
             deli = lexe       
     toke, lexe = lexico()
 
+
+#Checar el tipo OJO ESTE PUEDE SER OPCIONAL
 def funciones():
     global toke, lexe, conCod, tabSim, tData, renC, colC
     # ...existing code...
