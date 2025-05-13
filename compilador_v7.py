@@ -912,7 +912,7 @@ def block():
     print(f"[DEBUG] Dentro del bloque 'inicio': toke={toke}, lexe={lexe}")
     
     # Procesar comandos dentro del bloque hasta encontrar el token 'fin'
-    while lexe != 'fin':
+    if lexe != 'fin':
         estatutos()
         print(f"[DEBUG] Dentro del bloque, después de comando: toke={toke}, lexe={lexe}")
         # Si estatutos() ya consume todos los comandos, el ciclo continuará hasta que se llegue a 'fin'

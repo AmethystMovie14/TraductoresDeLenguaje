@@ -3,7 +3,6 @@ facto,V,E,0,0,#,
 i,V,E,0,0,#,
 FacIte,F,E,1,0,#,
 n,P,E,None,0,#,
-_P,E,I,24,0,#,
 @
 1 LIT 1, 0
 2 STO 0, facto
@@ -26,18 +25,4 @@ _P,E,I,24,0,#,
 19 STO i, 0
 20 JMP 0, 8
 21 NOP _ETIQ1, 0
-22 LOD facto, 0
-23 OPR 0, 1
-24 LIT "Dame num: ", 0
-25 OPR 0, 20
-26 OPR num, 19
-27 LIT "Factorial(", 0
-28 OPR 0, 20
-29 LOD num, 0
-30 OPR 0, 20
-31 LIT ")=", 0
-32 OPR 0, 20
-33 LOD num, 0
-34 LOD FacIte, 0
-35 OPR 0, 21
-36 OPR 0, 0
+22 OPR 0, 1
