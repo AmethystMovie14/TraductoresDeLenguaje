@@ -20,7 +20,7 @@ a,P,D,None,0,#,
 b,P,D,None,0,#,
 c,P,D,None,0,#,
 raices,F,D,1,0,#,
-OrdVec,F,E,43,0,#,
+OrdVec,F,V,43,0,#,
 @
 1 LOD b, 0
 2 LOD b, 0
