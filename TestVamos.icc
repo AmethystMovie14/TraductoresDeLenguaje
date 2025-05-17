@@ -22,7 +22,7 @@ inicio
     regresa r1;
 fin
 
-funcion OrdVec() 
+funcion entera OrdVec() 
 inicio
    %% Ordena Vec
    desde i=0 hasta i < (MAX-1) incr 1
