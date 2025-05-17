@@ -922,7 +922,7 @@ def block():
     print(f"[DEBUG] Después de 'fin': toke={toke}, lexe={lexe}")
 
 
-
+#Hola soy un easter egg
 #Consejo, leer el diagrama de derecha a izquierda, es mas facil
 
 def params():
