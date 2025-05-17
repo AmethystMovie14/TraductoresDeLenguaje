@@ -961,34 +961,49 @@ def uparams():
 #Checar el tipo OJO ESTE PUEDE SER OPCIONAL
 def funciones():
     global toke, lexe, conCod, tabSim, tData, renC, colC
-    # ...existing code...
-    toke, lexe = lexico()
-    # Si la función es principal, no tiene tipo de retorno
-    if lexe == 'principal':
-        nomF = lexe
-        insTabSim('_P', ['E', 'I', str(conCod), '0'])
-        toke, lexe = lexico()
+    
+    toke, lexe = lexico()  
+    
+    if toke == 'Ide' or lexe == 'principal':
+        nomF = lexe  
+        
+        if lexe == 'principal':
+            insTabSim('_P', ['E', 'I', str(conCod), '0'])
+        else:
+            insTabSim(nomF, ['F', 'V', str(conCod), '0'])
+        
+        toke, lexe = lexico()  
     else:
-        tipo()  # Lee el tipo de retorno y actualiza tData
-        nomF = lexe  # Ahora sí, lee el nombre de la función
+        tipo()  
+        
+        nomF = lexe  # Ahora lee el nombre de la función
         if toke != 'Ide':
             erra(renC, colC, 'Error de Sintaxis', 'se esperaba nombre de función y llegó ' + lexe)
+        
         insTabSim(nomF, ['F', tData, str(conCod), '0'])
-        toke, lexe = lexico()
-    # ...resto del código igual...
+        toke, lexe = lexico()  
+    
+    # Procesar parámetros
     if lexe != '(':
-       erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( llego ' + lexe)
-    toke, lexe = lexico()
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ( y llegó ' + lexe)
+    
+    toke, lexe = lexico()  
+    
+    # Procesar lista de parámetros si hay
     if lexe != ')':
-        params()                   
+        params()  
+    
     if lexe != ')':
-       erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) llego ' + lexe)
-    toke, lexe = lexico()
+        erra(renC, colC, 'Error de Sintaxis', 'se esperaba ) y llegó ' + lexe)
+    
+    toke, lexe = lexico()  
+    
     block()
+    
     if nomF == 'principal':
-        insCodigo(['OPR', '0', '0'])
+        insCodigo(['OPR', '0', '0'])  
     else:
-        insCodigo(['OPR', '0', '1'])
+        insCodigo(['OPR', '0', '1'])  
 
 
 def programa():
