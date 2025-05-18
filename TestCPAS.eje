@@ -1,8 +1,0 @@
-MAX,C,E,10,0,#,
-vector,V,E,10,0,#,
-_P,E,I,1,0,#,
-@
-1 OPR 0, 18
-2 LIT "Pruebaaaaaaaaaaa", 0
-3 OPR 0, 21
-4 OPR 0, 0
