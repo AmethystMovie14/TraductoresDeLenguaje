@@ -1,0 +1,31 @@
+a,V,E,0,0,#,
+b,V,E,0,0,#,
+cuenta,F,I,1,0,#,
+_E1,E,I,14,0,#,
+_P,E,I,15,0,#,
+principal,F,I,15,0,#,
+_E2,E,I,15,0,#,
+@
+1 LOD a, 0
+2 LOD b, 0
+3 OPR 0, 9
+4 JMC F, _E1
+5 LIT "a=", 0
+6 OPR 0, 20
+7 LOD a, 0
+8 OPR 0, 21
+9 LOD a, 0
+10 LIT 1, 0
+11 OPR 0, 2
+12 STO 0, a
+13 JMP 0, 1
+14 OPR 0, 1
+15 LIT "Dame num: ", 0
+16 OPR 0, 21
+17 OPR a, 19
+18 LIT "Dame num: ", 0
+19 OPR 0, 21
+20 OPR b, 19
+21 LOD _E2, 0
+22 CAL cuenta, 0
+23 OPR 0, 0

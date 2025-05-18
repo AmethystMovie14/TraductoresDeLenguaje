@@ -1,0 +1,19 @@
+variable entera a, b;
+
+funcion cuenta() 
+inicio
+     mientras a < b
+     inicio
+        imprimeln("a=", a);
+        a = a + 1;
+     fin
+fin
+
+funcion principal()
+inicio
+   imprime("Dame num: ");
+   lee(a);
+   imprime("Dame num: ");
+   lee(b);
+   cuenta();
+fin

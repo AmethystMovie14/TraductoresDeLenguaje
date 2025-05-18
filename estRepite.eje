@@ -1,7 +1,8 @@
 a,V,E,0,0,#,
 i,V,E,0,0,#,
 _P,E,I,1,0,#,
-_E1,E,I,17,0,#,
+principal,F,I,1,0,#,
+_E2,E,I,17,0,#,
 @
 1 LIT 0, 0
 2 STO 0, i
@@ -19,4 +20,6 @@ _E1,E,I,17,0,#,
 14 LOD a, 0
 15 OPR 0, 10
 16 JMC F, 5
-17 OPR 0, 0
+17 LOD _E2, 0
+18 CAL cuenta, 0
+19 OPR 0, 0
