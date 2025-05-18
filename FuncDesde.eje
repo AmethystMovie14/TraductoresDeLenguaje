@@ -1,0 +1,26 @@
+num,V,E,0,0,#,
+facto,V,E,0,0,#,
+i,V,E,0,0,#,
+FacIte,F,E,1,0,#,
+n,P,E,None,0,#,
+@
+1 LIT 1, 0
+2 STO 0, facto
+3 LOD n, 0
+4 STO i, 0
+5 LOD i, 0
+6 LIT 2, 0
+7 OPR 0, 9
+9 LOD i, 0
+10 SUB 0, incr
+11 JMC F, 21
+12 LIT 1, 0
+13 LOD facto, 0
+14 LOD i, 0
+15 OPR 0, 4
+16 STO 0, facto
+17 LOD i, 0
+18 ADD 1, 0
+19 STO i, 0
+20 JMP 0, 8
+22 OPR 0, 1

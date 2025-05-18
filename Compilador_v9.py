@@ -950,22 +950,17 @@ def funciones():
         nomF = lexe  
 
         if lexe == 'principal':
-            # Agrega principal como funcion interna y etiqueta _E2
+            # Solo agrega principal y _P, pero _E2 solo si hay llamada a otra función
             insTabSim('_P', ['E', 'I', str(conCod), '0'])
             insTabSim('principal', ['F', 'I', str(conCod), '0'])
-            # Etiqueta para principal
-            global IdEti
-            IdEti += 1
-            insTabSim('_E2', ['E', 'I', str(conCod), '0'])
         else:
-            # Si no hay tipo explícito, poner tipo I (interna)
             insTabSim(nomF, ['F', 'I', str(conCod), '0'])
 
         toke, lexe = lexico()  
     else:
         tipo()  
 
-        nomF = lexe  # Ahora lee el nombre de la función
+        nomF = lexe
         if toke != 'Ide':
             erra(renC, colC, 'Error de Sintaxis', 'se esperaba nombre de función y llegó ' + lexe)
 
@@ -1005,20 +1000,34 @@ def programa():
     else:
         while lexe == 'funcion':
             funciones()
-    # Al finalizar, si existe principal, agregar LOD _E2, 0 y CAL cuenta, 0 antes de OPR 0, 0
+    # Solo para programas con principal y llamada a otra función desde principal
     if 'principal' in tabSim:
-        # Buscar la posición antes de OPR 0, 0 (fin de principal)
+        principal_pos = int(tabSim['principal'][2])
         fin_principal = None
-        for k in codProg:
-            if codProg[k][0] == 'OPR' and codProg[k][2] == '0':
+        # Buscar el final de principal (OPR 0, 0)
+        for k in range(principal_pos, conCod):
+            if codProg.get(k, [None, None, None])[0] == 'OPR' and codProg[k][2] == '0':
                 fin_principal = k
                 break
-        if fin_principal:
-            # Insertar instrucciones antes de OPR 0, 0
+        # Buscar si hay una llamada a otra función (CAL ...) dentro de principal
+        hay_cal = False
+        cal_func = None
+        for k in range(principal_pos, fin_principal):
+            if codProg.get(k, [None, None, None])[0] == 'CAL':
+                hay_cal = True
+                cal_func = codProg[k][1]
+                break
+        if hay_cal:
+            # Agregar _E2 a la tabla de símbolos si no existe
+            if '_E2' not in tabSim:
+                tabSim['_E2'] = ['E', 'I', str(fin_principal+2), '0']
+            # Mueve las instrucciones después del fin_principal para hacer espacio
+            for move_k in range(conCod-1, fin_principal-1, -1):
+                codProg[move_k+3] = codProg[move_k]
             codProg[fin_principal] = ['LOD', '_E2', '0']
-            codProg[fin_principal+1] = ['CAL', 'cuenta', '0']
+            codProg[fin_principal+1] = ['CAL', cal_func, '0']
             codProg[fin_principal+2] = ['OPR', '0', '0']
-            conCod = fin_principal+3
+            conCod += 3
 
 def prgm():
     global entrada, idx, errB, tok, lex, \

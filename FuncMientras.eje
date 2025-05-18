@@ -4,7 +4,6 @@ cuenta,F,I,1,0,#,
 _E1,E,I,14,0,#,
 _P,E,I,15,0,#,
 principal,F,I,15,0,#,
-_E2,E,I,15,0,#,
 @
 1 LOD a, 0
 2 LOD b, 0
@@ -26,6 +25,4 @@ _E2,E,I,15,0,#,
 18 LIT "Dame num: ", 0
 19 OPR 0, 21
 20 OPR b, 19
-21 LOD _E2, 0
-22 CAL cuenta, 0
-23 OPR 0, 0
+21 OPR 0, 0
