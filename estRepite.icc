@@ -13,5 +13,6 @@ inicio
       interrumpe;
       continua;
    fin;   
+   
    hasta que i > a;
 fin

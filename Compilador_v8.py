@@ -466,48 +466,31 @@ def eMientras():
     insTabSim(ItiFin,['E', 'I', str(posJMC), '0'])
 
 def eRepite():
-    global toke, lexe, renC, colC, conCod, codProg, pilaTipos
-    print(f"[DEBUG] Iniciando eRepite: toke={toke}, lexe={lexe}, renC={renC}, colC={colC}")
-    # Marcar el inicio del ciclo
+    global toke, lexe, renC, colC, conCod, codProg, pilaTipos, tabSim
+    ItiFin = nomEti()
     posInicio = conCod
-    print(f"[DEBUG] Código inicial del ciclo generado en posición {posInicio}")
-    
-    # Validar la palabra clave "repite"
+    # No generar NOP, solo guardar la posición de inicio
     if lexe != 'repite':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "repite" y llegó: ' + lexe)
-        return  # Terminar en caso de error
-    
-    # Procesar el bloque de comandos o comandos individuales
+        return
     toke, lexe = lexico()
-    print(f"[DEBUG] Después de avanzar token: toke={toke}, lexe={lexe}")
     if lexe == 'inicio':
-        block()  # Reutilizar la función block para manejar el bloque de comandos
-        toke, lexe = lexico()  # Avanzar después de "fin"
+        block()
+        toke, lexe = lexico()
     else:
-        # Procesar comandos individuales hasta encontrar "hasta"
         while lexe not in ['hasta', 'fin']:
             comando()
             if lexe == ';':
                 toke, lexe = lexico()
-    
-    # Validar la palabra clave "hasta"
     if lexe != 'hasta':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "hasta" y llegó: ' + lexe)
-        return  # Terminar en caso de error
-    
-    print(f"[DEBUG] Validación de 'hasta' exitosa: toke={toke}, lexe={lexe}")
-    # Leer y evaluar la condición lógica
+        return
     toke, lexe = lexico()
     if lexe != 'que':
         erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "que" y llegó: ' + lexe)
-        return  # Terminar en caso de error
-    
-    print(f"[DEBUG] Validación de 'que' exitosa: toke={toke}, lexe={lexe}")
+        return
     toke, lexe = lexico()
-    expr()  # Evaluar la expresión lógica
-    print(f"[DEBUG] Después de evaluar la expresión lógica: pilaTipos={pilaTipos}")
-    
-    # Verificar el tipo lógico de la condición
+    expr()
     if len(pilaTipos) == 0:
         erra(renC, colC, 'Error de Tipos', 'Falta tipo lógico en pila.')
         return
@@ -515,13 +498,12 @@ def eRepite():
     if tipoCond != 'L':
         erra(renC, colC, 'Error de Tipos', 'Se esperaba una expresión lógica, pero se obtuvo: ' + tipoCond)
         return
-    
-    print(f"[DEBUG] Tipo lógico verificado: tipoCond={tipoCond}")
     # Generar el salto condicional al inicio si la condición es falsa
     insCodigo(['JMC', 'F', str(posInicio)])
-    print(f"[DEBUG] Salto condicional generado al inicio del ciclo")
-    toke, lexe = lexico()  # Avanzar después de "hasta"
-    print(f"[DEBUG] Finalizando eRepite: toke={toke}, lexe={lexe}")
+    # Avanzar después de "hasta"
+    toke, lexe = lexico()
+    # Registrar la etiqueta en la tabla de símbolos con la posición actual
+    insTabSim(ItiFin, ['E', 'I', str(conCod), '0'])
 
 def eDesde():
     global toke, lexe, renC, colC, conCod, codProg
@@ -1058,6 +1040,9 @@ if __name__ == '__main__':
         # print(tabSim.items())
             with open(archS, 'w') as aSal:
                 for x, y in tabSim.items():
+                    # Eliminar MAX y vec de la salida
+                    if x in ['MAX', 'vec']:
+                        continue
                     aSal.write(x + ',')
                     aSal.write(y[0] + ',')
                     aSal.write(y[1] + ',')
@@ -1066,6 +1051,9 @@ if __name__ == '__main__':
                     aSal.write('#,\n')
                 aSal.write('@\n')
                 for x , y in codProg.items():
+                    # Eliminar NOP _E1, 0 de la salida
+                    if y[0] == 'NOP':
+                        continue
                     aSal.write(str(x) + ' ')                    
                     aSal.write(y[0] + ' ')                    
                     aSal.write(y[1] + ', ')                    
