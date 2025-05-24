@@ -1,11 +1,19 @@
 constante entera MAX = 10; 
 variable entera vector[MAX];
 
+funcion alfabetica SAL()
+inicio
+    regresa "Hola Mundo Cruel en CPAS";
+
+fin
+
 funcion principal() 
 inicio
     lmp;
     imprimeln("Hola ", " Bienvenida(o) CPAS ", 
               verdadero, " ",10+10,"No falso y verdadero es:"," ", no falso y verdadero, " ", "fin de imprimir");
     imprimeln("Fin de hola bienvenidos!!!");
+    imprimeln(SAL());
+
 
 fin

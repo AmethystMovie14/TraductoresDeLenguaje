@@ -1,0 +1,44 @@
+vector,V,E,10,0,#,
+SAL,F,A,1,0,#,
+_P,E,I,5,0,#,
+principal,F,I,5,0,#,
+_E1,E,I,35,0,#,
+@
+1 LIT "Hola Mundo Cruel en CPAS", 0
+2 STO 0, SAL
+3 OPR 0, 1
+4 OPR 0, 1
+5 OPR 0, 18
+6 LIT "Hola ", 0
+7 OPR 0, 20
+8 LIT " Bienvenida(o) CPAS ", 0
+9 OPR 0, 20
+10 LIT V, 0
+11 OPR 0, 20
+12 LIT " ", 0
+13 OPR 0, 20
+14 LIT 10, 0
+15 LIT 10, 0
+16 OPR 0, 2
+17 OPR 0, 20
+18 LIT "No falso y verdadero es:", 0
+19 OPR 0, 20
+20 LIT " ", 0
+21 OPR 0, 20
+22 LIT F, 0
+23 OPR 0, 17
+24 LIT V, 0
+25 OPR 0, 15
+26 OPR 0, 20
+27 LIT " ", 0
+28 OPR 0, 20
+29 LIT "fin de imprimir", 0
+30 OPR 0, 21
+31 LIT "Fin de hola bienvenidos", 0
+32 OPR 0, 21
+33 LOD _E1, 0
+34 CAL SAL, 0
+35 LOD SAL, 0
+36 OPR 0, 21
+37 OPR 0, 1
+38 OPR 0, 0

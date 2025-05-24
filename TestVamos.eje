@@ -18,7 +18,9 @@ a,P,D,None,0,#,
 b,P,D,None,0,#,
 c,P,D,None,0,#,
 raices,F,D,1,0,#,
-OrdVec,F,I,43,0,#,
+OrdVec,F,I,45,0,#,
+_E1,E,I,47,0,#,
+_E2,E,I,56,0,#,
 @
 1 LOD b, 0
 2 LOD b, 0
@@ -61,34 +63,18 @@ OrdVec,F,I,43,0,#,
 39 OPR 0, 5
 40 STO 0, r2
 41 LOD r1, 0
-42 OPR 0, 1
-43 LIT 0, 0
-44 STO i, 0
-45 LOD i, 0
-46 LOD MAX, 0
-47 LIT 1, 0
-48 OPR 0, 3
-49 OPR 0, 9
+42 STO 0, raices
+43 OPR 0, 1
+44 OPR 0, 1
+45 LIT 0, 0
+46 STO 0, i
+47 LOD i, 0
+48 LOD i, 0
+49 OPR 0, 10
+50 JMC V, _E2
 51 LOD i, 0
-52 SUB 0, incr
-53 JMC F, 75
-54 LIT 1, 0
-55 LOD i, 0
-56 LIT 1, 0
-57 OPR 0, 2
-58 STO j, 0
-59 LOD j, 0
-60 LOD MAX, 0
-61 OPR 0, 9
-63 LOD j, 0
-64 SUB 0, inicio
-65 JMC F, 70
-66 LOD j, 0
-67 ADD 1, 0
-68 STO j, 0
-69 JMP 0, 62
-71 LOD i, 0
-72 ADD 1, 0
-73 STO i, 0
-74 JMP 0, 50
-76 OPR 0, 1
+52 LIT 1, 0
+53 OPR 0, 2
+54 STO 0, i
+55 JMP 0, _E1
+56 OPR 0, 1

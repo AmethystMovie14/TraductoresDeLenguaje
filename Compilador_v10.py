@@ -1,6 +1,7 @@
 ACP=99
 ERR=-1
 idx=0
+NFuncion = '' #Guardar el nombre de la funcion actual
 renC = 1
 colC = 0
 entrada = ''
@@ -384,15 +385,15 @@ def eInterrumpe():
     toke, lexe = lexico()
 
 def eRegresa():
-    global toke, lexe, renC, colC, bImp, conCod
+    global toke, lexe, renC, colC, bImp, conCod, NFuncion
     
     print("DEBUG: eRegresa() llamado")  # ← AGREGAR ESTA LÍNEA
     toke, lexe = lexico()
     expr()  # Evaluar la expresión de retorno (deja valor en pila)
+    insCodigo(['STO', '0', NFuncion])  # Guardar el valor de retorno en la posición 0
     insCodigo(['OPR', '0', '1'])  # Instrucción de retorno
     print(f"DEBUG: Generé OPR 0,1 en posición {conCod-1}")  # ← Y ESTA
     
-
 def eContinua():
     global toke, lexe, renC, colC, bImp, conCod
 
@@ -440,7 +441,7 @@ def eSi():
         toke, lexe = lexico()
         
         if lexe == 'inicio':
-            bloque()
+            block()
         else:
             comando()
     
@@ -638,9 +639,13 @@ def cfunc(nombreFunc):  # ← Recibir el nombre de la función
             else:
                 erra(renC, colC, 'Error de Sintaxis', 'se esperaba , o ) y llego ' + lexe)
                 return
-    
     # Generar llamada a la función
+    etiReg = nomEti()  # Genera una etiqueta única
+    insCodigo(['LOD', etiReg, '0'])  # Salto incondicional a la función, y se manda a la pila 
     insCodigo(['CAL', nombreFunc, '0'])
+    #GENERAR UNA ETIQUETA PARA EL RETORNO
+    insTabSim(etiReg, ['E', 'I', str(conCod), '0'])
+
 
 def udim():
     global toke, lexe, renC, colC, bImp, conCod
@@ -670,9 +675,8 @@ def termino():
                 pilaTipos.append(tipo_original)
         elif lexe == '[': 
             udim()
-        else:
-            # Solo generar LOD si NO es una función con parámetros
-            insCodigo(['LOD', nIde, '0'])
+        # Solo generar LOD si NO es una función con parámetros
+        insCodigo(['LOD', nIde, '0'])
 
 
     elif toke in ['Ent', 'Dec', 'CtA', 'CtL']:
@@ -999,12 +1003,14 @@ def uparams():
 
 #Checar el tipo OJO ESTE PUEDE SER OPCIONAL
 def funciones():
-    global toke, lexe, conCod, tabSim, tData, renC, colC
+    global toke, lexe, conCod, tabSim, tData, renC, colC, NFuncion
 
     toke, lexe = lexico()  
 
     if toke == 'Ide' or lexe == 'principal':
         nomF = lexe  
+        NFuncion = nomF
+        print(f"[DEBUG] Función: {NFuncion}")  # ← AGREGAR ESTA LÍNEA
 
         if lexe == 'principal':
             insTabSim('_P', ['E', 'I', str(conCod), '0'])
@@ -1016,6 +1022,7 @@ def funciones():
     else:
         tipo()  
         nomF = lexe
+        NFuncion = nomF
         if toke != 'Ide':
             erra(renC, colC, 'Error de Sintaxis', 'se esperaba nombre de función y llegó ' + lexe)
 
@@ -1037,6 +1044,7 @@ def funciones():
     toke, lexe = lexico()  
 
     block()
+    insCodigo(['OPR', '0', '1'])  # Retorno de función
 
     # SIMPLIFICAR - sin saltos complejos
     if nomF == 'principal':
