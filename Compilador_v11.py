@@ -40,29 +40,39 @@ matran=[
 opLog=['y', 'no', 'o']
 cteLog=['falso', 'verdadero']
 palRes=['interrumpe', 'si',  'sino',   'funcion',  
-        'entera', 'decimal', 'lógica', 'alfabetica',
+        'entera', 'decimal', 'logica', 'alfabetica',
         'constante', 'hasta', 'hacer', 'incr', 
         'inicio', 'fin','continua', 'desde',
         'regresa', 'variable', 'que', 'mientras', 
         'lmp', 'imprime', 'lee', 'imprimeln', 'principal']
 
 mapTipos={
+    # Asignaciones
     'E=E': '', 'A=A': '', 'D=D':'', 'D=E':'', 'L=L': '',
+    
+    # Operaciones aritméticas
     'A+A': 'A', 'E+E': 'E', 'E+D': 'D', 'D+E':'D', 'D+D': 'D', 
     'E-E': 'E', 'E-D': 'D', 'D-E':'D', 'D-D': 'D',
     'E*E': 'E', 'E*D': 'D', 'D*E':'D', 'D*D': 'D',     
     'E/E': 'D', 'E/D': 'D', 'D/E':'D', 'D/D': 'D',
     'E%E': 'E',     
     'E^E': 'D', 'E^D': 'D', 'D^E':'D', 'D^D': 'D',
-     '-E': 'E', '-D': 'D',     
+    '-E': 'E', '-D': 'D',     
+    
+    # Operaciones relacionales (devuelven lógico)
     'E<E': 'L', 'E<D': 'L', 'D<E':'L', 'D<D': 'L', 'A<A': 'L',
     'E<=E': 'L', 'E<=D':'L', 'D<=E': 'L', 'D<=D': 'L', 'A<=A':'L',
     'E>E' : 'L', 'E>D' :'L', 'D>E' : 'L', 'D>D' : 'L', 'A>A' :'L',
     'E>=E': 'L', 'E>=D':'L', 'D>=E': 'L', 'D>=D': 'L', 'A>=A':'L',
     'E<>E': 'L', 'E<>D':'L', 'D<>E': 'L', 'D<>D': 'L', 'A<>A':'L',
     'E==E': 'L', 'E==D':'L', 'D==E': 'L', 'D==D': 'L', 'A==A':'L',
+    
+    # NUEVAS: Operaciones lógicas
+    'L<L': 'L', 'L<=L': 'L', 'L>L': 'L', 'L>=L': 'L', 'L<>L': 'L', 'L==L': 'L',
+    
+    # Operaciones lógicas básicas
     'noL' : 'L', 'LyL' :'L', 'LoL' : 'L'
-    }
+}
 #A es alfabefica, E es entera, D es decimal, L es logica, 
 
 pilaTipos=[]
@@ -467,8 +477,8 @@ def eMientras():
         if tipo != 'L':
             erra(renC, colC, 'Error de Tipos', 'Se esperaba una expresión lógica')
     
-    #if lexe != 'hacer':
-    #   erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "hacer"')
+    if lexe != 'hacer':
+       erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "hacer"')
     
     toke, lexe = lexico()
     
@@ -610,13 +620,20 @@ def eDesde():
 
 def asigna(NomIde):
     global toke, lexe, renC, colC, bImp, conCod
+    esArreglo = False
+    
     if lexe == '[':
-        udim()
+        udim()  # Evalúa índice, lo deja en la pila
+        esArreglo = True
+        
     if lexe != '=':
-        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "=" en la asignación, pero llegó: ' + lexe)
+        erra(renC, colC, 'Error de Sintaxis', 'Se esperaba "=" en la asignación')
+    
     toke, lexe = lexico()
-    expr()  # Evaluar la expresión
-    insCodigo(['STO', '0', NomIde])  # Guardar el resultado
+    expr()  # Evalúa el valor, lo deja en la pila
+    
+    # Ahora la pila tiene: [índice, valor] (si es arreglo) o [valor] (si es variable)
+    insCodigo(['STO', '0', NomIde])  # El intérprete manejará el índice automáticamente
   
 def cfunc(nombreFunc):
     global toke, lexe, renC, colC, bImp, conCod, tabSim
@@ -688,11 +705,13 @@ def termino():
             cfunc(nIde)  # Genera CAL
             if nIde in tabSim and tabSim[nIde][0] == 'F':
                 pilaTipos.append(tipo_original)
+            # NO generar LOD después de llamada a función
         elif lexe == '[': 
             udim()
-        # Solo generar LOD si NO es una función con parámetros
-        insCodigo(['LOD', nIde, '0'])
-
+            insCodigo(['LOD', nIde, '0'])
+        else:
+            # DESCOMENTAR: Generar LOD para variables simples
+            insCodigo(['LOD', nIde, '0'])  # ← DESCOMENTAR ESTA LÍNEA
 
     elif toke in ['Ent', 'Dec', 'CtA', 'CtL']:
         cte = lexe
@@ -770,14 +789,17 @@ def oprel():
     while operador in ['<', '>', '<=', '>=', '<>', '==']:
         suma()
         if paso: 
-            dim2 = '9'
             vd = pilaTipos.pop()
             op = pilaTipos.pop()
             vi = pilaTipos.pop()
             tipKey = vi + op + vd
             tipoResul(tipKey)
             print(tipKey)
-            if op == '>':
+            
+            # CORREGIR: Inicializar dim2 basado en el operador
+            if op == '<':
+                dim2 = '9'
+            elif op == '>':
                 dim2 = '10'
             elif op == '<=':
                 dim2 = '11'
@@ -786,7 +808,10 @@ def oprel():
             elif op == '<>':
                 dim2 = '13'
             elif op == '==':
-                dim2 = '14'   
+                dim2 = '14'
+            else:
+                dim2 = '9'  # Por defecto
+                
             insCodigo(['OPR', '0', dim2]) 
             paso = False
             print(paso)
@@ -1023,28 +1048,31 @@ def funciones():
     global toke, lexe, conCod, tabSim, tData, renC, colC, NFuncion
 
     toke, lexe = lexico()  
+    print(f"DEBUG funciones: inicial toke={toke}, lexe={lexe}")
 
-    if toke == 'Ide' or lexe == 'principal':
+    if lexe == 'principal':
+        print(f"DEBUG: Procesando función principal")
+        nomF = 'principal'
+        NFuncion = nomF
+        insTabSim('_P', ['E', 'I', str(conCod), '0'])
+        insTabSim('principal', ['F', 'I', str(conCod), '0'])
+        toke, lexe = lexico()  
+    elif toke == 'Ide':
+        print(f"DEBUG: Función sin tipo de retorno")
         nomF = lexe  
         NFuncion = nomF
-        print(f"[DEBUG] Función: {NFuncion}")  # ← AGREGAR ESTA LÍNEA
-
-        if lexe == 'principal':
-            insTabSim('_P', ['E', 'I', str(conCod), '0'])
-            insTabSim('principal', ['F', 'I', str(conCod), '0'])
-        else:
-            insTabSim(nomF, ['F', 'I', str(conCod), '0'])
-
+        insTabSim(nomF, ['F', 'I', str(conCod), '0'])
         toke, lexe = lexico()  
     else:
+        print(f"DEBUG: Función con tipo de retorno")
         tipo()  
         nomF = lexe
         NFuncion = nomF
         if toke != 'Ide':
             erra(renC, colC, 'Error de Sintaxis', 'se esperaba nombre de función y llegó ' + lexe)
-
         insTabSim(nomF, ['F', tData, str(conCod), '0'])
-        toke, lexe = lexico()  
+        toke, lexe = lexico()
+        print(f"DEBUG después de lexico(): toke={toke}, lexe={lexe}")  # ← AGREGAR
 
     # Procesar parámetros
     if lexe != '(':
