@@ -985,23 +985,26 @@ def block():
 
 def params():
     global toke, lexe, renC, colC, tabSim, tData, NFuncion
-    deli2 = ';'
-    while deli2 == ';':
-        tipo()  
-        deli = ','
-        while deli == ',':
-            if toke != 'Ide':
-                erra(renC, colC, 'Error de Sintaxis', 'Se esperaba un identificador y llegó ' + lexe)
-            else:
-                # Inserción del parámetro con referencia a la función
-                insTabSim(lexe, ['P', tData, NFuncion, '0'])  # ← CAMBIO: usar NFuncion en lugar de None
+    
+    while lexe != ')':  # Mientras no llegue al final
+        tipo()  # Lee el tipo
+        
+        if toke != 'Ide':
+            erra(renC, colC, 'Error de Sintaxis', 'Se esperaba un identificador y llegó ' + lexe)
+            return
+        
+        # Insertar parámetro
+        insTabSim(lexe, ['P', tData, NFuncion, '0'])
+        toke, lexe = lexico()
+        
+        # Si hay ';' o ',', consumirlo y continuar
+        if lexe in [';', ',']:
             toke, lexe = lexico()
-            deli = lexe
-            if lexe == ',':
-                toke, lexe = lexico()
-        if lexe == ';':
-            toke, lexe = lexico()
-        deli2 = lexe
+        elif lexe == ')':
+            break  # Terminó la lista de parámetros
+        else:
+            erra(renC, colC, 'Error de Sintaxis', 'Se esperaba ; o , o ) y llegó ' + lexe)
+            return
 
 
 def uparams():
