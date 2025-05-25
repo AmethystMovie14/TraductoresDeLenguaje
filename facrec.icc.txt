@@ -1,0 +1,16 @@
+funcion decimal facrec(entera n) 
+inicio
+   si n == 0 o n == 1 hacer
+   inicio
+      regresa n;
+   fin
+   sino 
+   inicio
+      regresa n * facrec(n-1);
+   fin;
+fin
+
+funcion principal()
+inicio
+   imprimeln("Factorial(5)=", facrec(5));
+fin

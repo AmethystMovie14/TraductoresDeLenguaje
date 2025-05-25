@@ -1,0 +1,31 @@
+constante entera MAX = 10;
+variable entera vec[MAX] = { 0, 0, 0, 4, 19, 34, 15, 2, 100, 10 };
+variable entera i, j, tmp;
+
+funcion OrdVec()
+inicio
+   desde i=0 hasta i < (MAX-1) incr 1
+   inicio
+      desde j=i+1 hasta j < MAX
+      inicio 
+         si vec[i] > vec[j] hacer
+         inicio
+            tmp = vec[i];
+            vec[i] = vec[j];
+            vec[j] = tmp;
+         fin;
+      fin;
+   fin;
+
+   imprime("[");
+   desde i=0 hasta i < MAX 
+   inicio
+     imprime(vec[i], " ");
+   fin;
+   imprimeln("]");
+fin
+
+funcion principal()
+inicio
+   OrdVec();
+fin

@@ -1,0 +1,31 @@
+variable entera i, n;
+
+funcion logica esPrimo(entera n) 
+inicio
+   i = 2;
+   mientras( verdadero ) 
+   inicio
+      si n % i == 0 hacer
+      inicio
+         regresa falso;
+      fin;
+      i = i + 1;
+      si i >= n hacer
+      inicio
+         regresa verdadero;
+      fin;
+   fin;
+fin
+
+funcion principal()
+inicio
+   n = 7;
+   si esPrimo(n) hacer
+   inicio
+      imprimeln(n, " es primo");
+   fin
+   sino
+   inicio
+      imprimeln(n, " no es primo");
+   fin;
+fin

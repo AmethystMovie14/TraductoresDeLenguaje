@@ -1,0 +1,30 @@
+variable entera n, fiba, fibo, i, tmp;
+
+funcion entera fibonacci(entera n)
+inicio
+   si (n == 0 o n == 1) hacer
+   inicio
+     regresa n;
+   fin;
+   fiba = 0;
+   fibo = 1;
+   i = 2;
+   si n > 1 hacer
+   inicio
+      repite
+      inicio
+        tmp = fibo;
+        fibo = fiba + fibo;
+        fiba = tmp;
+        i = i + 1;
+      fin
+      hasta que ( i > n );
+   fin;
+   regresa fibo;
+fin
+
+funcion principal()
+inicio
+   n = 8;
+   imprimeln("Fibonacci(", n, ")=", fibonacci(n));
+fin

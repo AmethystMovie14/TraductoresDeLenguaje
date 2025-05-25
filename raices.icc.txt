@@ -1,0 +1,17 @@
+constante entera MAX = 10;
+variable decimal r1, r2, a, b, c;
+
+funcion decimal raices(decimal a, decimal b, decimal c)
+inicio
+    r1 = (-b + (b^2 - 4*a*c)^(1/2))/(2*a);
+    r2 = (-b - (b^2 - 4*a*c)^(1/2))/(2*a);
+    regresa r1;
+fin
+
+funcion principal()
+inicio
+    a = 1;
+    b = -3;
+    c = 2;
+    imprimeln("Raiz1=", raices(a, b, c));
+fin
