@@ -1,0 +1,10 @@
+variable entera x;
+funcion entera doble(entera num)
+inicio
+    regresa num + num;
+fin
+funcion principal()
+inicio
+    x = doble(4);
+    imprimeln("El doble de 4 es: ", x);
+fin
