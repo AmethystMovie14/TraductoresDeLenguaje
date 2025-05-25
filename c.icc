@@ -1,0 +1,12 @@
+variable entera i, suma;
+funcion principal()
+inicio
+    suma = 0;
+    desde i = 1 hasta 5 incr 1
+    inicio
+        suma = suma + i;
+        imprimeln("i = ", i, ", suma = ", suma);
+        imprimeln("i = ", i, ", suma = ", suma);
+    fin;
+    imprimeln("Suma total: ", suma);
+fin

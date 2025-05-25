@@ -1,0 +1,12 @@
+variable entera i;
+
+funcion principal()
+inicio
+    i = 1;
+    mientras i <= 3 hacer
+    inicio
+        imprimeln("Iteracion: ", i);
+        i = i + 1;
+    fin;
+    imprimeln("Fin del ciclo");
+fin

@@ -1,0 +1,383 @@
+MAX,C,E,0,0,#,
+PI,C,D,0,0,#,
+SALUDO,C,A,0,0,#,
+vec,V,E,10,0,#,
+i,V,E,0,0,#,
+j,V,E,0,0,#,
+k,V,E,0,0,#,
+facto,V,E,0,0,#,
+num,V,E,0,0,#,
+tmp,V,E,0,0,#,
+fibo,V,E,0,0,#,
+fiba,V,E,0,0,#,
+bPrimo,V,L,0,0,#,
+nom,V,A,0,0,#,
+raiz1,V,D,0,0,#,
+raiz2,V,D,0,0,#,
+r1,V,D,0,0,#,
+r2,V,D,0,0,#,
+_P,I,I,1,0,#,
+c$raices$D$D$D,P,D,0,0,#,
+b$raices$D$D$D,P,D,0,0,#,
+a$raices$D$D$D,P,D,0,0,#,
+raices$D$D$D,F,D,42,0,#,
+OrdVec,F,I,91,0,#,
+_E5,E,I,136,0,#,
+_E6,E,I,136,0,#,
+_E3,E,I,137,0,#,
+_E4,E,I,119,0,#,
+_E1,E,I,138,0,#,
+_E2,E,I,105,0,#,
+_E7,E,I,158,0,#,
+_E8,E,I,152,0,#,
+n$esPrimo$E,P,E,0,0,#,
+esPrimo$E,F,L,161,0,#,
+_E10,E,I,176,0,#,
+_E11,E,I,176,0,#,
+_E12,E,I,188,0,#,
+_E13,E,I,188,0,#,
+_E9,E,I,189,0,#,
+num$fibonacci$E,P,E,0,0,#,
+fibonacci$E,F,E,190,0,#,
+_E14,E,I,203,0,#,
+_E15,E,I,203,0,#,
+_E16,E,I,230,0,#,
+_E17,E,I,230,0,#,
+n$facrec$E,P,E,0,0,#,
+facrec$E,F,E,234,0,#,
+_E18,E,I,247,0,#,
+_E20,E,I,253,0,#,
+_E19,E,I,257,0,#,
+_Principal,F,I,258,0,#,
+_E21,E,I,271,0,#,
+_E22,E,I,275,0,#,
+_E23,E,I,285,0,#,
+_E24,E,I,295,0,#,
+_E25,E,I,300,0,#,
+_E26,E,I,302,0,#,
+@
+1 LIT 10, 0
+2 STO 0, MAX
+3 LIT 3.141592, 0
+4 STO 0, PI
+5 LIT "Hola", 0
+6 STO 0, SALUDO
+7 LIT 0, 0
+8 LIT 33, 0
+9 STO 0, vec
+10 LIT 1, 0
+11 LIT 1, 0
+12 STO 0, vec
+13 LIT 2, 0
+14 LIT 0, 0
+15 STO 0, vec
+16 LIT 3, 0
+17 LIT 4, 0
+18 STO 0, vec
+19 LIT 4, 0
+20 LIT 19, 0
+21 STO 0, vec
+22 LIT 5, 0
+23 LIT 34, 0
+24 STO 0, vec
+25 LIT 6, 0
+26 LIT 15, 0
+27 STO 0, vec
+28 LIT 7, 0
+29 LIT 2, 0
+30 STO 0, vec
+31 LIT 8, 0
+32 LIT 100, 0
+33 STO 0, vec
+34 LIT 9, 0
+35 LIT 10, 0
+36 STO 0, vec
+37 LIT V, 0
+38 STO 0, bPrimo
+39 LIT "Juan", 0
+40 STO 0, nom
+41 JMP 0, _Principal
+42 STO 0, c$raices$D$D$D
+43 STO 0, b$raices$D$D$D
+44 STO 0, a$raices$D$D$D
+45 LOD b$raices$D$D$D, 0
+46 OPR 0, 8
+47 LOD b$raices$D$D$D, 0
+48 LIT 2, 0
+49 OPR 0, 7
+50 LIT 4, 0
+51 LOD a$raices$D$D$D, 0
+52 OPR 0, 4
+53 LOD c$raices$D$D$D, 0
+54 OPR 0, 4
+55 OPR 0, 3
+56 LIT 1, 0
+57 LIT 2, 0
+58 OPR 0, 5
+59 OPR 0, 7
+60 OPR 0, 2
+61 LIT 2, 0
+62 LOD a$raices$D$D$D, 0
+63 OPR 0, 4
+64 OPR 0, 5
+65 STO 0, r1
+66 LOD b$raices$D$D$D, 0
+67 OPR 0, 8
+68 LOD b$raices$D$D$D, 0
+69 LIT 2, 0
+70 OPR 0, 7
+71 LIT 4, 0
+72 LOD a$raices$D$D$D, 0
+73 OPR 0, 4
+74 LOD c$raices$D$D$D, 0
+75 OPR 0, 4
+76 OPR 0, 3
+77 LIT 1, 0
+78 LIT 2, 0
+79 OPR 0, 5
+80 OPR 0, 7
+81 OPR 0, 3
+82 LIT 2, 0
+83 LOD a$raices$D$D$D, 0
+84 OPR 0, 4
+85 OPR 0, 5
+86 STO 0, r2
+87 LOD r1, 0
+88 STO 0, raices$D$D$D
+89 OPR 0, 1
+90 OPR 0, 1
+91 LIT 0, 0
+92 STO 0, i
+93 LOD i, 0
+94 LOD MAX, 0
+95 LIT 1, 0
+96 OPR 0, 3
+97 OPR 0, 9
+98 JMC F, _E1
+99 JMP 0, _E2
+100 LOD i, 0
+101 LIT 1, 0
+102 OPR 0, 2
+103 STO 0, i
+104 JMP 0, 93
+105 LOD i, 0
+106 LIT 1, 0
+107 OPR 0, 2
+108 STO 0, j
+109 LOD j, 0
+110 LOD MAX, 0
+111 OPR 0, 9
+112 JMC F, _E3
+113 JMP 0, _E4
+114 LOD j, 0
+115 LIT 1, 0
+116 OPR 0, 2
+117 STO 0, j
+118 JMP 0, 109
+119 LOD i, 0
+120 LOD vec, 0
+121 LOD j, 0
+122 LOD vec, 0
+123 OPR 0, 10
+124 JMC F, _E5
+125 LOD i, 0
+126 LOD vec, 0
+127 STO 0, tmp
+128 LOD i, 0
+129 LOD j, 0
+130 LOD vec, 0
+131 STO 0, vec
+132 LOD j, 0
+133 LOD tmp, 0
+134 STO 0, vec
+135 JMP 0, _E6
+136 JMP 0, 114
+137 JMP 0, 100
+138 LIT "[", 0
+139 OPR 0, 20
+140 LIT 0, 0
+141 STO 0, i
+142 LOD i, 0
+143 LOD MAX, 0
+144 OPR 0, 9
+145 JMC F, _E7
+146 JMP 0, _E8
+147 LOD i, 0
+148 LIT 1, 0
+149 OPR 0, 2
+150 STO 0, i
+151 JMP 0, 142
+152 LOD i, 0
+153 LOD vec, 0
+154 OPR 0, 20
+155 LIT " ", 0
+156 OPR 0, 20
+157 JMP 0, 147
+158 LIT "]", 0
+159 OPR 0, 21
+160 OPR 0, 1
+161 STO 0, n$esPrimo$E
+162 LIT 2, 0
+163 STO 0, i
+164 LIT V, 0
+165 JMC F, _E9
+166 LOD n$esPrimo$E, 0
+167 LOD i, 0
+168 OPR 0, 6
+169 LIT 0, 0
+170 OPR 0, 14
+171 JMC F, _E10
+172 LIT F, 0
+173 STO 0, esPrimo$E
+174 OPR 0, 1
+175 JMP 0, _E11
+176 LOD i, 0
+177 LIT 1, 0
+178 OPR 0, 2
+179 STO 0, i
+180 LOD i, 0
+181 LOD n$esPrimo$E, 0
+182 OPR 0, 12
+183 JMC F, _E12
+184 LIT V, 0
+185 STO 0, esPrimo$E
+186 OPR 0, 1
+187 JMP 0, _E13
+188 JMP 0, 164
+189 OPR 0, 1
+190 STO 0, num$fibonacci$E
+191 LOD num$fibonacci$E, 0
+192 LIT 0, 0
+193 OPR 0, 14
+194 LOD num$fibonacci$E, 0
+195 LIT 1, 0
+196 OPR 0, 14
+197 OPR 0, 16
+198 JMC F, _E14
+199 LOD num$fibonacci$E, 0
+200 STO 0, fibonacci$E
+201 OPR 0, 1
+202 JMP 0, _E15
+203 LIT 0, 0
+204 STO 0, fiba
+205 LIT 1, 0
+206 STO 0, fibo
+207 LIT 2, 0
+208 STO 0, i
+209 LOD num$fibonacci$E, 0
+210 LIT 1, 0
+211 OPR 0, 10
+212 JMC F, _E16
+213 LOD fibo, 0
+214 STO 0, tmp
+215 LOD fiba, 0
+216 LOD fibo, 0
+217 OPR 0, 2
+218 STO 0, fibo
+219 LOD tmp, 0
+220 STO 0, fiba
+221 LOD i, 0
+222 LIT 1, 0
+223 OPR 0, 2
+224 STO 0, i
+225 LOD i, 0
+226 LOD num$fibonacci$E, 0
+227 OPR 0, 10
+228 JMC F, 213
+229 JMP 0, _E17
+230 LOD fibo, 0
+231 STO 0, fibonacci$E
+232 OPR 0, 1
+233 OPR 0, 1
+234 STO 0, n$facrec$E
+235 LOD n$facrec$E, 0
+236 LIT 0, 0
+237 OPR 0, 14
+238 LOD n$facrec$E, 0
+239 LIT 1, 0
+240 OPR 0, 14
+241 OPR 0, 16
+242 JMC F, _E18
+243 LOD n$facrec$E, 0
+244 STO 0, facrec$E
+245 OPR 0, 1
+246 JMP 0, _E19
+247 LOD n$facrec$E, 0
+248 LOD _E20, 0
+249 LOD n$facrec$E, 0
+250 LIT 1, 0
+251 OPR 0, 3
+252 CAL facrec$E, 0
+253 LOD facrec$E, 0
+254 OPR 0, 4
+255 STO 0, facrec$E
+256 OPR 0, 1
+257 OPR 0, 1
+258 OPR 0, 18
+259 LIT "Dame num: ", 0
+260 OPR 0, 20
+261 OPR k, 19
+262 LIT "Factorial(", 0
+263 OPR 0, 20
+264 LOD k, 0
+265 OPR 0, 20
+266 LIT ")=", 0
+267 OPR 0, 20
+268 LOD _E21, 0
+269 LOD k, 0
+270 CAL facrec$E, 0
+271 LOD facrec$E, 0
+272 OPR 0, 21
+273 LOD _E22, 0
+274 CAL OrdVec, 0
+275 LOD OrdVec, 0
+276 LIT "Fibonacci(", 0
+277 OPR 0, 20
+278 LOD k, 0
+279 OPR 0, 20
+280 LIT ")=", 0
+281 OPR 0, 20
+282 LOD _E23, 0
+283 LOD k, 0
+284 CAL fibonacci$E, 0
+285 LOD fibonacci$E, 0
+286 OPR 0, 21
+287 LIT "Dame num: ", 0
+288 OPR 0, 20
+289 OPR num, 19
+290 LOD num, 0
+291 OPR 0, 20
+292 LOD _E24, 0
+293 LOD num, 0
+294 CAL esPrimo$E, 0
+295 LOD esPrimo$E, 0
+296 JMC F, _E25
+297 LIT " es numero PRIMO", 0
+298 OPR 0, 21
+299 JMP 0, _E26
+300 LIT " NO es numero PRIMO", 0
+301 OPR 0, 21
+302 LOD k, 0
+303 LOD num, 0
+304 OPR 0, 4
+305 STO 0, j
+306 LOD num, 0
+307 OPR 0, 20
+308 LIT "*", 0
+309 OPR 0, 20
+310 LOD k, 0
+311 OPR 0, 20
+312 LIT "=", 0
+313 OPR 0, 20
+314 LOD j, 0
+315 OPR 0, 21
+316 LIT "Como te llamas ", 0
+317 OPR 0, 20
+318 OPR nom, 19
+319 LIT "Felicidades ", 0
+320 OPR 0, 20
+321 LOD nom, 0
+322 OPR 0, 20
+323 LIT ", ya PASASTE Compiladores con Exito", 0
+324 OPR 0, 21
+325 OPR 0, 0

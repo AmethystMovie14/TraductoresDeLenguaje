@@ -1,0 +1,46 @@
+i,V,E,0,0,#,
+suma,V,E,0,0,#,
+_P,E,I,1,0,#,
+principal,F,I,1,0,#,
+_E1,E,I,5,0,#,
+_E2,E,I,34,0,#,
+@
+1 LIT 0, 0
+2 STO 0, suma
+3 LIT 1, 0
+4 STO 0, i
+5 LOD i, 0
+6 LIT 5, 0
+7 OPR 0, 10
+8 JMC V, _E2
+9 LOD suma, 0
+10 LOD i, 0
+11 OPR 0, 2
+12 STO 0, suma
+13 LIT "i = ", 0
+14 OPR 0, 20
+15 LOD i, 0
+16 OPR 0, 20
+17 LIT ", suma = ", 0
+18 OPR 0, 20
+19 LOD suma, 0
+20 OPR 0, 21
+21 LIT "i = ", 0
+22 OPR 0, 20
+23 LOD i, 0
+24 OPR 0, 20
+25 LIT ", suma = ", 0
+26 OPR 0, 20
+27 LOD suma, 0
+28 OPR 0, 21
+29 LOD i, 0
+30 LIT 1, 0
+31 OPR 0, 2
+32 STO 0, i
+33 JMP 0, _E1
+34 LIT "Suma total: ", 0
+35 OPR 0, 20
+36 LOD suma, 0
+37 OPR 0, 21
+38 OPR 0, 1
+39 OPR 0, 0
