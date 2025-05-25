@@ -618,33 +618,48 @@ def asigna(NomIde):
     expr()  # Evaluar la expresión
     insCodigo(['STO', '0', NomIde])  # Guardar el resultado
   
-def cfunc(nombreFunc):  # ← Recibir el nombre de la función
-    global toke, lexe, renC, colC, bImp, conCod
+def cfunc(nombreFunc):
+    global toke, lexe, renC, colC, bImp, conCod, tabSim
     toke, lexe = lexico()  # Consumir el (
     
-    # Contar parámetros (opcional, para validación futura)
-    numParams = 0
+    parametros = []
     
     if lexe == ')':
         toke, lexe = lexico()
     else:
+        # Obtener lista de parámetros de esta función específica
+        params_funcion = []
+        for nombre, info in tabSim.items():
+            if info[0] == 'P' and info[2] == nombreFunc:  # Parámetro de esta función
+                params_funcion.append(nombre)
+        
+        param_index = 0
         while True:
-            expr()  # Evalúa cada parámetro (deja valores en la pila)
-            numParams += 1
+            expr()  # Evalúa parámetro (valor queda en pila)
+            
+            if param_index < len(params_funcion):
+                parametros.append(params_funcion[param_index])
+                param_index += 1
+            
             if lexe == ',':
                 toke, lexe = lexico()
             elif lexe == ')':
                 toke, lexe = lexico()
                 break
             else:
-                erra(renC, colC, 'Error de Sintaxis', 'se esperaba , o ) y llego ' + lexe)
+                erra(renC, colC, 'Error de Sintaxis', 'se esperaba , o )')
                 return
-    # Generar llamada a la función
-    etiReg = nomEti()  # Genera una etiqueta única
-    insCodigo(['LOD', etiReg, '0'])  # Salto incondicional a la función, y se manda a la pila 
+    
+    # Asignar parámetros (en orden inverso porque están en la pila)
+    for i in range(len(parametros)-1, -1, -1):
+        insCodigo(['STO', '0', parametros[i]])
+    
+    # NUEVO: Poner dirección de retorno en la pila
+    insCodigo(['LIT', str(conCod + 2), '0'])  # Dirección después del CAL
+    
+    # Llamada a la función
     insCodigo(['CAL', nombreFunc, '0'])
-    #GENERAR UNA ETIQUETA PARA EL RETORNO
-    insTabSim(etiReg, ['E', 'I', str(conCod), '0'])
+    
 
 
 def udim():
@@ -969,18 +984,17 @@ def block():
 #Consejo, leer el diagrama de derecha a izquierda, es mas facil
 
 def params():
-    global toke, lexe, renC, colC, tabSim, tData
+    global toke, lexe, renC, colC, tabSim, tData, NFuncion
     deli2 = ';'
     while deli2 == ';':
-        # Se asume que ya se leyó el tipo y se guarda en tData
         tipo()  
         deli = ','
         while deli == ',':
             if toke != 'Ide':
                 erra(renC, colC, 'Error de Sintaxis', 'Se esperaba un identificador y llegó ' + lexe)
             else:
-                # Inserción del parámetro en la tabla de símbolos
-                insTabSim(lexe, ['P', tData, None, '0'])
+                # Inserción del parámetro con referencia a la función
+                insTabSim(lexe, ['P', tData, NFuncion, '0'])  # ← CAMBIO: usar NFuncion en lugar de None
             toke, lexe = lexico()
             deli = lexe
             if lexe == ',':
