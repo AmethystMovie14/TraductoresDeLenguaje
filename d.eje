@@ -1,0 +1,39 @@
+a,V,E,3,0,#,
+i,V,E,0,0,#,
+_P,E,I,13,0,#,
+principal,F,I,13,0,#,
+_E1,E,I,17,0,#,
+_E2,E,I,32,0,#,
+@
+1 LIT 10, 0
+2 LIT 0, 0
+3 OPR 0, 30
+4 STO 0, a
+5 LIT 20, 0
+6 LIT 1, 0
+7 OPR 0, 30
+8 STO 0, a
+9 LIT 30, 0
+10 LIT 2, 0
+11 OPR 0, 30
+12 STO 0, a
+13 LIT "=== Valores del arreglo ===", 0
+14 OPR 0, 21
+15 LIT 0, 0
+16 STO 0, i
+17 LOD i, 0
+18 LIT 2, 0
+19 OPR 0, 10
+20 JMC V, _E2
+21 LIT "Elemento ", 0
+22 OPR 0, 21
+23 LOD i, 0
+24 OPR 0, 30
+25 LOD a, 0
+26 OPR 0, 21
+27 LOD i, 0
+28 LIT 1, 0
+29 OPR 0, 2
+30 STO 0, i
+31 JMP 0, _E1
+32 OPR 0, 0

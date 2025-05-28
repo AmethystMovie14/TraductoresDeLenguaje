@@ -1,0 +1,60 @@
+i,V,E,0,0,#,
+n,P,E,esPrimo,0,#,
+esPrimo,F,L,1,0,#,
+_E1,E,I,3,0,#,
+_E3,E,I,15,0,#,
+_E4,E,I,15,0,#,
+_E5,E,I,27,0,#,
+_E6,E,I,27,0,#,
+_E2,E,I,28,0,#,
+_P,E,I,29,0,#,
+principal,F,I,29,0,#,
+_E7,E,I,42,0,#,
+_E8,E,I,46,0,#,
+@
+1 LIT 2, 0
+2 STO 0, i
+3 LIT V, 0
+4 JMC F, _E2
+5 LOD n, 0
+6 LOD i, 0
+7 OPR 0, 6
+8 LIT 0, 0
+9 OPR 0, 14
+10 JMC F, _E3
+11 LIT F, 0
+12 STO 0, esPrimo
+13 OPR 0, 1
+14 JMP 0, _E4
+15 LOD i, 0
+16 LIT 1, 0
+17 OPR 0, 2
+18 STO 0, i
+19 LOD i, 0
+20 LOD n, 0
+21 OPR 0, 12
+22 JMC F, _E5
+23 LIT V, 0
+24 STO 0, esPrimo
+25 OPR 0, 1
+26 JMP 0, _E6
+27 JMP 0, _E1
+28 OPR 0, 1
+29 LIT 7, 0
+30 STO 0, n
+31 LOD n, 0
+32 STO 0, n
+33 LIT 35, 0
+34 CAL esPrimo, 0
+35 LOD esPrimo, 0
+36 JMC F, _E7
+37 LOD n, 0
+38 OPR 0, 20
+39 LIT " es primo", 0
+40 OPR 0, 21
+41 JMP 0, _E8
+42 LOD n, 0
+43 OPR 0, 20
+44 LIT " no es primo", 0
+45 OPR 0, 21
+46 OPR 0, 0

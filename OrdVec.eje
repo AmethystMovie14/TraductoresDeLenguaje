@@ -1,0 +1,21 @@
+MAX,C,E,10,0,#,
+vec,V,E,10,0,#,
+i,V,E,0,0,#,
+j,V,E,0,0,#,
+tmp,V,E,0,0,#,
+OrdVec,F,E,1,0,#,
+_E1,E,I,3,0,#,
+_E2,E,I,12,0,#,
+@
+1 LIT 0, 0
+2 STO 0, i
+3 LOD i, 0
+4 LOD i, 0
+5 OPR 0, 10
+6 JMC V, _E2
+7 LOD i, 0
+8 LIT 1, 0
+9 OPR 0, 2
+10 STO 0, i
+11 JMP 0, _E1
+12 OPR 0, 1

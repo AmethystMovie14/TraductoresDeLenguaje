@@ -1,0 +1,32 @@
+variable alfabetica nom = "A";
+variable entera promedio = 0;
+variable entera opcion = 0;
+
+funcion principal() 
+inicio
+   lmp;
+   imprime("Como te llamas? ");
+   lee(nom);
+   imprime("Cual fue tu promedio? ");
+   lee(promedio);
+
+   si promedio >= 60 hacer
+   inicio
+      imprimeln("Felicidades ", nom, " ", "Ya PASASTE Compiladores con ", promedio);
+   fin
+   sino
+   inicio
+      imprime("Escoge una opcion? ");
+      imprime("1.-Bonito");
+      imprime("2.-Real");
+      lee(opcion);
+      si opcion == 1 hacer
+        inicio
+            imprimeln("Lo siento ", nom, " ", "no pasaste Compiladores. Tu promedio fue de"," ", promedio," ", "Suerte para la proxima campeon");
+        fin
+      sino
+        inicio
+            imprime("Tas bien pendejo bien pendejo");
+        fin      
+   fin
+fin

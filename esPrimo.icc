@@ -3,7 +3,7 @@ variable entera i, n;
 funcion logica esPrimo(entera n) 
 inicio
    i = 2;
-   mientras( verdadero ) 
+   mientras( verdadero ) hacer
    inicio
       si n % i == 0 hacer
       inicio

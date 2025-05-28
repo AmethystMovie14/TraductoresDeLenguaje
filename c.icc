@@ -1,12 +1,46 @@
-variable entera i, suma;
+variable entera vec[5];
+variable entera s, j, tmp;
+
+funcion entera OrdVec() 
+inicio
+   %% Ordena Vec usando bubble sort
+   desde s=0 hasta 4 incr 1 
+   inicio
+      desde j=s+1 hasta 4 incr 1
+      inicio 
+         si vec[s] > vec[j] hacer
+         inicio
+            tmp = vec[s];
+            vec[s] = vec[j];
+            vec[j] = tmp;
+         fin;
+      fin;
+   fin;
+   
+   %% Imprime arreglo ordenado
+   imprime("[");
+   desde s=0 hasta 4 incr 1
+   inicio
+     imprime(vec[s], " ");
+   fin;
+   imprimeln("]");
+fin
+
 funcion principal()
 inicio
-    suma = 0;
-    desde i = 1 hasta 5 incr 1
-    inicio
-        suma = suma + i;
-        imprimeln("i = ", i, ", suma = ", suma);
-        imprimeln("i = ", i, ", suma = ", suma);
-    fin;
-    imprimeln("Suma total: ", suma);
+   %% Llenar el vector
+   vec[0] = 5;
+   vec[1] = 2;
+   vec[2] = 8;
+   vec[3] = 1;
+   vec[4] = 9;
+   
+   imprimeln("Vector original:");
+   desde s=0 hasta 4 incr 1
+   inicio
+      imprime(vec[s], " ");
+   fin;
+   imprimeln("");
+   
+    OrdVec();
 fin

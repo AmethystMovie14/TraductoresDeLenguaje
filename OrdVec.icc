@@ -1,8 +1,8 @@
-constante entera MAX = 10;
+vari entera MAX = 10;
 variable entera vec[MAX] = { 0, 0, 0, 4, 19, 34, 15, 2, 100, 10 };
 variable entera i, j, tmp;
 
-funcion OrdVec()
+funcion entera OrdVec()
 inicio
    desde i=0 hasta i < (MAX-1) incr 1
    inicio

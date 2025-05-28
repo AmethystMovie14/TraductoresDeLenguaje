@@ -1,0 +1,72 @@
+n,P,E,fibonacci,0,#,
+fiba,V,E,0,0,#,
+fibo,V,E,0,0,#,
+i,V,E,0,0,#,
+tmp,V,E,0,0,#,
+fibonacci,F,E,1,0,#,
+_E1,E,I,13,0,#,
+_E2,E,I,13,0,#,
+_E5,E,I,39,0,#,
+_E3,E,I,40,0,#,
+_E4,E,I,40,0,#,
+_P,E,I,44,0,#,
+principal,F,I,44,0,#,
+@
+1 LOD n, 0
+2 LIT 0, 0
+3 OPR 0, 14
+4 LOD n, 0
+5 LIT 1, 0
+6 OPR 0, 14
+7 OPR 0, 16
+8 JMC F, _E1
+9 LOD n, 0
+10 STO 0, fibonacci
+11 OPR 0, 1
+12 JMP 0, _E2
+13 LIT 0, 0
+14 STO 0, fiba
+15 LIT 1, 0
+16 STO 0, fibo
+17 LIT 2, 0
+18 STO 0, i
+19 LOD n, 0
+20 LIT 1, 0
+21 OPR 0, 10
+22 JMC F, _E3
+23 LOD fibo, 0
+24 STO 0, tmp
+25 LOD fiba, 0
+26 LOD fibo, 0
+27 OPR 0, 2
+28 STO 0, fibo
+29 LOD tmp, 0
+30 STO 0, fiba
+31 LOD i, 0
+32 LIT 1, 0
+33 OPR 0, 2
+34 STO 0, i
+35 LOD i, 0
+36 LOD n, 0
+37 OPR 0, 10
+38 JMC F, 23
+39 JMP 0, _E4
+40 LOD fibo, 0
+41 STO 0, fibonacci
+42 OPR 0, 1
+43 OPR 0, 1
+44 LIT 8, 0
+45 STO 0, n
+46 LIT "Fibonacci(", 0
+47 OPR 0, 20
+48 LOD n, 0
+49 OPR 0, 20
+50 LIT ")=", 0
+51 OPR 0, 20
+52 LOD n, 0
+53 STO 0, n
+54 LIT 56, 0
+55 CAL fibonacci, 0
+56 LOD fibonacci, 0
+57 OPR 0, 21
+58 OPR 0, 0

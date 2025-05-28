@@ -1,0 +1,13 @@
+variable entera a[3] = {10, 20, 30};
+variable entera i;
+
+funcion principal()
+inicio
+    imprimeln("=== Valores del arreglo ===");
+
+    desde i = 0 hasta 2
+    inicio
+        imprime("Elemento ");
+        imprimeln(a[i]);
+    fin;
+fin

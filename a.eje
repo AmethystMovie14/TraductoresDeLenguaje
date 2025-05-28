@@ -1,0 +1,435 @@
+n,P,E,esPrimo,0,#,
+fiba,V,E,0,0,#,
+fibo,V,E,0,0,#,
+i,V,E,0,0,#,
+tmp,V,E,0,0,#,
+promedio,V,E,0,0,#,
+opcion,V,E,0,0,#,
+x,V,E,0,0,#,
+nom,V,A,0,0,#,
+MAX,C,E,10,0,#,
+r1,V,D,0,0,#,
+r2,V,D,0,0,#,
+a,P,D,raices,0,#,
+b,P,D,raices,0,#,
+c,P,D,raices,0,#,
+vec,V,E,5,0,#,
+s,V,E,0,0,#,
+j,V,E,0,0,#,
+raices,F,D,1,0,#,
+facrec,F,D,45,0,#,
+_E1,E,I,57,0,#,
+_E2,E,I,68,0,#,
+fibonacci,F,E,69,0,#,
+_E3,E,I,81,0,#,
+_E4,E,I,81,0,#,
+_E7,E,I,107,0,#,
+_E5,E,I,108,0,#,
+_E6,E,I,108,0,#,
+esPrimo,F,L,112,0,#,
+_E8,E,I,114,0,#,
+_E10,E,I,128,0,#,
+_E11,E,I,128,0,#,
+_E9,E,I,133,0,#,
+doble,F,E,137,0,#,
+num,P,E,doble,0,#,
+pasa,F,E,143,0,#,
+_E12,E,I,164,0,#,
+_E14,E,I,192,0,#,
+_E15,E,I,194,0,#,
+_E13,E,I,194,0,#,
+OrdVec,F,E,195,0,#,
+_E16,E,I,197,0,#,
+_E18,E,I,205,0,#,
+_E20,E,I,226,0,#,
+_E21,E,I,226,0,#,
+_E19,E,I,231,0,#,
+_E17,E,I,236,0,#,
+_E22,E,I,240,0,#,
+_E23,E,I,254,0,#,
+_P,E,I,257,0,#,
+principal,F,I,257,0,#,
+_E24,E,I,319,0,#,
+_E25,E,I,323,0,#,
+_E26,E,I,359,0,#,
+_E27,E,I,373,0,#,
+@
+1 LOD b, 0
+2 LOD b, 0
+3 LIT 2, 0
+4 OPR 0, 7
+5 LIT 4, 0
+6 LOD a, 0
+7 OPR 0, 4
+8 LOD c, 0
+9 OPR 0, 4
+10 OPR 0, 3
+11 LIT 1, 0
+12 LIT 2, 0
+13 OPR 0, 5
+14 OPR 0, 7
+15 OPR 0, 2
+16 LIT 2, 0
+17 LOD a, 0
+18 OPR 0, 4
+19 OPR 0, 5
+20 STO 0, r1
+21 LOD b, 0
+22 LOD b, 0
+23 LIT 2, 0
+24 OPR 0, 7
+25 LIT 4, 0
+26 LOD a, 0
+27 OPR 0, 4
+28 LOD c, 0
+29 OPR 0, 4
+30 OPR 0, 3
+31 LIT 1, 0
+32 LIT 2, 0
+33 OPR 0, 5
+34 OPR 0, 7
+35 OPR 0, 3
+36 LIT 2, 0
+37 LOD a, 0
+38 OPR 0, 4
+39 OPR 0, 5
+40 STO 0, r2
+41 LOD r1, 0
+42 STO 0, raices
+43 OPR 0, 1
+44 OPR 0, 1
+45 LOD n, 0
+46 LIT 0, 0
+47 OPR 0, 14
+48 LOD n, 0
+49 LIT 1, 0
+50 OPR 0, 14
+51 OPR 0, 16
+52 JMC F, _E1
+53 LIT 1, 0
+54 STO 0, facrec
+55 OPR 0, 1
+56 JMP 0, _E2
+57 LOD n, 0
+58 LOD n, 0
+59 LIT 1, 0
+60 OPR 0, 3
+61 STO 0, n
+62 LIT 64, 0
+63 CAL facrec, 0
+64 LOD facrec, 0
+65 OPR 0, 4
+66 STO 0, facrec
+67 OPR 0, 1
+68 OPR 0, 1
+69 LOD n, 0
+70 LIT 0, 0
+71 OPR 0, 14
+72 LOD n, 0
+73 LIT 1, 0
+74 OPR 0, 14
+75 OPR 0, 16
+76 JMC F, _E3
+77 LOD n, 0
+78 STO 0, fibonacci
+79 OPR 0, 1
+80 JMP 0, _E4
+81 LIT 0, 0
+82 STO 0, fiba
+83 LIT 1, 0
+84 STO 0, fibo
+85 LIT 2, 0
+86 STO 0, i
+87 LOD n, 0
+88 LIT 1, 0
+89 OPR 0, 10
+90 JMC F, _E5
+91 LOD fibo, 0
+92 STO 0, tmp
+93 LOD fiba, 0
+94 LOD fibo, 0
+95 OPR 0, 2
+96 STO 0, fibo
+97 LOD tmp, 0
+98 STO 0, fiba
+99 LOD i, 0
+100 LIT 1, 0
+101 OPR 0, 2
+102 STO 0, i
+103 LOD i, 0
+104 LOD n, 0
+105 OPR 0, 10
+106 JMC F, 91
+107 JMP 0, _E6
+108 LOD fibo, 0
+109 STO 0, fibonacci
+110 OPR 0, 1
+111 OPR 0, 1
+112 LIT 2, 0
+113 STO 0, i
+114 LOD i, 0
+115 LOD n, 0
+116 OPR 0, 9
+117 JMC F, _E9
+118 LOD n, 0
+119 LOD i, 0
+120 OPR 0, 6
+121 LIT 0, 0
+122 OPR 0, 14
+123 JMC F, _E10
+124 LIT F, 0
+125 STO 0, esPrimo
+126 OPR 0, 1
+127 JMP 0, _E11
+128 LOD i, 0
+129 LIT 1, 0
+130 OPR 0, 2
+131 STO 0, i
+132 JMP 0, _E8
+133 LIT V, 0
+134 STO 0, esPrimo
+135 OPR 0, 1
+136 OPR 0, 1
+137 LOD num, 0
+138 LOD num, 0
+139 OPR 0, 2
+140 STO 0, doble
+141 OPR 0, 1
+142 OPR 0, 1
+143 LIT "Como te llamas ", 0
+144 OPR 0, 20
+145 OPR nom, 19
+146 LIT "Cual fue tu promedio ", 0
+147 OPR 0, 20
+148 OPR promedio, 19
+149 LOD promedio, 0
+150 LIT 60, 0
+151 OPR 0, 12
+152 JMC F, _E12
+153 LIT "Felicidades ", 0
+154 OPR 0, 20
+155 LOD nom, 0
+156 OPR 0, 20
+157 LIT " ", 0
+158 OPR 0, 20
+159 LIT "Ya PASASTE Compiladores con ", 0
+160 OPR 0, 20
+161 LOD promedio, 0
+162 OPR 0, 21
+163 JMP 0, _E13
+164 LIT "Escoge una opción: ", 0
+165 OPR 0, 21
+166 LIT "1.- Bonito", 0
+167 OPR 0, 21
+168 LIT "2.- Real", 0
+169 OPR 0, 21
+170 OPR opcion, 19
+171 LOD opcion, 0
+172 LIT 1, 0
+173 OPR 0, 14
+174 JMC F, _E14
+175 LIT "Lo siento ", 0
+176 OPR 0, 20
+177 LOD nom, 0
+178 OPR 0, 20
+179 LIT " ", 0
+180 OPR 0, 20
+181 LIT "no pasaste Compiladores. Tu promedio fue de", 0
+182 OPR 0, 20
+183 LIT " ", 0
+184 OPR 0, 20
+185 LOD promedio, 0
+186 OPR 0, 20
+187 LIT " ", 0
+188 OPR 0, 20
+189 LIT "Suerte para la próxima campeon", 0
+190 OPR 0, 21
+191 JMP 0, _E15
+192 LIT "Tas bien pendejo bien pendejo", 0
+193 OPR 0, 21
+194 OPR 0, 1
+195 LIT 0, 0
+196 STO 0, s
+197 LOD s, 0
+198 LIT 4, 0
+199 OPR 0, 10
+200 JMC V, _E17
+201 LOD s, 0
+202 LIT 1, 0
+203 OPR 0, 2
+204 STO 0, j
+205 LOD j, 0
+206 LIT 4, 0
+207 OPR 0, 10
+208 JMC V, _E19
+209 LOD s, 0
+210 LOD vec, 0
+211 LOD j, 0
+212 LOD vec, 0
+213 OPR 0, 10
+214 JMC F, _E20
+215 LOD s, 0
+216 LOD vec, 0
+217 STO 0, tmp
+218 LOD s, 0
+219 LOD j, 0
+220 LOD vec, 0
+221 STO 0, vec
+222 LOD j, 0
+223 LOD tmp, 0
+224 STO 0, vec
+225 JMP 0, _E21
+226 LOD j, 0
+227 LIT 1, 0
+228 OPR 0, 2
+229 STO 0, j
+230 JMP 0, _E18
+231 LOD s, 0
+232 LIT 1, 0
+233 OPR 0, 2
+234 STO 0, s
+235 JMP 0, _E16
+236 LIT "[", 0
+237 OPR 0, 21
+238 LIT 0, 0
+239 STO 0, s
+240 LOD s, 0
+241 LIT 4, 0
+242 OPR 0, 10
+243 JMC V, _E23
+244 LOD s, 0
+245 LOD vec, 0
+246 OPR 0, 20
+247 LIT " ", 0
+248 OPR 0, 21
+249 LOD s, 0
+250 LIT 1, 0
+251 OPR 0, 2
+252 STO 0, s
+253 JMP 0, _E22
+254 LIT "]", 0
+255 OPR 0, 21
+256 OPR 0, 1
+257 LIT "Los valores de las raices son A=1 B=-3 y C=2 y el resultado es:", 0
+258 OPR 0, 21
+259 LIT 1, 0
+260 STO 0, a
+261 LIT 3, 0
+262 STO 0, b
+263 LIT 2, 0
+264 STO 0, c
+265 LIT "Raiz1= ", 0
+266 OPR 0, 20
+267 LOD a, 0
+268 STO 0, a
+269 LOD b, 0
+270 STO 0, b
+271 LOD c, 0
+272 STO 0, c
+273 LIT 275, 0
+274 CAL raices, 0
+275 LOD raices, 0
+276 OPR 0, 21
+277 LIT "Introduce un numero para calcular su factorial: ", 0
+278 OPR 0, 21
+279 OPR n, 19
+280 LIT "Factorial(", 0
+281 OPR 0, 20
+282 LOD n, 0
+283 OPR 0, 20
+284 LIT ")=", 0
+285 OPR 0, 20
+286 LOD n, 0
+287 LIT 289, 0
+288 CAL facrec, 0
+289 LOD facrec, 0
+290 OPR 0, 21
+291 LIT "Introduce un numero para calcular su Fibonacci: ", 0
+292 OPR 0, 21
+293 OPR n, 19
+294 LIT "Fibonacci(", 0
+295 OPR 0, 20
+296 LOD n, 0
+297 OPR 0, 20
+298 LIT ")=", 0
+299 OPR 0, 20
+300 LOD n, 0
+301 LIT 303, 0
+302 CAL fibonacci, 0
+303 LOD fibonacci, 0
+304 OPR 0, 21
+305 LIT "Introduce un numero para saber si es primo: ", 0
+306 OPR 0, 21
+307 OPR n, 19
+308 LOD n, 0
+309 STO 0, n
+310 LIT 312, 0
+311 CAL esPrimo, 0
+312 LOD esPrimo, 0
+313 JMC F, _E24
+314 LOD n, 0
+315 OPR 0, 20
+316 LIT " es primo", 0
+317 OPR 0, 21
+318 JMP 0, _E25
+319 LOD n, 0
+320 OPR 0, 20
+321 LIT " no es primo", 0
+322 OPR 0, 21
+323 LIT "Introduce un numero para calcular su doble: ", 0
+324 OPR 0, 21
+325 OPR x, 19
+326 LIT "El doble de ", 0
+327 OPR 0, 20
+328 LOD x, 0
+329 OPR 0, 20
+330 LIT " es: ", 0
+331 OPR 0, 20
+332 LOD x, 0
+333 STO 0, num
+334 LIT 336, 0
+335 CAL doble, 0
+336 LOD doble, 0
+337 OPR 0, 21
+338 LIT 340, 0
+339 CAL pasa, 0
+340 LIT 0, 0
+341 LIT 5, 0
+342 STO 0, vec
+343 LIT 1, 0
+344 LIT 2, 0
+345 STO 0, vec
+346 LIT 2, 0
+347 LIT 8, 0
+348 STO 0, vec
+349 LIT 3, 0
+350 LIT 1, 0
+351 STO 0, vec
+352 LIT 4, 0
+353 LIT 9, 0
+354 STO 0, vec
+355 LIT "Vector original:", 0
+356 OPR 0, 21
+357 LIT 0, 0
+358 STO 0, s
+359 LOD s, 0
+360 LIT 4, 0
+361 OPR 0, 10
+362 JMC V, _E27
+363 LOD s, 0
+364 LOD vec, 0
+365 OPR 0, 20
+366 LIT " ", 0
+367 OPR 0, 21
+368 LOD s, 0
+369 LIT 1, 0
+370 OPR 0, 2
+371 STO 0, s
+372 JMP 0, _E26
+373 LIT "", 0
+374 OPR 0, 21
+375 LIT 377, 0
+376 CAL OrdVec, 0
+377 LIT "�Hasta luego", 0
+378 OPR 0, 21
+379 OPR 0, 0

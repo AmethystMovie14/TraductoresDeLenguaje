@@ -1,46 +1,118 @@
-i,V,E,0,0,#,
-suma,V,E,0,0,#,
-_P,E,I,1,0,#,
-principal,F,I,1,0,#,
-_E1,E,I,5,0,#,
-_E2,E,I,34,0,#,
+vec,V,E,5,0,#,
+s,V,E,0,0,#,
+j,V,E,0,0,#,
+tmp,V,E,0,0,#,
+OrdVec,F,E,1,0,#,
+_E1,E,I,3,0,#,
+_E3,E,I,11,0,#,
+_E5,E,I,32,0,#,
+_E6,E,I,32,0,#,
+_E4,E,I,37,0,#,
+_E2,E,I,42,0,#,
+_E7,E,I,46,0,#,
+_E8,E,I,60,0,#,
+_P,E,I,63,0,#,
+principal,F,I,63,0,#,
+_E9,E,I,82,0,#,
+_E10,E,I,96,0,#,
 @
 1 LIT 0, 0
-2 STO 0, suma
-3 LIT 1, 0
-4 STO 0, i
-5 LOD i, 0
-6 LIT 5, 0
-7 OPR 0, 10
-8 JMC V, _E2
-9 LOD suma, 0
-10 LOD i, 0
-11 OPR 0, 2
-12 STO 0, suma
-13 LIT "i = ", 0
-14 OPR 0, 20
-15 LOD i, 0
-16 OPR 0, 20
-17 LIT ", suma = ", 0
-18 OPR 0, 20
-19 LOD suma, 0
-20 OPR 0, 21
-21 LIT "i = ", 0
-22 OPR 0, 20
-23 LOD i, 0
-24 OPR 0, 20
-25 LIT ", suma = ", 0
-26 OPR 0, 20
-27 LOD suma, 0
-28 OPR 0, 21
-29 LOD i, 0
-30 LIT 1, 0
-31 OPR 0, 2
-32 STO 0, i
-33 JMP 0, _E1
-34 LIT "Suma total: ", 0
-35 OPR 0, 20
-36 LOD suma, 0
-37 OPR 0, 21
-38 OPR 0, 1
-39 OPR 0, 0
+2 STO 0, s
+3 LOD s, 0
+4 LIT 4, 0
+5 OPR 0, 10
+6 JMC V, _E2
+7 LOD s, 0
+8 LIT 1, 0
+9 OPR 0, 2
+10 STO 0, j
+11 LOD j, 0
+12 LIT 4, 0
+13 OPR 0, 10
+14 JMC V, _E4
+15 LOD s, 0
+16 LOD vec, 0
+17 LOD j, 0
+18 LOD vec, 0
+19 OPR 0, 10
+20 JMC F, _E5
+21 LOD s, 0
+22 LOD vec, 0
+23 STO 0, tmp
+24 LOD s, 0
+25 LOD j, 0
+26 LOD vec, 0
+27 STO 0, vec
+28 LOD j, 0
+29 LOD tmp, 0
+30 STO 0, vec
+31 JMP 0, _E6
+32 LOD j, 0
+33 LIT 1, 0
+34 OPR 0, 2
+35 STO 0, j
+36 JMP 0, _E3
+37 LOD s, 0
+38 LIT 1, 0
+39 OPR 0, 2
+40 STO 0, s
+41 JMP 0, _E1
+42 LIT "[", 0
+43 OPR 0, 20
+44 LIT 0, 0
+45 STO 0, s
+46 LOD s, 0
+47 LIT 4, 0
+48 OPR 0, 10
+49 JMC V, _E8
+50 LOD s, 0
+51 LOD vec, 0
+52 OPR 0, 20
+53 LIT " ", 0
+54 OPR 0, 20
+55 LOD s, 0
+56 LIT 1, 0
+57 OPR 0, 2
+58 STO 0, s
+59 JMP 0, _E7
+60 LIT "]", 0
+61 OPR 0, 21
+62 OPR 0, 1
+63 LIT 0, 0
+64 LIT 5, 0
+65 STO 0, vec
+66 LIT 1, 0
+67 LIT 2, 0
+68 STO 0, vec
+69 LIT 2, 0
+70 LIT 8, 0
+71 STO 0, vec
+72 LIT 3, 0
+73 LIT 1, 0
+74 STO 0, vec
+75 LIT 4, 0
+76 LIT 9, 0
+77 STO 0, vec
+78 LIT "Vector original:", 0
+79 OPR 0, 21
+80 LIT 0, 0
+81 STO 0, s
+82 LOD s, 0
+83 LIT 4, 0
+84 OPR 0, 10
+85 JMC V, _E10
+86 LOD s, 0
+87 LOD vec, 0
+88 OPR 0, 20
+89 LIT " ", 0
+90 OPR 0, 21
+91 LOD s, 0
+92 LIT 1, 0
+93 OPR 0, 2
+94 STO 0, s
+95 JMP 0, _E9
+96 LIT "", 0
+97 OPR 0, 21
+98 LIT 100, 0
+99 CAL OrdVec, 0
+100 OPR 0, 0

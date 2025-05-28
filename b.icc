@@ -1,0 +1,38 @@
+variable entera arreglo[5];
+variable entera i;
+variable entera temp;
+
+funcion principal()
+inicio
+    %% Llenar el arreglo con una secuencia
+    desde i = 0 hasta 4
+    inicio
+        arreglo[i] = (i + 1) * 10;
+    fin;
+
+    %% Imprimir arreglo original
+    imprimeln("");
+    imprimeln("=== Arreglo original ===");
+    desde i = 0 hasta 4
+    inicio
+        imprime("Elemento ");       %% Sin salto de línea
+        imprimeln(arreglo[i]);     %% Con salto de línea al final
+    fin;
+
+    %% Invertir el arreglo usando un índice calculado
+    desde i = 0 hasta 2
+    inicio
+        temp = arreglo[i];
+        arreglo[i] = arreglo[4-i];
+        arreglo[4-i] = temp;
+    fin;
+
+    %% Imprimir arreglo invertido
+    imprimeln("");
+    imprimeln("=== Arreglo invertido ===");
+    desde i = 0 hasta 4
+    inicio
+        imprime("Elemento ");       %% Sin salto de línea
+        imprimeln(arreglo[i]);     %% Con salto de línea al final
+    fin;
+fin

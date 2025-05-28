@@ -14,7 +14,7 @@ variable logica bPrimo = verdadero, paso;
 variable alfabetica nom = "Juan";
 variable decimal raiz1, raiz2, r1, r2 = 1, a, b ,c ;
 
-funcion decimal raices(decimal a, b, c)
+funcion decimal raices(decimal a, decimal b, decimal c)
 inicio
     r1 = (-b + (b^2 - 4*a*c)^(1/2))/(2*a);
     r2 = (-b - (b^2 - 4*a*c)^(1/2))/(2*a);
@@ -22,7 +22,7 @@ inicio
     regresa r1;
 fin
 
-funcion OrdVec() 
+funcion entera OrdVec() 
 inicio
    %% Ordena Vec
    desde i=0 hasta i < (MAX-1) incr 1

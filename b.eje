@@ -1,0 +1,98 @@
+arreglo,V,E,5,0,#,
+i,V,E,0,0,#,
+temp,V,E,0,0,#,
+_P,E,I,1,0,#,
+principal,F,I,1,0,#,
+_E1,E,I,3,0,#,
+_E2,E,I,19,0,#,
+_E3,E,I,25,0,#,
+_E4,E,I,39,0,#,
+_E5,E,I,41,0,#,
+_E6,E,I,64,0,#,
+_E7,E,I,70,0,#,
+_E8,E,I,84,0,#,
+@
+1 LIT 0, 0
+2 STO 0, i
+3 LOD i, 0
+4 LIT 4, 0
+5 OPR 0, 10
+6 JMC V, _E2
+7 LOD i, 0
+8 LOD i, 0
+9 LIT 1, 0
+10 OPR 0, 2
+11 LIT 10, 0
+12 OPR 0, 4
+13 STO 0, arreglo
+14 LOD i, 0
+15 LIT 1, 0
+16 OPR 0, 2
+17 STO 0, i
+18 JMP 0, _E1
+19 LIT "", 0
+20 OPR 0, 21
+21 LIT "=== Arreglo original ===", 0
+22 OPR 0, 21
+23 LIT 0, 0
+24 STO 0, i
+25 LOD i, 0
+26 LIT 4, 0
+27 OPR 0, 10
+28 JMC V, _E4
+29 LIT "Elemento ", 0
+30 OPR 0, 21
+31 LOD i, 0
+32 LOD arreglo, 0
+33 OPR 0, 21
+34 LOD i, 0
+35 LIT 1, 0
+36 OPR 0, 2
+37 STO 0, i
+38 JMP 0, _E3
+39 LIT 0, 0
+40 STO 0, i
+41 LOD i, 0
+42 LIT 2, 0
+43 OPR 0, 10
+44 JMC V, _E6
+45 LOD i, 0
+46 LOD arreglo, 0
+47 STO 0, temp
+48 LOD i, 0
+49 LIT 4, 0
+50 LOD i, 0
+51 OPR 0, 3
+52 LOD arreglo, 0
+53 STO 0, arreglo
+54 LIT 4, 0
+55 LOD i, 0
+56 OPR 0, 3
+57 LOD temp, 0
+58 STO 0, arreglo
+59 LOD i, 0
+60 LIT 1, 0
+61 OPR 0, 2
+62 STO 0, i
+63 JMP 0, _E5
+64 LIT "", 0
+65 OPR 0, 21
+66 LIT "=== Arreglo invertido ===", 0
+67 OPR 0, 21
+68 LIT 0, 0
+69 STO 0, i
+70 LOD i, 0
+71 LIT 4, 0
+72 OPR 0, 10
+73 JMC V, _E8
+74 LIT "Elemento ", 0
+75 OPR 0, 21
+76 LOD i, 0
+77 LOD arreglo, 0
+78 OPR 0, 21
+79 LOD i, 0
+80 LIT 1, 0
+81 OPR 0, 2
+82 STO 0, i
+83 JMP 0, _E7
+84 OPR 0, 0

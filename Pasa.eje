@@ -1,0 +1,63 @@
+nom,V,A,0,0,#,
+promedio,V,E,0,0,#,
+opcion,V,E,0,0,#,
+_P,E,I,1,0,#,
+principal,F,I,1,0,#,
+_E1,E,I,23,0,#,
+_E3,E,I,51,0,#,
+_E4,E,I,53,0,#,
+_E2,E,I,53,0,#,
+@
+1 OPR 0, 18
+2 LIT "Como te llamas ", 0
+3 OPR 0, 20
+4 OPR nom, 19
+5 LIT "Cual fue tu promedio ", 0
+6 OPR 0, 20
+7 OPR promedio, 19
+8 LOD promedio, 0
+9 LIT 60, 0
+10 OPR 0, 12
+11 JMC F, _E1
+12 LIT "Felicidades ", 0
+13 OPR 0, 20
+14 LOD nom, 0
+15 OPR 0, 20
+16 LIT " ", 0
+17 OPR 0, 20
+18 LIT "Ya PASASTE Compiladores con ", 0
+19 OPR 0, 20
+20 LOD promedio, 0
+21 OPR 0, 21
+22 JMP 0, _E2
+23 LIT "Escoge una opcion ", 0
+24 OPR 0, 21
+25 LIT "1.-Bonito", 0
+26 OPR 0, 21
+27 LIT "2.-Real", 0
+28 OPR 0, 21
+29 OPR opcion, 19
+30 LOD opcion, 0
+31 LIT 1, 0
+32 OPR 0, 14
+33 JMC F, _E3
+34 LIT "Lo siento ", 0
+35 OPR 0, 20
+36 LOD nom, 0
+37 OPR 0, 20
+38 LIT " ", 0
+39 OPR 0, 20
+40 LIT "no pasaste Compiladores. Tu promedio fue de", 0
+41 OPR 0, 20
+42 LIT " ", 0
+43 OPR 0, 20
+44 LOD promedio, 0
+45 OPR 0, 20
+46 LIT " ", 0
+47 OPR 0, 20
+48 LIT "Suerte para la proxima campeon", 0
+49 OPR 0, 21
+50 JMP 0, _E4
+51 LIT "Tas bien pendejo bien pendejo", 0
+52 OPR 0, 21
+53 OPR 0, 0

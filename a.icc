@@ -1,0 +1,183 @@
+%% Declaración de variables y constantes
+variable entera n, fiba, fibo, i, tmp, promedio, opcion, x;
+variable alfabetica nom = "A";
+constante entera MAX = 10;
+variable decimal r1, r2, a, b, c;
+variable entera vec[5];
+variable entera s, j;
+
+%% Funcion para calcular raices cuadraticas
+funcion decimal raices(decimal a, decimal b, decimal c)
+inicio
+    r1 = (-b + (b^2 - 4*a*c)^(1/2))/(2*a);
+    r2 = (-b - (b^2 - 4*a*c)^(1/2))/(2*a);
+    regresa r1;
+fin
+
+%% Función para calcular el factorial de manera recursiva
+funcion decimal facrec(entera n) 
+inicio
+   si n == 0 o n == 1 hacer
+   inicio
+      regresa 1;
+   fin
+   sino 
+   inicio
+      regresa n * facrec(n-1);
+   fin;
+fin
+
+%% Función para calcular Fibonacci
+funcion entera fibonacci(entera n)
+inicio
+   si (n == 0 o n == 1) hacer
+   inicio
+     regresa n;
+   fin;
+   fiba = 0;
+   fibo = 1;
+   i = 2;
+   si n > 1 hacer
+   inicio
+      repite
+      inicio
+        tmp = fibo;
+        fibo = fiba + fibo;
+        fiba = tmp;
+        i = i + 1;
+      fin
+      hasta que ( i > n );
+   fin;
+   regresa fibo;
+fin
+
+%% Función para verificar si un número es primo
+funcion logica esPrimo(entera n) 
+inicio
+   i = 2;
+   mientras( i < n ) hacer
+   inicio
+      si n % i == 0 hacer
+      inicio
+         regresa falso;
+      fin;
+      i = i + 1;
+   fin;
+   regresa verdadero;
+fin
+
+%% Funcion para duplicar un número
+funcion entera doble(entera num)
+inicio
+    regresa num + num;
+fin
+
+%% Funcion que imprime un mensaje dependiendo del promedio
+funcion entera pasa()
+inicio
+   %%lmp;
+   imprime("Como te llamas? ");
+   lee(nom);
+   imprime("Cual fue tu promedio? ");
+   lee(promedio);
+
+   si promedio >= 60 hacer
+   inicio
+      imprimeln("Felicidades ", nom, " ", "Ya PASASTE Compiladores con ", promedio);
+   fin
+   sino
+   inicio
+      imprime("Escoge una opcion: ");
+      imprimeln("1.- Bonito");
+      imprimeln("2.- Real");
+      lee(opcion);
+      si opcion == 1 hacer
+        inicio
+            imprimeln("Lo siento ", nom, " ", "no pasaste Compiladores. Tu promedio fue de"," ", promedio," ", "Suerte para la próxima campeon");
+        fin
+      sino
+        inicio
+            imprimeln("Tas bien pendejo bien pendejo");
+        fin      
+   fin
+fin
+
+%% Función para ordenar un vector con bubble sort
+funcion entera OrdVec() 
+inicio
+   %% Ordena Vec usando bubble sort
+   desde s=0 hasta 4 incr 1 
+   inicio
+      desde j=s+1 hasta 4 incr 1
+      inicio 
+         si vec[s] > vec[j] hacer
+         inicio
+            tmp = vec[s];
+            vec[s] = vec[j];
+            vec[j] = tmp;
+         fin;
+      fin;
+   fin;
+   
+   %% Imprime arreglo ordenado
+   imprime("[");
+   desde s=0 hasta 4 incr 1
+   inicio
+     imprime(vec[s], " ");
+   fin;
+   imprimeln("]");
+fin
+
+%% Funcion principal que coordina las demas funciones
+funcion principal()
+inicio
+    imprimeln("Los valores de las raices son A=1 B=-3 y C=2 y el resultado es:");
+    a = 1;
+    b = -3;
+    c = 2;
+    imprimeln("Raiz1= ", raices(a, b, c));
+    # Â\xa0Â\xa0Â\xa0 LOS ODIOOOOOOOO 
+    fastidian la ejecucion del codigo!!!#
+    imprime("Introduce un numero para calcular su factorial: ");
+    lee(n);
+    imprimeln("Factorial(", n, ")=", facrec(n));
+
+    imprime("Introduce un numero para calcular su Fibonacci: ");
+    lee(n);
+    imprimeln("Fibonacci(", n, ")=", fibonacci(n));
+
+    imprime("Introduce un numero para saber si es primo: ");
+    lee(n);
+    si esPrimo(n) hacer
+    inicio
+        imprimeln(n, " es primo");
+    fin
+    sino
+    inicio
+        imprimeln(n, " no es primo");
+    fin;
+
+    imprime("Introduce un numero para calcular su doble: ");
+    lee(x);
+    imprimeln("El doble de ", x, " es: ", doble(x));
+
+    pasa();
+
+    %% Llenar el vector con valores de ejemplo
+    vec[0] = 5;
+    vec[1] = 2;
+    vec[2] = 8;
+    vec[3] = 1;
+    vec[4] = 9;
+   
+    imprimeln("Vector original:");
+    desde s=0 hasta 4 incr 1
+    inicio
+        imprime(vec[s], " ");
+    fin;
+    imprimeln("");
+   
+    OrdVec();
+
+    imprimeln("Hasta luego!");
+fin
