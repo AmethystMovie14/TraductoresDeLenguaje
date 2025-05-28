@@ -93,7 +93,7 @@ inicio
       lee(opcion);
       si opcion == 1 hacer
         inicio
-            imprimeln("Lo siento ", nom, " ", "no pasaste Compiladores. Tu promedio fue de"," ", promedio," ", "Suerte para la próxima campeon");
+            imprimeln("Lo siento ", nom, " ", "no pasaste Compiladores. Tu promedio fue de"," ", promedio," ", "Suerte para la proxima campeon");
         fin
       sino
         inicio
@@ -120,12 +120,12 @@ inicio
    fin;
    
    %% Imprime arreglo ordenado
-   imprime("[");
+   imprime("Inicio");
    desde s=0 hasta 4 incr 1
    inicio
      imprime(vec[s], " ");
    fin;
-   imprimeln("]");
+   imprimeln("Final");
 fin
 
 %% Funcion principal que coordina las demas funciones
@@ -170,10 +170,12 @@ inicio
     vec[3] = 1;
     vec[4] = 9;
    
+
+    imprimeln("Ordenamiento del vector");
     imprimeln("Vector original:");
     desde s=0 hasta 4 incr 1
     inicio
-        imprime(vec[s], " ");
+        imprime(vec[s]);
     fin;
     imprimeln("");
    

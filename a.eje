@@ -51,7 +51,7 @@ _P,E,I,257,0,#,
 principal,F,I,257,0,#,
 _E24,E,I,319,0,#,
 _E25,E,I,323,0,#,
-_E26,E,I,359,0,#,
+_E26,E,I,361,0,#,
 _E27,E,I,373,0,#,
 @
 1 LOD b, 0
@@ -217,7 +217,7 @@ _E27,E,I,373,0,#,
 161 LOD promedio, 0
 162 OPR 0, 21
 163 JMP 0, _E13
-164 LIT "Escoge una opción: ", 0
+164 LIT "Escoge una opcion: ", 0
 165 OPR 0, 21
 166 LIT "1.- Bonito", 0
 167 OPR 0, 21
@@ -242,7 +242,7 @@ _E27,E,I,373,0,#,
 186 OPR 0, 20
 187 LIT " ", 0
 188 OPR 0, 20
-189 LIT "Suerte para la próxima campeon", 0
+189 LIT "Suerte para la proxima campeon", 0
 190 OPR 0, 21
 191 JMP 0, _E15
 192 LIT "Tas bien pendejo bien pendejo", 0
@@ -289,7 +289,7 @@ _E27,E,I,373,0,#,
 233 OPR 0, 2
 234 STO 0, s
 235 JMP 0, _E16
-236 LIT "[", 0
+236 LIT "Inicio", 0
 237 OPR 0, 21
 238 LIT 0, 0
 239 STO 0, s
@@ -307,7 +307,7 @@ _E27,E,I,373,0,#,
 251 OPR 0, 2
 252 STO 0, s
 253 JMP 0, _E22
-254 LIT "]", 0
+254 LIT "Final", 0
 255 OPR 0, 21
 256 OPR 0, 1
 257 LIT "Los valores de las raices son A=1 B=-3 y C=2 y el resultado es:", 0
@@ -408,18 +408,18 @@ _E27,E,I,373,0,#,
 352 LIT 4, 0
 353 LIT 9, 0
 354 STO 0, vec
-355 LIT "Vector original:", 0
+355 LIT "Ordenamiento del vector", 0
 356 OPR 0, 21
-357 LIT 0, 0
-358 STO 0, s
-359 LOD s, 0
-360 LIT 4, 0
-361 OPR 0, 10
-362 JMC V, _E27
-363 LOD s, 0
-364 LOD vec, 0
-365 OPR 0, 20
-366 LIT " ", 0
+357 LIT "Vector original:", 0
+358 OPR 0, 21
+359 LIT 0, 0
+360 STO 0, s
+361 LOD s, 0
+362 LIT 4, 0
+363 OPR 0, 10
+364 JMC V, _E27
+365 LOD s, 0
+366 LOD vec, 0
 367 OPR 0, 21
 368 LOD s, 0
 369 LIT 1, 0
@@ -430,6 +430,6 @@ _E27,E,I,373,0,#,
 374 OPR 0, 21
 375 LIT 377, 0
 376 CAL OrdVec, 0
-377 LIT "�Hasta luego", 0
+377 LIT "Hasta luego", 0
 378 OPR 0, 21
 379 OPR 0, 0
